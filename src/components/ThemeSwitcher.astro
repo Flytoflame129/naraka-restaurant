@@ -4,7 +4,7 @@ import { mapThemes } from "../data/mapThemes";
 
 <div class="theme-switcher" aria-label="地图主题切换">
   {mapThemes.map((theme) => (
-    <button type="button" data-theme-target={theme.key} aria-pressed={theme.key === "juku" ? "true" : "false"}>
+    <button type="button" data-theme-target={theme.key} title={`${theme.name}主题`} aria-pressed={theme.key === "juku" ? "true" : "false"}>
       {theme.name}
     </button>
   ))}

@@ -7,6 +7,8 @@ export const mapThemes = [
     heroDescription: "聚窟洲席面偏雾色江湖：把玩家热梗、来源线索和同好创作装进一份初入局的暗色菜单。",
     accent: "#b99a58",
     tone: "深墨绿 / 暗金 / 温红 / 雾白",
+    image: "/assets/visuals/theme-juku.png",
+    alt: "雾林、古树与远处暖灯食肆构成的聚窟洲主题原创氛围图",
   },
   {
     key: "huoluo",
@@ -16,6 +18,8 @@ export const mapThemes = [
     heroDescription: "火罗国席面切到沙海烈宴：焦橙热浪、古城机关和爆炒口味更重的玩家梗一起上桌。",
     accent: "#d98931",
     tone: "沙金 / 赤红 / 焦橙 / 深褐",
+    image: "/assets/visuals/theme-huoluo.png",
+    alt: "沙海、古城机关与宴席构成的火罗国主题原创氛围图",
   },
   {
     key: "longyin",
@@ -25,6 +29,8 @@ export const mapThemes = [
     heroDescription: "龙隐洞天席面沉入地宫幽光：曜黑、冷青、龙纹机关和翻盘怪味梗都先交给后厨试菜。",
     accent: "#34a6b2",
     tone: "曜黑 / 熔岩红 / 冷青 / 古铜金",
+    image: "/assets/visuals/theme-longyin.png",
+    alt: "地宫、矿洞、机关与幽光后厨构成的龙隐洞天主题原创氛围图",
   },
 ] as const;
 

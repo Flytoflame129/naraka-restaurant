@@ -35,8 +35,9 @@ const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
   </head>
   <body>
     <div class="site-shell">
+      <a class="skip-link" href="#main-content">跳到主要内容</a>
       <Navbar />
-      <main class="page-main">
+      <main class="page-main" id="main-content">
         <slot />
       </main>
       <Footer />
