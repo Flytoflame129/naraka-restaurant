@@ -6,7 +6,7 @@
 
 ### 首页 Hero
 
-- 相对路径：`/assets/visuals/hero-main.png`
+- 相对路径：`public/assets/visuals/hero-main.png`
 - 用途：首页 Hero 背景图，营造夜色东方幻想食肆的首屏氛围。
 - 中文 alt：夜色山雾中的东方幻想食肆，灯火映照着临崖宴席。
 - 生成方式：OpenAI 内置 imagegen
@@ -16,7 +16,7 @@
 
 ### 聚窟洲主题
 
-- 相对路径：`/assets/visuals/theme-juku.png`
+- 相对路径：`public/assets/visuals/theme-juku.png`
 - 用途：聚窟洲地图主题入口横幅及相关主题视觉。
 - 中文 alt：雾林古树间的山崖食肆，木栈道通向远处的温暖灯火。
 - 生成方式：OpenAI 内置 imagegen
@@ -26,7 +26,7 @@
 
 ### 火罗国主题
 
-- 相对路径：`/assets/visuals/theme-huoluo.png`
+- 相对路径：`public/assets/visuals/theme-huoluo.png`
 - 用途：火罗国地图主题入口横幅及相关主题视觉。
 - 中文 alt：沙海落日下的古城机关宴席，红色帷幔与金色器皿铺陈在城墙露台。
 - 生成方式：OpenAI 内置 imagegen
@@ -36,7 +36,7 @@
 
 ### 龙隐洞天主题
 
-- 相对路径：`/assets/visuals/theme-longyin.png`
+- 相对路径：`public/assets/visuals/theme-longyin.png`
 - 用途：龙隐洞天地图主题入口横幅及相关主题视觉。
 - 中文 alt：幽蓝矿洞中的地宫机关后厨，熔岩火光照亮古铜色圆形机关。
 - 生成方式：OpenAI 内置 imagegen
