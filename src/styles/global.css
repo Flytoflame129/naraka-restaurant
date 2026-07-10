@@ -839,8 +839,13 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 
 .theme-card[data-theme-card="longyin"],
 .map-theme-card[data-theme-card="longyin"] {
-  --theme-card-accent: #b38b52;
   background-color: rgba(9, 15, 17, 0.88);
+  border-color: rgba(179, 139, 82, 0.44);
+}
+
+.theme-card[data-theme-card="longyin"]::after,
+.map-theme-card[data-theme-card="longyin"]::after {
+  border-color: #b38b52;
 }
 
 .info-card,
