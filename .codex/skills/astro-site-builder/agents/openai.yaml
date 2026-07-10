@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astro Site Builder"
+  short_description: "Build Astro pages for the restaurant site"
+  default_prompt: "Use $astro-site-builder to build or modify NARAKA Restaurant Astro pages and components."

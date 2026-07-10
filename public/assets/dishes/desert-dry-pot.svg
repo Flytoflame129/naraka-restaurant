@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">火罗国占位图</title>
+  <desc id="desc">沙色背景上的红铜锅和热辣配菜。</desc>
+  <rect width="960" height="600" fill="#f8ead4"/>
+  <path d="M0 360c150-70 260-65 420-10 190 66 330 26 540-72v322H0z" fill="#d69a53"/>
+  <path d="M90 420c180-72 310-58 470-10 120 36 220 30 310-24" fill="none" stroke="#bf7a2a" stroke-width="18" opacity=".65"/>
+  <ellipse cx="480" cy="356" rx="280" ry="94" fill="#5d261e" opacity=".22"/>
+  <rect x="218" y="250" width="524" height="160" rx="8" fill="#7f2b20"/>
+  <ellipse cx="480" cy="250" rx="262" ry="96" fill="#b94a32"/>
+  <ellipse cx="480" cy="246" rx="208" ry="66" fill="#f3b65b"/>
+  <circle cx="393" cy="238" r="22" fill="#b71f35"/>
+  <circle cx="460" cy="260" r="18" fill="#7b2b1f"/>
+  <circle cx="548" cy="236" r="24" fill="#b71f35"/>
+  <path d="M356 198h248" stroke="#452a24" stroke-width="20" stroke-linecap="round"/>
+  <path d="M274 280h-88M686 280h88" stroke="#7f2b20" stroke-width="32" stroke-linecap="round"/>
+</svg>

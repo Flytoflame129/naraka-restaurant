@@ -1,0 +1,37 @@
+---
+import { mapThemes } from "../data/mapThemes";
+---
+
+<div class="theme-switcher" aria-label="地图主题切换">
+  {mapThemes.map((theme) => (
+    <button type="button" data-theme-target={theme.key} aria-pressed={theme.key === "juku" ? "true" : "false"}>
+      {theme.name}
+    </button>
+  ))}
+</div>
+
+<script>
+  const themeKey = "naraka-restaurant-theme";
+  const buttons = Array.from(document.querySelectorAll("[data-theme-target]"));
+  const allowedThemes = new Set(buttons.map((button) => button.dataset.themeTarget));
+
+  function applyTheme(theme) {
+    if (!allowedThemes.has(theme)) {
+      theme = "juku";
+    }
+
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem(themeKey, theme);
+
+    for (const button of buttons) {
+      button.setAttribute("aria-pressed", button.dataset.themeTarget === theme ? "true" : "false");
+    }
+  }
+
+  const savedTheme = window.localStorage.getItem(themeKey);
+  applyTheme(savedTheme || "juku");
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => applyTheme(button.dataset.themeTarget));
+  }
+</script>

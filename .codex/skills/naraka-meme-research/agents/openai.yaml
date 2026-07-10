@@ -1,0 +1,4 @@
+interface:
+  display_name: "NARAKA Meme Research"
+  short_description: "Research NARAKA community memes with sources"
+  default_prompt: "Use $naraka-meme-research to create a sourced NARAKA player meme research card."

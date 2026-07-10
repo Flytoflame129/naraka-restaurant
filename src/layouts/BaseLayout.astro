@@ -1,0 +1,45 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { siteTitle } from "../lib/site";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = siteTitle,
+  description = "NARAKA Restaurant 是《永劫无间》玩家同好创作的虚拟游戏主题餐厅站点。",
+} = Astro.props;
+
+const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
+---
+
+<!doctype html>
+<html lang="zh-CN" data-theme="juku">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <script is:inline>
+      try {
+        const theme = window.localStorage.getItem("naraka-restaurant-theme");
+        if (theme) {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <Navbar />
+      <main class="page-main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

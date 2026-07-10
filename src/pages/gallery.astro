@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { galleryItems } from "../data/galleryItems";
+import { sitePath } from "../lib/site";
+---
+
+<BaseLayout title="画廊" description="NARAKA Restaurant 社区作品画廊。">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">食肆画廊</p>
+      <h1 class="page-title">同好作品陈列架</h1>
+      <p class="lead">
+        画廊只展示原创或获得授权的作品。每个作品都需要作者署名、来源链接和授权说明，未授权素材不会上架。
+      </p>
+      {galleryItems.length === 0 ? (
+        <div class="notice">
+          当前还没有正式画廊作品。投稿前请先确认作品授权，避免上传游戏客户端提取素材或未授权二创。
+          可以从 <a href={sitePath("/submit/")}>投稿页</a> 提交线索。
+        </div>
+      ) : (
+        <div class="info-grid">
+          {galleryItems.map((item) => (
+            <article class="info-card">
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <p>{item.author} · {item.licenseNote}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

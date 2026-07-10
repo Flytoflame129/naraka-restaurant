@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { repositoryUrl } from "../lib/site";
+
+const issueUrl = `${repositoryUrl}/issues/new?template=dish-submission.yml`;
+---
+
+<BaseLayout title="投稿" description="向 NARAKA Restaurant 投稿菜品、梗来源或画廊作品。">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">后厨委托</p>
+      <h1 class="hero-title">向后厨递交新菜谱</h1>
+      <p class="lead">
+        想把一个玩家梗端上无间食肆？请先把梗名、出处、相关角色 / 武器 / 地图、图片授权和展示许可写清楚。投稿不等于发布，维护者会先审核来源和安全风险。
+      </p>
+      <div class="button-row">
+        <a class="button" href={issueUrl}>打开 GitHub 菜谱表</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container info-grid">
+      <article class="info-card">
+        <h2>梗名与出处</h2>
+        <p>写清楚梗名、别名、来源链接、平台、作者或发布者。来源不足时必须标注“待考证”。</p>
+      </article>
+      <article class="info-card">
+        <h2>相关线索</h2>
+        <p>尽量补充相关角色、武器、地图、操作或社区语境。没有把握时写“暂不确定”。</p>
+      </article>
+      <article class="info-card">
+        <h2>授权说明</h2>
+        <p>图片、海报、菜单设计和二创作品都需要作者署名、来源链接、授权范围，以及是否允许本站展示。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <p class="eyebrow">递谱清单</p>
+      <h2 class="section-title">上菜前先把账本写明白</h2>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <h3>梗名</h3>
+          <p>本名、别名、常见叫法，以及是否只是你自己的临时脑洞。</p>
+        </article>
+        <article class="stat-card">
+          <h3>出处</h3>
+          <p>原帖、原视频、投稿记录或可核验链接。没有就写“待考证”。</p>
+        </article>
+        <article class="stat-card">
+          <h3>授权</h3>
+          <p>图片、二创、截图和菜单设计都要说明是否允许本站展示。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="notice">
+        后厨不收：低俗、歧视、攻击、引战、开盒、隐私泄露、网暴内容；不收未授权图片；不收冒充官方口吻的文案；不把未考证传闻写成事实。
+      </div>
+    </div>
+  </section>
+</BaseLayout>

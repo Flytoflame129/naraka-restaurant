@@ -1,0 +1,36 @@
+---
+import NonOfficialNotice from "../components/NonOfficialNotice.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { copyrightNotice, repositoryUrl } from "../lib/site";
+---
+
+<BaseLayout title="关于" description="NARAKA Restaurant 的非官方声明、版权说明和维护规则。">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">关于无间食肆</p>
+      <h1 class="hero-title">玩家梗文化的一张暗色菜单</h1>
+      <p class="lead">
+        NARAKA Restaurant 是《永劫无间 / NARAKA: BLADEPOINT》玩家同好创作项目，用虚拟餐厅形式包装玩家梗、来源线索和社区作品。
+      </p>
+      <NonOfficialNotice />
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container info-grid">
+      <article class="info-card">
+        <h2>非官方立场</h2>
+        <p>{copyrightNotice}</p>
+        <p>本站不代表官方立场，不模拟官方公告，不提供官方资料库。</p>
+      </article>
+      <article class="info-card">
+        <h2>玩家梗整理</h2>
+        <p>目标是整理玩家梗文化，记录来源状态，把未考证内容清楚标为“待考证”。</p>
+      </article>
+      <article class="info-card">
+        <h2>虚拟餐厅包装</h2>
+        <p>菜品只是同好文案，不是真实售卖。内容通过 Markdown 和 GitHub 维护，投稿和撤稿请求可在 <a href={repositoryUrl}>GitHub 仓库</a> 提交。</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

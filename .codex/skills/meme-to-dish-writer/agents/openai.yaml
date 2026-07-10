@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meme To Dish Writer"
+  short_description: "Turn verified memes into virtual dish copy"
+  default_prompt: "Use $meme-to-dish-writer to turn a sourced meme into virtual restaurant dish copy."

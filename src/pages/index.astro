@@ -1,0 +1,96 @@
+---
+import { getCollection } from "astro:content";
+import DishGrid from "../components/DishGrid.astro";
+import NonOfficialNotice from "../components/NonOfficialNotice.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mapThemes } from "../data/mapThemes";
+import { isPublicDishStatus, sitePath } from "../lib/site";
+
+const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
+const featuredDishes = dishes.slice(0, 3);
+---
+
+<BaseLayout title="首页" description="NARAKA Restaurant 是《永劫无间》玩家同好创作的虚拟游戏主题餐厅。">
+  <section class="hero">
+    <div class="container hero-panel">
+      <div class="hero-copy">
+        <p class="eyebrow">非官方玩家同好创作站 · 无间食肆</p>
+        <h1 class="hero-title">聚窟开席，劫味上桌</h1>
+        <div class="theme-intro-stack" aria-live="polite">
+          {mapThemes.map((theme) => (
+            <p class="lead theme-intro" data-theme-copy={theme.key}>
+              {theme.heroDescription}
+            </p>
+          ))}
+        </div>
+        <div class="button-row">
+          <a class="button" href={sitePath("/menu/")}>翻开菜单卷轴</a>
+          <a class="button secondary" href={sitePath("/submit/")}>向后厨递菜谱</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="暗色武侠虚拟食肆视觉占位">
+        <div class="hero-seal">非官方</div>
+        <div class="hero-board">
+          <span>聚窟洲</span>
+          <span>火罗国</span>
+          <span>龙隐洞天</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <NonOfficialNotice />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">地图席位</p>
+      <h2 class="section-title">三处开席，三种梗味</h2>
+      <p class="lead">聚窟洲、火罗国、龙隐洞天是本站的内容分区和视觉主题，不代表官方资料库。</p>
+      <div class="theme-grid">
+        {mapThemes.map((theme) => (
+          <article class="theme-card" data-theme-card={theme.key} style={`--theme-card-accent: ${theme.accent}`}>
+            <h3>{theme.label}</h3>
+            <p><strong>{theme.name}</strong></p>
+            <p>{theme.description}</p>
+            <p class="theme-tone">{theme.tone}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">今日招牌菜</p>
+      <h2 class="section-title">待考证热梗试菜单</h2>
+      <p class="lead">当前示例用于演示内容结构。没有公开来源的具体梗都会保留“待考证”，不会写成已核验事实。</p>
+      <DishGrid dishes={featuredDishes} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">玩家热梗 / 投稿入口</p>
+      <h2 class="section-title">缺来源的梗，先进后厨账本</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>玩家热梗</h3>
+          <p>收录前先看来源。没有公开证据的内容只作为待考证试菜，不进入正式菜单口径。</p>
+        </article>
+        <article class="info-card">
+          <h3>菜品设定</h3>
+          <p>把梗写成虚拟菜品，但不暗示真实售卖、不冒充官方、不攻击现实玩家或主播。</p>
+        </article>
+        <article class="info-card">
+          <h3>后厨投稿</h3>
+          <p>提供梗名、出处、相关角色 / 武器 / 地图和图片授权说明，再交给维护者审核。</p>
+          <p><a href={sitePath("/submit/")}>前往投稿页</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

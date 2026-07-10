@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import DishGrid from "../components/DishGrid.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mapThemes } from "../data/mapThemes";
+import { isPublicDishStatus } from "../lib/site";
+
+const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
+const dishesByTheme = mapThemes.map((theme) => ({
+  theme,
+  dishes: dishes.filter((dish) => dish.data.map === theme.name),
+}));
+---
+
+<BaseLayout title="菜单" description="浏览 NARAKA Restaurant 的玩家梗菜品菜单。">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">菜单卷轴 / 梗味情报板</p>
+      <h1 class="page-title">无间食肆悬赏榜</h1>
+      <p class="lead">按聚窟洲、火罗国、龙隐洞天筛选菜品。每张卡片展示地图、梗类型、可信度和相关角色 / 武器 / 操作线索。</p>
+      <div class="filter-panel" aria-label="菜单筛选">
+        <div class="filter-row">
+          <button class="filter-button" type="button" data-menu-filter="all" aria-pressed="true">全部席位</button>
+          {mapThemes.map((theme) => (
+            <button class="filter-button" type="button" data-menu-filter={theme.name} aria-pressed="false">{theme.name}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {dishesByTheme.map(({ theme, dishes }) => (
+    <section class="section-tight theme-section" data-theme-section={theme.name} data-theme-card={theme.key}>
+      <div class="container">
+        <p class="eyebrow">{theme.label}</p>
+        <h2 class="section-title">{theme.name}</h2>
+        <p class="lead">{theme.description}</p>
+        {dishes.length > 0 ? <DishGrid dishes={dishes} /> : <p>这个主题还没有可展示菜品。</p>}
+      </div>
+    </section>
+  ))}
+
+  <script>
+    const filterButtons = Array.from(document.querySelectorAll("[data-menu-filter]"));
+    const sections = Array.from(document.querySelectorAll("[data-theme-section]"));
+
+    for (const button of filterButtons) {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.menuFilter;
+
+        for (const item of filterButtons) {
+          item.setAttribute("aria-pressed", item === button ? "true" : "false");
+        }
+
+        for (const section of sections) {
+          section.classList.toggle("is-hidden", filter !== "all" && section.dataset.themeSection !== filter);
+        }
+      });
+    }
+  </script>
+</BaseLayout>

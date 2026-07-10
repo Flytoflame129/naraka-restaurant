@@ -1,0 +1,9 @@
+---
+import DishCard from "./DishCard.astro";
+
+const { dishes } = Astro.props;
+---
+
+<div class="dish-grid">
+  {dishes.map((dish) => <DishCard dish={dish} />)}
+</div>

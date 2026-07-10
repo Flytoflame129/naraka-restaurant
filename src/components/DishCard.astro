@@ -1,0 +1,35 @@
+---
+import MemeBadge from "./MemeBadge.astro";
+import { getMapTheme } from "../data/mapThemes";
+import { sitePath } from "../lib/site";
+
+const { dish } = Astro.props;
+const data = dish.data;
+const theme = getMapTheme(data.map);
+
+const relatedItems = [
+  ...data.relatedCharacter.map((item) => `角色：${item}`),
+  ...data.relatedWeapon.map((item) => `武器：${item}`),
+  ...data.relatedOperation.map((item) => `操作：${item}`),
+];
+---
+
+<article class="dish-card">
+  <a href={sitePath(`/dishes/${data.slug}/`)}>
+    <img src={sitePath(data.image.src)} alt={data.image.alt} loading="lazy" />
+    <div class="dish-card-body">
+      <div class="card-kicker">
+        <span>{theme?.name ?? data.map}</span>
+        <MemeBadge status={data.status} memeType={data.memeType} />
+      </div>
+      <h3>{data.title}</h3>
+      <p>{data.summary}</p>
+      <div class="card-meta">
+        <span>可信度：{data.credibility}</span>
+        <span>{data.category}</span>
+        <span>{data.priceLabel}</span>
+      </div>
+      <p>{relatedItems.length > 0 ? relatedItems.join(" / ") : "相关角色 / 武器 / 操作：待补充"}</p>
+    </div>
+  </a>
+</article>

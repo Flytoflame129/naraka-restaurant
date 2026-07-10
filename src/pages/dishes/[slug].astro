@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import MemeBadge from "../../components/MemeBadge.astro";
+import SourceList from "../../components/SourceList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMapTheme } from "../../data/mapThemes";
+import { isPublicDishStatus, publishStatusLabel, sitePath, statusLabel } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
+
+  return dishes.map((dish) => ({
+    params: { slug: dish.data.slug },
+    props: { dish },
+  }));
+}
+
+const { dish } = Astro.props;
+const data = dish.data;
+const theme = getMapTheme(data.map);
+const relatedItems = [
+  ...data.relatedCharacter.map((item) => `角色：${item}`),
+  ...data.relatedWeapon.map((item) => `武器：${item}`),
+  ...data.relatedOperation.map((item) => `操作：${item}`),
+];
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <section class="detail-hero">
+    <div class="container detail-hero-grid">
+      <div>
+        <p class="eyebrow">{theme?.label ?? data.map}</p>
+        <h1 class="page-title">{data.title}</h1>
+        <p class="lead">{data.dishIntro}</p>
+        <div class="meta-row">
+          <MemeBadge status={data.status} memeType={data.memeType} />
+          <span>可信度：{data.credibility}</span>
+          <span>{data.category}</span>
+          <span>{data.priceLabel}</span>
+        </div>
+      </div>
+      <img src={sitePath(data.image.src)} alt={data.image.alt} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-layout">
+      <article>
+        <div class="detail-section">
+          <p class="eyebrow">菜品介绍</p>
+          <h2 class="section-title">{data.title}</h2>
+          <p class="detail-copy">{data.summary}</p>
+          <p class="detail-copy">{relatedItems.length > 0 ? relatedItems.join(" / ") : "相关角色 / 武器 / 操作：待补充"}</p>
+        </div>
+
+        <div class="detail-section">
+          <p class="eyebrow">梗的来源</p>
+          <p class="detail-copy">{data.memeOrigin}</p>
+        </div>
+
+        <div class="detail-section">
+          <p class="eyebrow">菜品设定</p>
+          <p class="detail-copy">{data.dishSetting}</p>
+        </div>
+
+        <div class="detail-section">
+          <p class="eyebrow">玩家吐槽</p>
+          <p class="detail-copy">{data.playerComment}</p>
+        </div>
+
+        <div class="detail-section">
+          <p class="eyebrow">推荐搭配</p>
+          <p class="detail-copy">{data.recommendedPairing}：{data.pairingNote}</p>
+        </div>
+
+        <div class="detail-section">
+          <p class="eyebrow">待考证说明</p>
+          <p class="detail-copy">{data.verificationNote}</p>
+        </div>
+      </article>
+
+      <aside class="detail-aside">
+        <div class="info-card">
+          <h2>情报牌</h2>
+          <p><strong>{statusLabel(data.status)}</strong></p>
+          <p>地图：{theme?.name ?? data.map}</p>
+          <p>梗类型：{data.memeType}</p>
+          <p>可信度：{data.credibility}</p>
+          <p>发布状态：{publishStatusLabel(data.publishStatus)}</p>
+          <p>整理者：{data.curator}</p>
+          <p>辣度：{data.spiceLevel}/5</p>
+          <p>图片：{data.image.credit}；{data.image.license}</p>
+        </div>
+        <div class="info-card" style="margin-top: 1rem;">
+          <h2>来源链接</h2>
+          <SourceList sources={data.sources} />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

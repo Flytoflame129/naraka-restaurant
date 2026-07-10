@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dish Schema Keeper"
+  short_description: "Review dish Markdown frontmatter schema"
+  default_prompt: "Use $dish-schema-keeper to review dish Markdown frontmatter and publish readiness."
