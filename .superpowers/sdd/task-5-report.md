@@ -77,17 +77,26 @@
 ## Skill 4: copyright-source-review
 
 - Baseline:
-  - 待填写
+  - 没有把 `docs/visual-asset-register.md` 纳入审核入口。
+  - 没有单列 AI / 图片资产检查项，也没有明确阻止“看起来像官方概念图”的 AI 图片。
+  - 虽然有来源审核，但官方来源、社区来源、本站二创之间的句子级边界还不够明确。
 - 修改:
-  - 待填写
+  - workflow 加入读取 `AGENTS.md` 与 `docs/visual-asset-register.md`。
+  - 新增“来源 - 结论对应”逐句审核和 AI / 图片资产检查，覆盖用途、alt、生成说明、权利备注以及官方视觉相似性阻断。
+  - output_format 增加 `AI/图片资产` 检查项，并把高风险 AI / 版权问题明确为 blocking。
 - 验证命令 / 结果:
-  - 待填写
+  - `rg -n "^name:|^description:|^## when_to_use|^## workflow|^## output_format|^## guardrails" .codex/skills/copyright-source-review/SKILL.md`
+    - 命中 `name`、`description` 和 4 个必需章节。
+  - `git diff --check`
+    - 无 diff 错误；仅有 Git 的 LF/CRLF 警告。
 - 应用场景检查:
-  - 待填写
+  - 场景：审核 `docs/visual-asset-register.md` 中登记的 Hero 与三张主题图是否适合公开站点使用。
+  - 检查命令：`rg -n "visual-asset-register|AI / 图片资产|官方 Logo|官方概念设计|本站二创|来源 - 结论|alt|生成说明|权利备注" .codex/skills/copyright-source-review/SKILL.md`
+  - 结果：视觉资产登记入口、AI 资产字段、官方视觉相似性阻断、本站二创与来源原文分离要求都能直接检索到。
 - Commit:
-  - 待填写
+  - `docs(skills): review generated visual assets`
 - 残余风险:
-  - 待填写
+  - “视觉相似性”仍然需要人工判断，skill 只能要求比较和阻断，不能自动量化。
 
 ## Skill 5: astro-site-builder
 
