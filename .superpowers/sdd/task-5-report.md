@@ -53,17 +53,26 @@
 ## Skill 3: dish-schema-keeper
 
 - Baseline:
-  - 待填写
+  - skill 自己复制了大量字段和枚举，和 `src/content.config.ts`、`scripts/validate-content.mjs` 有漂移风险。
+  - 没有把“先读实现再检查”的顺序写成硬约束。
+  - 输出表格是手写字段清单，不符合“动态提取当前实现”的要求。
 - 修改:
-  - 待填写
+  - workflow 第一步改成读取并解析 `src/content.config.ts` 与 `scripts/validate-content.mjs`，并明确它们是字段与发布门的真相。
+  - 把长枚举从 skill 主体删掉，保留必须的人类判断规则：逐条 `sources` 检查、verified 不得依赖 low、pending/mixed 不得伪装发布。
+  - output_format 改成“动态字段检查 + 来源逐条检查 + 阻塞项 + 建议修改”。
 - 验证命令 / 结果:
-  - 待填写
+  - `rg -n "^name:|^description:|^## when_to_use|^## workflow|^## output_format|^## guardrails" .codex/skills/dish-schema-keeper/SKILL.md`
+    - 命中 `name`、`description` 和 4 个必需章节。
+  - `git diff --check`
+    - 无 diff 错误；仅有 Git 的 LF/CRLF 警告。
 - 应用场景检查:
-  - 待填写
+  - 场景：审核任意 dish frontmatter 时，不再依赖 skill 内置字段表，而是先读 `src/content.config.ts` 与 `scripts/validate-content.mjs`。
+  - 检查命令：`rg -n "src/content.config.ts|scripts/validate-content.mjs|sourceType|supports|reliability|checkedAt|动态字段|verified.*low|mixed|待考证" .codex/skills/dish-schema-keeper/SKILL.md`
+  - 结果：实现真相入口、`sources` 逐条字段、`verified` 不能依赖 low、`mixed` / `待考证` 伪装发布阻断、动态字段检查占位都能直接检索到。
 - Commit:
-  - 待填写
+  - `docs(skills): make schema implementation authoritative`
 - 残余风险:
-  - 待填写
+  - 如果执行者不真的解析实现文件，仍可能只做表面字段检查；skill 只能把这个顺序要求写死。
 
 ## Skill 4: copyright-source-review
 

@@ -5,15 +5,6 @@ description: Use when creating, editing, or reviewing NARAKA Restaurant dish Mar
 
 # dish-schema-keeper
 
-## source_claim_audit_update
-
-- 每条 `sources` 不只是链接，必须包含 `title`、`url` 或 `noPublicLinkReason`、`platform`、`sourceType`、`supports`、`reliability`、`checkedAt`、`notes`。
-- `sourceType` 只能使用 `official`、`guide`、`community`、`video`、`forum`、`unknown`。
-- `reliability` 只能使用 `high`、`medium`、`low`。
-- `supports` 必须写清楚该来源具体支撑页面中的哪些说法；不允许只写“相关资料”。
-- 如果页面句子超出来源能证明的范围，必须改写为“本站二创”、标注“待考证”，或把 `status` / `publishStatus` 降级。
-- `verified` 内容不得依赖 `low` 可信度来源。
-
 ## when_to_use
 
 Use this skill when a Dish markdown file, frontmatter block, or Astro Content Collection schema needs to be created, reviewed, normalized, or blocked from publication.
@@ -28,42 +19,22 @@ Use it for:
 
 ## workflow
 
-1. Locate the dish file or proposed frontmatter.
-2. Parse frontmatter as structured data. Do not rely on visual formatting alone.
-3. Check required fields:
-   - `title`
-   - `slug`
-   - `map`
-   - `category`
-   - `relatedCharacter`
-   - `relatedWeapon`
-   - `relatedOperation`
-   - `memeType`
-   - `credibility`
-   - `image`
-   - `tags`
-   - `sources`
-   - `status`
-   - `publishStatus`
-   - `curator`
-4. Validate field rules:
-   - `title`: non-empty Chinese display name.
-   - `slug`: stable lowercase hyphen-case identifier.
-   - `map`: one known MapTheme display name, such as `聚窟洲`、`火罗国`、`龙隐洞天`.
-   - `category`: one of `主食`、`小吃`、`饮品`、`招牌菜`、`怪菜`、`套餐`.
-   - `relatedCharacter`: array; use empty array only when genuinely unrelated.
-   - `relatedWeapon`: array; use empty array only when genuinely unrelated.
-   - `relatedOperation`: array; use empty array only when genuinely unrelated.
-   - `memeType`: one of `谐音梗`、`角色梗`、`武器梗`、`地图梗`、`操作梗`、`社区梗`、`赛事梗`、`二创梗`、`其他`.
-   - `credibility`: one of `高`、`中`、`低`、`待考证`.
-   - `image`: path or object with source / license note; empty image is allowed only for draft.
-   - `tags`: non-empty array for published content.
-   - `sources`: non-empty array for `verified` or `mixed`; each source keeps a URL or explicit no-public-link reason.
-   - `status`: source verification state, one of `verified`、`pending`、`mixed`、`rejected`.
-   - `publishStatus`: publication control state, one of `draft`、`published`、`needs-review`.
-   - `curator`: maintainer or editor who organized this dish.
-5. Check body content for dish setting, meme explanation, source status, and non-official wording.
-6. Produce a publish decision: `可发布`、`需修改`、`不得发布`.
+1. 第一步先读并解析 `src/content.config.ts` 与 `scripts/validate-content.mjs`。这两个文件才是字段、枚举、细化校验和发布门的实现真相；不要相信旧 skill 或旧模板里的手抄字段表。
+2. 从实现中提取当前需要检查的字段、受控词汇和自定义规则，再去定位 dish 文件或提议的 frontmatter。
+3. 以结构化数据解析 frontmatter，不依赖视觉排版。报告里的字段检查表也应基于当前实现动态列出，而不是照抄历史枚举。
+4. 逐条核对 `sources`：
+   - 每条都要检查 `title`、`url` 或 `noPublicLinkReason`、`platform`、`sourceType`、`supports`、`reliability`、`checkedAt`、`notes`。
+   - `supports` 必须写清楚来源具体支撑哪些页面说法，不能只写“相关资料”。
+   - 如果页面句子超出来源能证明的范围，必须改写为“本站二创”、标注“待考证”，或把 `status` / `publishStatus` 降级。
+   - `verified` 不得依赖 `low` 可信度来源。
+5. 应用当前实现里的发布门，至少阻止这些情况：
+   - schema 解析失败。
+   - `verified` 或 `mixed` 缺少来源。
+   - 图片缺少说明、授权或发布所需备注。
+   - `pending` / `mixed` / “待考证” 被伪装成已核验或已发布。
+   - `published` 与 `rejected` 等状态组合冲突。
+6. 检查正文是否保留非官方定位、梗来源说明、待考证提示和必要的图片说明。
+7. 输出发布结论：`可发布`、`需修改`、`不得发布`，并说明结论是基于当前实现文件得出的。
 
 ## output_format
 
@@ -81,21 +52,13 @@ Use this report:
 
 | 字段 | 结果 | 说明 |
 | --- | --- | --- |
-| title | pass/fail |  |
-| slug | pass/fail |  |
-| map | pass/fail |  |
-| category | pass/fail |  |
-| relatedCharacter | pass/fail |  |
-| relatedWeapon | pass/fail |  |
-| relatedOperation | pass/fail |  |
-| memeType | pass/fail |  |
-| credibility | pass/fail |  |
-| image | pass/fail |  |
-| tags | pass/fail |  |
-| sources | pass/fail |  |
-| status | pass/fail |  |
-| publishStatus | pass/fail |  |
-| curator | pass/fail |  |
+| [从当前实现提取的字段名] | pass/fail |  |
+
+### 来源逐条检查
+
+| 来源 | sourceType | supports | reliability | checkedAt | 结果 | 说明 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 |  |  |  |  | pass/fail |  |
 
 ### 阻塞项
 
@@ -109,10 +72,11 @@ Use this report:
 ## guardrails
 
 - 不符合 schema 的内容不得直接发布。
-- `sources` 为空时不得标为 `verified`。
+- `sources` 为空时不得标为 `verified` 或 `mixed`。
 - 图片没有授权说明或来源说明时不得作为正式内容发布。
 - `status` 不得用自然语言替代枚举值。
 - `publishStatus` 不得用来源可信度替代。
 - 不为了页面效果硬编码 Dish 内容到组件里。
 - 不把 `pending`、`mixed`、`needs-review` 或 “待考证” 内容展示成已核验。
+- 不得用 skill 自己的历史字段列表覆盖 `src/content.config.ts` 与 `scripts/validate-content.mjs` 的当前实现。
 - 结构争议无法解决时，优先参考 `docs/domain-model.md` 和 `AGENTS.md`。
