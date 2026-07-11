@@ -450,6 +450,10 @@ select:focus-visible {
   min-height: clamp(22rem, 58vh, 30rem);
 }
 
+.hero--main {
+  --hero-image: url("/assets/visuals/hero-main.png");
+}
+
 .hero::before,
 .page-hero::before {
   position: absolute;
@@ -958,8 +962,8 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   gap: 1rem;
 }
 
-.detail-aside > [style] {
-  margin-top: 0 !important;
+.source-panel {
+  margin-top: 1rem;
 }
 
 .detail-section {
