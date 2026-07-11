@@ -1,36 +1,40 @@
 ---
-import NonOfficialNotice from "../components/NonOfficialNotice.astro";
+import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { copyrightNotice, repositoryUrl } from "../lib/site";
+
+const issuesUrl = `${repositoryUrl}/issues`;
 ---
 
 <BaseLayout title="关于" description="NARAKA Restaurant 的非官方声明、版权说明和维护规则。">
-  <section class="hero">
-    <div class="container">
-      <p class="eyebrow">关于无间食肆</p>
-      <h1 class="hero-title">玩家梗文化的一张暗色菜单</h1>
-      <p class="lead">
-        NARAKA Restaurant 是《永劫无间 / NARAKA: BLADEPOINT》玩家同好创作项目，用虚拟餐厅形式包装玩家梗、来源线索和社区作品。
-      </p>
-      <NonOfficialNotice />
-    </div>
-  </section>
+  <PageHero
+    eyebrow="关于无间食肆"
+    title="把玩家梗整理成一张暗色菜单"
+    lead="这里是非官方同好创作站，不演官方公告口吻。我们做的是线索整理、虚拟菜单包装和社区协作，不是替官方发声。"
+    compact
+  />
 
   <section class="section-tight">
-    <div class="container info-grid">
-      <article class="info-card">
-        <h2>非官方立场</h2>
-        <p>{copyrightNotice}</p>
-        <p>本站不代表官方立场，不模拟官方公告，不提供官方资料库。</p>
-      </article>
-      <article class="info-card">
-        <h2>玩家梗整理</h2>
-        <p>目标是整理玩家梗文化，记录来源状态，把未考证内容清楚标为“待考证”。</p>
-      </article>
-      <article class="info-card">
-        <h2>虚拟餐厅包装</h2>
-        <p>菜品只是同好文案，不是真实售卖。内容通过 Markdown 和 GitHub 维护，投稿和撤稿请求可在 <a href={repositoryUrl}>GitHub 仓库</a> 提交。</p>
-      </article>
+    <div class="container">
+      <div class="info-grid">
+        <article class="info-card">
+          <h2>非官方立场</h2>
+          <p>{copyrightNotice}</p>
+          <p>本站不代表官方立场，不冒充官方公告，也不把同好整理包装成官方资料库。</p>
+        </article>
+        <article class="info-card">
+          <h2>玩家梗整理</h2>
+          <p>目标是把玩家梗、来源线索和核查备注整理清楚。来源不完整的内容继续标“待考证”，不会改写成已验证事实。</p>
+        </article>
+        <article class="info-card">
+          <h2>虚拟餐厅包装</h2>
+          <p>菜品、席位和文案都是同好包装，用来增强阅读体验，不代表真实售卖，也不直接搬运官方视觉素材。</p>
+        </article>
+        <article class="info-card">
+          <h2>撤稿与权益路径</h2>
+          <p>如果你是作者、权利人或投稿者，需要补授权、申请下架或纠正文案，请到 <a href={issuesUrl}>GitHub Issues</a> 留言，维护者会优先处理并记录结果。</p>
+        </article>
+      </div>
     </div>
   </section>
 </BaseLayout>

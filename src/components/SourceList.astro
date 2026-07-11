@@ -46,18 +46,26 @@ function formatCheckedAt(value: Date | string) {
   {sources.map((source) => (
     <li class="source-card">
       <strong>
-        {source.url ? <a href={source.url}>{source.title}</a> : source.title}
+        {source.url ? (
+          <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+        ) : (
+          source.title
+        )}
       </strong>
-      <p>
-        {source.platform} · {typeLabels[source.sourceType]} · 可信度：{reliabilityLabels[source.reliability]} · 核查：{formatCheckedAt(source.checkedAt)}
-      </p>
-      <p>{source.noPublicLinkReason ? `无公开链接：${source.noPublicLinkReason}` : source.notes}</p>
+
       <div>
-        <span>支撑说法：</span>
+        <span>支持说法：</span>
         <ul>
           {source.supports.map((claim) => <li>{claim}</li>)}
         </ul>
       </div>
+
+      <p>
+        {source.platform} 路 {typeLabels[source.sourceType]} 路 可靠度：{reliabilityLabels[source.reliability]} 路 核查：{formatCheckedAt(source.checkedAt)}
+      </p>
+
+      {source.noPublicLinkReason && <p>无公开链接：{source.noPublicLinkReason}</p>}
+      <p>维护备注：{source.notes}</p>
     </li>
   ))}
 </ul>

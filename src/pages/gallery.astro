@@ -1,21 +1,25 @@
 ---
+import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { galleryItems } from "../data/galleryItems";
 import { sitePath } from "../lib/site";
 ---
 
 <BaseLayout title="画廊" description="NARAKA Restaurant 社区作品画廊。">
-  <section class="section">
+  <PageHero
+    eyebrow="食肆画廊"
+    title="同好作品陈列架"
+    lead="只展示原创或获得授权的作品。没有作者署名、来源链接和授权范围的内容，不会上架到这里。"
+    compact
+  >
+    <a class="button secondary" href={sitePath("/submit/")}>查看投稿说明</a>
+  </PageHero>
+
+  <section class="section-tight">
     <div class="container">
-      <p class="eyebrow">食肆画廊</p>
-      <h1 class="page-title">同好作品陈列架</h1>
-      <p class="lead">
-        画廊只展示原创或获得授权的作品。每个作品都需要作者署名、来源链接和授权说明，未授权素材不会上架。
-      </p>
       {galleryItems.length === 0 ? (
-        <div class="notice">
-          当前还没有正式画廊作品。投稿前请先确认作品授权，避免上传游戏客户端提取素材或未授权二创。
-          可以从 <a href={sitePath("/submit/")}>投稿页</a> 提交线索。
+        <div class="empty-state">
+          当前还没有正式画廊作品。投稿前请先确认作者署名、来源链接、授权范围和撤稿联系方式，避免上传游戏客户端提取素材或未授权二创。
         </div>
       ) : (
         <div class="info-grid">
@@ -23,7 +27,7 @@ import { sitePath } from "../lib/site";
             <article class="info-card">
               <h2>{item.title}</h2>
               <p>{item.description}</p>
-              <p>{item.author} · {item.licenseNote}</p>
+              <p>{item.author} 路 {item.licenseNote}</p>
             </article>
           ))}
         </div>

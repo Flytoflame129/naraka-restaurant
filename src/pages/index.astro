@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import DishGrid from "../components/DishGrid.astro";
-import NonOfficialNotice from "../components/NonOfficialNotice.astro";
+import MapThemeCard from "../components/MapThemeCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapThemes } from "../data/mapThemes";
 import { isPublicDishStatus, sitePath } from "../lib/site";
@@ -10,11 +10,11 @@ const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(da
 const featuredDishes = dishes.slice(0, 3);
 ---
 
-<BaseLayout title="首页" description="NARAKA Restaurant 是《永劫无间》玩家同好创作的虚拟游戏主题餐厅。">
+<BaseLayout title="首页" description="NARAKA Restaurant 是《永劫无间 / NARAKA: BLADEPOINT》玩家同好创作站。">
   <section class="hero">
     <div class="container hero-panel">
       <div class="hero-copy">
-        <p class="eyebrow">非官方玩家同好创作站 · 无间食肆</p>
+        <p class="eyebrow">非官方玩家同好创作站</p>
         <h1 class="hero-title">聚窟开席，劫味上桌</h1>
         <div class="theme-intro-stack" aria-live="polite">
           {mapThemes.map((theme) => (
@@ -25,23 +25,20 @@ const featuredDishes = dishes.slice(0, 3);
         </div>
         <div class="button-row">
           <a class="button" href={sitePath("/menu/")}>翻开菜单卷轴</a>
-          <a class="button secondary" href={sitePath("/submit/")}>向后厨递菜谱</a>
+          <a class="button secondary" href={sitePath("/submit/")}>查看投稿委托</a>
         </div>
       </div>
-      <div class="hero-visual" aria-label="暗色武侠虚拟食肆视觉占位">
-        <div class="hero-seal">非官方</div>
-        <div class="hero-board">
-          <span>聚窟洲</span>
-          <span>火罗国</span>
-          <span>龙隐洞天</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="section-tight">
-    <div class="container">
-      <NonOfficialNotice />
+      <article class="info-card" aria-label="今日席位">
+        <p class="eyebrow">今日席位</p>
+        <h2>无间食肆档案</h2>
+        <div class="button-row">
+          <span class="meme-badge pending">显著非官方</span>
+        </div>
+        <p>本站整理玩家交流中的公开线索，再用虚拟菜单的方式做同好包装，不代表官方资料站、公告或真实餐厅。</p>
+        <p><strong>收录前提：</strong>来源、授权和安全边界先过一遍，未补齐的内容继续留在待考证或草稿状态。</p>
+        <p><strong>今日通路：</strong>菜单卷轴负责公开菜品，地图席位负责分区浏览，后厨委托负责接收投稿线索。</p>
+      </article>
     </div>
   </section>
 
@@ -49,16 +46,9 @@ const featuredDishes = dishes.slice(0, 3);
     <div class="container">
       <p class="eyebrow">地图席位</p>
       <h2 class="section-title">三处开席，三种梗味</h2>
-      <p class="lead">聚窟洲、火罗国、龙隐洞天是本站的内容分区和视觉主题，不代表官方资料库。</p>
+      <p class="lead">聚窟洲、火罗国、龙隐洞天既是页面分区，也是视觉主题。入口统一展示原创氛围图，不冒充官方地图资料页。</p>
       <div class="theme-grid">
-        {mapThemes.map((theme) => (
-          <article class="theme-card" data-theme-card={theme.key} style={`--theme-card-accent: ${theme.accent}`}>
-            <h3>{theme.label}</h3>
-            <p><strong>{theme.name}</strong></p>
-            <p>{theme.description}</p>
-            <p class="theme-tone">{theme.tone}</p>
-          </article>
-        ))}
+        {mapThemes.map((theme) => <MapThemeCard theme={theme} />)}
       </div>
     </div>
   </section>
@@ -66,29 +56,36 @@ const featuredDishes = dishes.slice(0, 3);
   <section class="section">
     <div class="container">
       <p class="eyebrow">今日招牌菜</p>
-      <h2 class="section-title">待考证热梗试菜单</h2>
-      <p class="lead">当前示例用于演示内容结构。没有公开来源的具体梗都会保留“待考证”，不会写成已核验事实。</p>
-      <DishGrid dishes={featuredDishes} />
+      <h2 class="section-title">只端公开菜品上桌</h2>
+      <p class="lead">首页招牌菜只读取允许公开的菜品。没有通过公开过滤的条目，不会在这里被包装成已上桌内容。</p>
+      {featuredDishes.length > 0 ? (
+        <DishGrid dishes={featuredDishes} />
+      ) : (
+        <div class="empty-state">
+          当前还没有符合公开条件的招牌菜。待考证、草稿或未授权内容会继续留在后厨账本里，不会直接挂到首页。
+        </div>
+      )}
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <p class="eyebrow">玩家热梗 / 投稿入口</p>
-      <h2 class="section-title">缺来源的梗，先进后厨账本</h2>
+      <h2 class="section-title">先记线索，再决定上不上桌</h2>
       <div class="info-grid">
         <article class="info-card">
-          <h3>玩家热梗</h3>
-          <p>收录前先看来源。没有公开证据的内容只作为待考证试菜，不进入正式菜单口径。</p>
+          <h3>玩家热梗整理</h3>
+          <p>首页这里只说明整理规则，不凭空新增热梗条目。来源未补齐的内容继续标注“待考证”，不会改写成已核实事实。</p>
         </article>
         <article class="info-card">
-          <h3>菜品设定</h3>
-          <p>把梗写成虚拟菜品，但不暗示真实售卖、不冒充官方、不攻击现实玩家或主播。</p>
+          <h3>后厨投稿委托</h3>
+          <p>投稿时请带上梗名、出处、关联角色或操作、图片授权和是否允许展示。维护者先核来源，再决定是否进入公开菜单。</p>
+          <p><a href={sitePath("/submit/")}>前往投稿说明</a></p>
         </article>
         <article class="info-card">
-          <h3>后厨投稿</h3>
-          <p>提供梗名、出处、相关角色 / 武器 / 地图和图片授权说明，再交给维护者审核。</p>
-          <p><a href={sitePath("/submit/")}>前往投稿页</a></p>
+          <h3>公开范围</h3>
+          <p>菜单页和详情页沿用同一套公开过滤。首页只做入口和说明，不额外制造新菜品、新状态或新故事。</p>
+          <p><a href={sitePath("/menu/")}>查看全部公开菜品</a></p>
         </article>
       </div>
     </div>

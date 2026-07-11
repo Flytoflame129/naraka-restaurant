@@ -1,9 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import DishGrid from "../components/DishGrid.astro";
+import MapThemeCard from "../components/MapThemeCard.astro";
+import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapThemes } from "../data/mapThemes";
-import { isPublicDishStatus } from "../lib/site";
+import { isPublicDishStatus, sitePath } from "../lib/site";
 
 const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
 const dishesByTheme = mapThemes.map((theme) => ({
@@ -12,12 +14,18 @@ const dishesByTheme = mapThemes.map((theme) => ({
 }));
 ---
 
-<BaseLayout title="菜单" description="浏览 NARAKA Restaurant 的玩家梗菜品菜单。">
-  <section class="section">
+<BaseLayout title="菜单" description="浏览 NARAKA Restaurant 的公开菜品菜单。">
+  <PageHero
+    eyebrow="菜单卷轴 / 悬赏榜"
+    title="今日悬赏菜单"
+    lead="只展示允许公开的菜品。筛选按钮继续按三张地图切换，公开数量、氛围图和分区说明都按真实内容状态输出。"
+    compact
+  >
+    <a class="button secondary" href={sitePath("/submit/")}>查看后厨委托书</a>
+  </PageHero>
+
+  <section class="section-tight">
     <div class="container">
-      <p class="eyebrow">菜单卷轴 / 梗味情报板</p>
-      <h1 class="page-title">无间食肆悬赏榜</h1>
-      <p class="lead">按聚窟洲、火罗国、龙隐洞天筛选菜品。每张卡片展示地图、梗类型、可信度和相关角色 / 武器 / 操作线索。</p>
       <div class="filter-panel" aria-label="菜单筛选">
         <div class="filter-row">
           <button class="filter-button" type="button" data-menu-filter="all" aria-pressed="true">全部席位</button>
@@ -34,8 +42,27 @@ const dishesByTheme = mapThemes.map((theme) => ({
       <div class="container">
         <p class="eyebrow">{theme.label}</p>
         <h2 class="section-title">{theme.name}</h2>
-        <p class="lead">{theme.description}</p>
-        {dishes.length > 0 ? <DishGrid dishes={dishes} /> : <p>这个主题还没有可展示菜品。</p>}
+        <div class="info-grid">
+          <MapThemeCard theme={theme} />
+          <article class="info-card">
+            <h3>席位说明</h3>
+            <p>{theme.description}</p>
+            <p><strong>公开菜品：</strong>{dishes.length} 道</p>
+            <p>
+              {dishes.length > 0
+                ? "这一席已经有可公开浏览的菜品，继续沿用现有卡片和详情页入口。"
+                : "这一席暂时没有符合公开条件的菜品，保持真实空席，不补虚构占位。"}
+            </p>
+          </article>
+        </div>
+
+        {dishes.length > 0 ? (
+          <DishGrid dishes={dishes} />
+        ) : (
+          <div class="empty-state">
+            当前没有符合公开过滤的菜品。待考证、草稿或未授权条目继续留在后厨，不会在菜单页伪装成可点单内容。
+          </div>
+        )}
       </div>
     </section>
   ))}
