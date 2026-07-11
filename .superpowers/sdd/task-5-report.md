@@ -29,17 +29,26 @@
 ## Skill 2: meme-to-dish-writer
 
 - Baseline:
-  - 待填写
+  - 只有“来源状态”，没有同时区分 `status` 与 `publishStatus`。
+  - 没有逐条 `sources` 合同，也没有把来源事实和本站原创菜品化内容分开。
+  - 输出结构没有对齐 `docs/dish-writing-template.md` 的七分区正文。
 - 修改:
-  - 待填写
+  - workflow 改为先读 `AGENTS.md`、`src/content.config.ts`、`docs/dish-writing-template.md`，并显式区分来源事实、本站二创和不可用内容。
+  - 输出增加 `status` 与 `publishStatus`，并要求两者独立判断、不得互相替代。
+  - output_format 改成“来源事实 + 七分区正文 + `sources` 合同 + 待考证说明 + 下一步交给 dish-schema-keeper”。
 - 验证命令 / 结果:
-  - 待填写
+  - `rg -n "^name:|^description:|^## when_to_use|^## workflow|^## output_format|^## guardrails" .codex/skills/meme-to-dish-writer/SKILL.md`
+    - 命中 `name`、`description` 和 4 个必需章节。
+  - `git diff --check`
+    - 无 diff 错误；仅有 Git 的 LF/CRLF 警告。
 - 应用场景检查:
-  - 待填写
+  - 场景：把 `docs/research/doujiang-huimian.md` 改写成一份仍需审核的菜品草稿。
+  - 检查命令：`rg -n "status: verified|publishStatus: draft|资料整理中|待考证|sources:|dish-schema-keeper|本站二创|来源事实" .codex/skills/meme-to-dish-writer/SKILL.md`
+  - 结果：`status`、`publishStatus`、`资料整理中` / `待考证`、逐条 `sources` 合同、`来源事实`、`本站二创` 和移交 `dish-schema-keeper` 的要求都能直接检索到。
 - Commit:
-  - 待填写
+  - `docs(skills): separate dish facts and fan copy`
 - 残余风险:
-  - 待填写
+  - skill 只要求交接给 `dish-schema-keeper`，不会在这里自动补齐全部 dish frontmatter 字段。
 
 ## Skill 3: dish-schema-keeper
 
