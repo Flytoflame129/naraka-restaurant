@@ -21,18 +21,14 @@ Do not use it to invent missing origin stories. If a source is weak or missing, 
 
 ## workflow
 
-1. Read the request and identify the exact meme, alias, character, weapon, map, operation, or community phrase being researched.
-2. Search only as much as needed to find source candidates. Prefer primary sources: original video, original post, official material, author submission, or maintainer note.
-3. Record every usable source link with platform, author or publisher, title, publication date if visible, and access date if relevant.
-4. Assign a meme type from this controlled set: `谐音梗`、`角色梗`、`武器梗`、`地图梗`、`操作梗`、`社区梗`、`赛事梗`、`二创梗`、`其他`。
-5. Assign credibility:
-   - `高`: primary source or multiple mutually consistent reliable sources.
-   - `中`: credible secondary source plus context, but primary source not found.
-   - `低`: weak source, unclear origin, or single unverified repost.
-   - `待考证`: no reliable source, conflicting claims, or only user memory.
-6. Summarize in your own words. Use short quotes only when needed and never copy large blocks of source text.
-7. Mark any unresolved facts as `待考证点` instead of smoothing them over.
-8. End with whether this meme is safe to use in public site content: `可使用`、`仅可作为待考证示例`、`暂不建议使用`。
+1. 先读 `AGENTS.md` 和 `src/content.config.ts`，确认当前项目对地图名、梗类型、来源对象、`status` 与 `publishStatus` 的真实约束；不要在输出里复写过时枚举。
+2. 识别本次研究的精确对象：梗名、别名、可能原句、相关角色、武器、地图、操作或社区叫法。
+3. 只搜索到足以建立证据链的程度。优先原始视频、原帖、官方材料、作者投稿、维护者备注；能用一手来源时不要拿二手转述充数。
+4. 为每条可用来源建立独立 evidence 对象，逐条填写 `title`、`url` 或 `noPublicLinkReason`、`platform`、`sourceType`、`supports`、`reliability`、`checkedAt`、`notes`。
+5. 写 `supports` 时只写该来源能直接支撑的具体说法，例如“玩家把某操作称为某梗”或“官方公告出现某机制名”。官方机制、社区叫法、本站二创菜品设定必须分开列证，不能混证。
+6. 依据 `src/content.config.ts` 的当前受控词汇给出梗类型，并用 `高 / 中 / 低 / 待考证` 评估整体可信度：`高` 代表一手或多条相互印证的可靠来源，`中` 代表上下文可信但一手缺失，`低` 代表单条弱来源或转述，`待考证` 代表无可靠来源或说法冲突。
+7. 用自己的话做证据摘要，必要时只保留极短引文。把无法确认的地方单列为 `待人工确认点`，不要抹平不确定性。
+8. 给出菜品化方向和公开使用建议：`可使用`、`仅可作为待考证示例`、`暂不建议使用`。
 
 ## output_format
 
@@ -43,31 +39,48 @@ Output one or more structured cards:
 
 - 梗名:
 - 别名:
+- 可能原句:
 - 梗类型:
+- 流行平台:
 - 可信度: 高 / 中 / 低 / 待考证
 - 状态建议: verified / pending / rejected
 - 一句话摘要:
-- 梗来源说明:
-- 待考证点:
+- 证据摘要:
 - 相关角色:
-- 相关武器 / 地图 / 操作:
+- 相关武器:
+- 相关地图:
+- 相关操作:
 - 可转菜品方向:
 - 内容风险:
+- 待人工确认点:
 
-### 来源
+### 来源证据
 
-| 可信度 | 类型 | 平台 | 标题 | 作者/发布者 | 日期 | 链接 | 备注 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |  |
+```yaml
+sources:
+  - title:
+    url:
+    noPublicLinkReason:
+    platform:
+    sourceType:
+    supports:
+      - 具体说法
+    reliability:
+    checkedAt:
+    notes:
 ```
 
-For multiple memes, repeat the card. Keep each source row traceable enough for a maintainer to re-check.
+`supports` 必须逐条对应上方摘要里的具体说法，并明确这是在证明官方机制、社区叫法，还是仅为本站二创提供语境。
+```
+
+For multiple memes, repeat the card. Keep each evidence object traceable enough for a maintainer to re-check.
 
 ## guardrails
 
 - 不允许无来源编造《永劫无间》梗、起源、人物关系、传播路径或玩家共识。
 - 不把二手转述写成一手事实。
 - 不把“听说”“大家都知道”当作来源。
+- 不把官方机制、社区叫法、本站原创菜名或本站菜品设定写成同一层事实。
 - 不大量复制原文；只做摘要、归纳和短引。
 - 不收集现实玩家隐私，不记录开盒、网暴或攻击性材料。
 - 不把待考证内容写成已核验事实。
