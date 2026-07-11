@@ -125,14 +125,23 @@
 ## Skill 6: deploy-quality-check
 
 - Baseline:
-  - 待填写
+  - 只有泛化的移动端检查，没有精确到 375 / 768 / 1440、四类页面、三主题和 reduced-motion。
+  - 没有把 `npm run validate:content` 写成和 `npm run build` 同级的必跑命令，也没有要求记录真实输出。
+  - 没有把 `docs/visual-asset-register.md`、AI 资产登记、`aria-pressed`、44px、刷新持久化纳入 checklist。
 - 修改:
-  - 待填写
+  - workflow 改成先跑并记录 `npm run validate:content` 与 `npm run build`。
+  - 加入 375 / 768 / 1440、首页 / 菜单 / 公开详情 / 投稿、三主题差异与持久化、唯一 `aria-pressed=true`、键盘焦点、44px、reduced-motion 检查。
+  - checklist 增加 `validate:content`、AI / 图片资产登记、主题与交互可访问性项目。
 - 验证命令 / 结果:
-  - 待填写
+  - `rg -n "^name:|^description:|^## when_to_use|^## workflow|^## output_format|^## guardrails" .codex/skills/deploy-quality-check/SKILL.md`
+    - 命中 `name`、`description` 和 4 个必需章节。
+  - `git diff --check`
+    - 无 diff 错误；仅有 Git 的 LF/CRLF 警告。
 - 应用场景检查:
-  - 待填写
+  - 场景：发布前检查首页、菜单、公开详情页、投稿页，以及三主题切换与视觉资产登记是否齐全。
+  - 检查命令：`rg -n "validate:content|npm run build|375px|768px|1440px|aria-pressed|44px|reduced-motion|visual-asset-register|首页|菜单|公开详情页|投稿页|AI / 图片资产登记" .codex/skills/deploy-quality-check/SKILL.md`
+  - 结果：必跑命令、四类页面、三个视口、`aria-pressed`、44px、reduced-motion、`docs/visual-asset-register.md` 和 AI 资产登记 checklist 都能直接检索到。
 - Commit:
-  - 待填写
+  - `docs(skills): strengthen release visual checks`
 - 残余风险:
-  - 待填写
+  - 该 skill 仍依赖执行时真的打开页面做视口与交互检查，不能只靠构建命令替代。
