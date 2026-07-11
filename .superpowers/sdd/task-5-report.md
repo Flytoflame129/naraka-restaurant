@@ -101,17 +101,26 @@
 ## Skill 5: astro-site-builder
 
 - Baseline:
-  - 待填写
+  - 没有要求视觉任务先读 `docs/design-direction.md` 或调用 `ui-ux-pro-max`。
+  - 没有写明复用 `mapThemes`、`sitePath()`、Content Collections。
+  - 完成门缺少 375 / 768 / 1440、键盘焦点、44px、文字溢出、三主题差异和 reduced-motion。
 - 修改:
-  - 待填写
+  - workflow 增加架构文档读取顺序，以及视觉任务调用 `ui-ux-pro-max`、但项目设计和版权边界优先的规则。
+  - 明确要求复用 `mapThemes`、`sitePath()`、Content Collections，不得硬编码内容。
+  - 补上视口、键盘可访问性、44px、文字溢出、三主题差异、reduced-motion、`npm run build` 完成门。
 - 验证命令 / 结果:
-  - 待填写
+  - `rg -n "^name:|^description:|^## when_to_use|^## workflow|^## output_format|^## guardrails" .codex/skills/astro-site-builder/SKILL.md`
+    - 命中 `name`、`description` 和 4 个必需章节。
+  - `git diff --check`
+    - 无 diff 错误；仅有 Git 的 LF/CRLF 警告。
 - 应用场景检查:
-  - 待填写
+  - 场景：实现首页 / 菜单页 UI 重做时，需要先对齐设计方向，再验证三主题和多视口完成门。
+  - 检查命令：`rg -n "docs/design-direction.md|ui-ux-pro-max|mapThemes|sitePath\\(\\)|Content Collections|375px|768px|1440px|44px|reduced-motion|npm run build" .codex/skills/astro-site-builder/SKILL.md`
+  - 结果：设计文档、`ui-ux-pro-max`、现有数据接口复用、375 / 768 / 1440、44px、reduced-motion 和 build 门都能直接检索到。
 - Commit:
-  - 待填写
+  - `docs(skills): add visual design workflow`
 - 残余风险:
-  - 待填写
+  - `ui-ux-pro-max` 是建议来源，不会自动保证实现正确；最终仍依赖实际页面验证。
 
 ## Skill 6: deploy-quality-check
 
