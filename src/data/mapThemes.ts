@@ -28,12 +28,12 @@ export const mapThemes = [
     name: "龙隐洞天",
     label: "龙隐秘席",
     heroTitle: "龙隐设宴，幽味入席",
-    description: "地宫、矿洞、龙纹幽光与机关遗迹，适合地下、阴间、机关、翻盘和幽默怪菜梗。",
-    heroDescription: "龙隐洞天席面沉入地宫幽光：曜黑、冷青、龙纹机关和翻盘怪味梗都先交给后厨试菜。",
+    description: "洞天、地宫、紫色星盘与辉煌宫阙，适合地下、机关、翻盘和幽默怪菜梗。",
+    heroDescription: "龙隐洞天席面沉入紫星地宫：北斗星盘悬于辉煌宫阙之上，幽味试菜都先交给后厨。",
     accent: "#34a6b2",
     tone: "曜黑 / 熔岩红 / 冷青 / 古铜金",
     image: "/assets/visuals/theme-longyin.webp",
-    alt: "地宫、矿洞、机关与幽光后厨构成的龙隐洞天主题原创氛围图",
+    alt: "紫色北斗七星星盘照耀地下辉煌宫殿的龙隐洞天主题原创氛围图",
   },
 ] as const;
 
