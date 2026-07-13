@@ -23,6 +23,11 @@ import { mapThemes } from "../data/mapThemes";
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem(themeKey, theme);
 
+    for (const title of document.querySelectorAll("[data-theme-title]")) {
+      const nextTitle = title.dataset[theme];
+      if (nextTitle) title.textContent = nextTitle;
+    }
+
     for (const button of buttons) {
       button.setAttribute("aria-pressed", button.dataset.themeTarget === theme ? "true" : "false");
     }

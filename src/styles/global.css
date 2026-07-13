@@ -450,10 +450,6 @@ select:focus-visible {
   min-height: clamp(22rem, 58vh, 30rem);
 }
 
-.hero--main {
-  --hero-image: var(--asset-hero-main);
-}
-
 .hero::before,
 .page-hero::before {
   position: absolute;
@@ -463,6 +459,13 @@ select:focus-visible {
     linear-gradient(90deg, rgba(5, 4, 3, 0.92) 0%, rgba(5, 4, 3, 0.7) 40%, rgba(5, 4, 3, 0.9) 100%),
     var(--hero-surface-overlay),
     repeating-linear-gradient(90deg, rgba(212, 176, 106, 0.05) 0 1px, transparent 1px 88px);
+}
+
+.hero--main::before {
+  background:
+    linear-gradient(90deg, rgba(5, 4, 3, 0.82) 0%, rgba(5, 4, 3, 0.48) 48%, rgba(5, 4, 3, 0.7) 100%),
+    var(--hero-surface-overlay),
+    repeating-linear-gradient(90deg, rgba(212, 176, 106, 0.04) 0 1px, transparent 1px 88px);
 }
 
 .hero .container,
@@ -666,11 +669,17 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 }
 
 .dish-card img {
+  display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   background: var(--color-surface-muted);
   filter: saturate(0.9) contrast(1.04) brightness(0.92);
+}
+
+.dish-grid--featured {
+  grid-template-columns: minmax(0, 38rem);
 }
 
 .dish-card-body {
