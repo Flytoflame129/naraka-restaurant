@@ -1,20 +1,32 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
-import { siteTitle } from "../lib/site";
+import { sitePath, siteTitle } from "../lib/site";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = siteTitle,
   description = "NARAKA Restaurant 是《永劫无间》玩家同好创作的虚拟游戏主题餐厅站点。",
+  image = "/assets/visuals/hero-main.webp",
 } = Astro.props;
 
 const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const socialImageUrl = new URL(sitePath(image), Astro.site ?? Astro.url.origin);
+const assetVariables = [
+  ["--asset-hero-main", "/assets/visuals/hero-main.webp"],
+  ["--asset-theme-juku", "/assets/visuals/theme-juku.webp"],
+  ["--asset-theme-huoluo", "/assets/visuals/theme-huoluo.webp"],
+  ["--asset-theme-longyin", "/assets/visuals/theme-longyin.webp"],
+]
+  .map(([name, path]) => `${name}: url("${sitePath(path)}")`)
+  .join(";");
 ---
 
 <!doctype html>
@@ -24,6 +36,16 @@ const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style is:inline set:html={`:root{${assetVariables}}`}></style>
     <script is:inline>
       try {
         const theme = window.localStorage.getItem("naraka-restaurant-theme");

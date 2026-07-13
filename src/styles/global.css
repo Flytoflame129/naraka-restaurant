@@ -29,7 +29,7 @@
   --shadow-hero: 0 28px 64px rgba(0, 0, 0, 0.42);
   --radius-panel: 6px;
   --max-width: 1180px;
-  --hero-image: url("/assets/visuals/hero-main.png");
+  --hero-image: var(--asset-hero-main);
   --theme-glow: rgba(185, 154, 88, 0.22);
   --theme-overlay: linear-gradient(115deg, rgba(16, 20, 15, 0.78), transparent 58%);
   --theme-card-overlay: linear-gradient(180deg, rgba(10, 11, 9, 0.08), rgba(10, 11, 9, 0.62) 58%, rgba(10, 11, 9, 0.96) 100%);
@@ -43,7 +43,7 @@ html[data-theme="juku"] {
   --theme-overlay: linear-gradient(115deg, rgba(15, 20, 14, 0.78), transparent 58%);
   --theme-card-overlay: linear-gradient(180deg, rgba(9, 11, 8, 0.06), rgba(13, 17, 12, 0.56) 58%, rgba(11, 12, 10, 0.96) 100%);
   --theme-section-overlay: linear-gradient(90deg, rgba(59, 82, 58, 0.2), transparent 54%);
-  --hero-image: url("/assets/visuals/theme-juku.png");
+  --hero-image: var(--asset-theme-juku);
 }
 
 html[data-theme="huoluo"] {
@@ -53,7 +53,7 @@ html[data-theme="huoluo"] {
   --theme-overlay: linear-gradient(115deg, rgba(36, 18, 10, 0.76), transparent 60%);
   --theme-card-overlay: linear-gradient(180deg, rgba(22, 11, 5, 0.06), rgba(28, 14, 7, 0.54) 56%, rgba(14, 9, 6, 0.96) 100%);
   --theme-section-overlay: linear-gradient(90deg, rgba(128, 61, 28, 0.24), transparent 54%);
-  --hero-image: url("/assets/visuals/theme-huoluo.png");
+  --hero-image: var(--asset-theme-huoluo);
 }
 
 html[data-theme="longyin"] {
@@ -63,7 +63,7 @@ html[data-theme="longyin"] {
   --theme-overlay: linear-gradient(115deg, rgba(32, 18, 16, 0.8), rgba(18, 12, 11, 0.48) 34%, transparent 60%);
   --theme-card-overlay: linear-gradient(180deg, rgba(24, 13, 12, 0.08), rgba(36, 18, 17, 0.58) 58%, rgba(10, 11, 12, 0.96) 100%);
   --theme-section-overlay: linear-gradient(90deg, rgba(128, 66, 43, 0.18), rgba(44, 67, 72, 0.1) 34%, transparent 56%);
-  --hero-image: url("/assets/visuals/theme-longyin.png");
+  --hero-image: var(--asset-theme-longyin);
 }
 
 [data-theme-card="juku"] {
@@ -71,7 +71,7 @@ html[data-theme="longyin"] {
   --component-theme-overlay: linear-gradient(115deg, rgba(15, 20, 14, 0.78), transparent 58%);
   --component-theme-card-overlay: linear-gradient(180deg, rgba(9, 11, 8, 0.06), rgba(13, 17, 12, 0.56) 58%, rgba(11, 12, 10, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(59, 82, 58, 0.2), transparent 54%);
-  --component-theme-image: url("/assets/visuals/theme-juku.png");
+  --component-theme-image: var(--asset-theme-juku);
 }
 
 [data-theme-card="huoluo"] {
@@ -79,7 +79,7 @@ html[data-theme="longyin"] {
   --component-theme-overlay: linear-gradient(115deg, rgba(36, 18, 10, 0.76), transparent 60%);
   --component-theme-card-overlay: linear-gradient(180deg, rgba(22, 11, 5, 0.06), rgba(28, 14, 7, 0.54) 56%, rgba(14, 9, 6, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(128, 61, 28, 0.24), transparent 54%);
-  --component-theme-image: url("/assets/visuals/theme-huoluo.png");
+  --component-theme-image: var(--asset-theme-huoluo);
 }
 
 [data-theme-card="longyin"] {
@@ -87,7 +87,7 @@ html[data-theme="longyin"] {
   --component-theme-overlay: linear-gradient(115deg, rgba(32, 18, 16, 0.8), rgba(18, 12, 11, 0.48) 34%, transparent 60%);
   --component-theme-card-overlay: linear-gradient(180deg, rgba(24, 13, 12, 0.08), rgba(36, 18, 17, 0.58) 58%, rgba(10, 11, 12, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(128, 66, 43, 0.18), rgba(44, 67, 72, 0.1) 34%, transparent 56%);
-  --component-theme-image: url("/assets/visuals/theme-longyin.png");
+  --component-theme-image: var(--asset-theme-longyin);
 }
 
 *,
@@ -451,7 +451,7 @@ select:focus-visible {
 }
 
 .hero--main {
-  --hero-image: url("/assets/visuals/hero-main.png");
+  --hero-image: var(--asset-hero-main);
 }
 
 .hero::before,

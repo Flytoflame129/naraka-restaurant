@@ -7,7 +7,7 @@ export const copyrightNotice =
   "《永劫无间 / NARAKA: BLADEPOINT》相关名称、商标、角色、设定和素材版权归其相应权利人所有。";
 
 export const repositoryUrl =
-  import.meta.env.PUBLIC_REPOSITORY_URL ?? "https://github.com/OWNER/naraka-restaurant";
+  import.meta.env.PUBLIC_REPOSITORY_URL ?? "https://github.com/Flytoflame129/naraka-restaurant";
 
 export function sitePath(path = "/") {
   const base = import.meta.env.BASE_URL || "/";

@@ -11,6 +11,6 @@ function normalizeBase(value) {
 
 export default defineConfig({
   output: "static",
-  site: process.env.SITE ?? "https://example.github.io",
+  site: process.env.SITE ?? "https://flytoflame129.github.io",
   base: normalizeBase(process.env.BASE_PATH),
 });
