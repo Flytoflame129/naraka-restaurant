@@ -1,14 +1,18 @@
 ---
+import { getMapTheme } from "../data/mapThemes";
+
 const { item, sequence } = Astro.props;
 const data = item.data;
+const theme = getMapTheme(data.map);
+const isLongTitle = Array.from(data.title).length >= 9;
 ---
 
-<article class="menu-item-card">
+<article class="menu-item-card" data-theme-card={theme?.key}>
   <div class="card-kicker">
     <span>席位 {String(sequence).padStart(2, "0")}</span>
     <span>{data.map}</span>
   </div>
-  <h3>{data.title}</h3>
+  <h3 class:list={{ "is-long-title": isLongTitle }}>{data.title}</h3>
   <p>{data.description}</p>
   <span class="menu-item-category">{data.category}</span>
 </article>
