@@ -3,6 +3,7 @@ import { join } from "node:path";
 
 const root = process.cwd();
 const dishesDir = join(root, "src", "content", "dishes");
+const menuItemsDir = join(root, "src", "content", "menu-items");
 const requiredFields = [
   "title",
   "slug",
@@ -20,6 +21,7 @@ const requiredFields = [
   "publishStatus",
   "curator",
 ];
+const requiredMenuItemFields = ["title", "slug", "map", "category", "description", "order"];
 
 const knownMaps = new Set(["聚窟洲", "火罗国", "龙隐洞天"]);
 const knownStatuses = new Set(["verified", "pending", "mixed", "rejected"]);
@@ -147,7 +149,18 @@ if (!existsSync(dishesDir)) {
   process.exit();
 }
 
+if (!existsSync(menuItemsDir)) {
+  fail("src/content/menu-items is missing");
+  process.exit();
+}
+
 const dishFiles = readdirSync(dishesDir).filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+const menuItemFiles = readdirSync(menuItemsDir).filter((file) => file.endsWith(".md") || file.endsWith(".mdx"));
+const expectedMenuCounts = new Map([
+  ["聚窟洲", 8],
+  ["火罗国", 4],
+  ["龙隐洞天", 3],
+]);
 
 if (dishFiles.length === 0) {
   fail("at least one dish markdown file is required");
@@ -251,11 +264,64 @@ for (const file of dishFiles) {
     fail(`${file}: pending or mixed content must visibly include 待考证 or 资料整理中`);
   }
 
-  if (publishStatus === "published" && status === "rejected") {
-    fail(`${file}: rejected content cannot be published`);
+  if (publishStatus === "published" && status !== "verified") {
+    fail(`${file}: only verified content can be published`);
+  }
+}
+
+const menuItemSlugs = new Set();
+const menuCounts = new Map(Array.from(expectedMenuCounts.keys(), (map) => [map, 0]));
+
+for (const file of menuItemFiles) {
+  const parsed = parseFrontmatter(join(menuItemsDir, file));
+
+  if (!parsed) {
+    fail(`${file}: missing YAML frontmatter`);
+    continue;
+  }
+
+  const { fields } = parsed;
+  for (const field of requiredMenuItemFields) {
+    if (!fields.has(field) || !scalar(fields, field)) {
+      fail(`${file}: missing required field ${field}`);
+    }
+  }
+
+  const slug = scalar(fields, "slug");
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    fail(`${file}: slug must be lowercase hyphen-case`);
+  } else if (menuItemSlugs.has(slug)) {
+    fail(`${file}: duplicate menu item slug ${slug}`);
+  }
+  menuItemSlugs.add(slug);
+
+  const map = scalar(fields, "map");
+  if (!knownMaps.has(map)) {
+    fail(`${file}: map must be one of ${Array.from(knownMaps).join(", ")}`);
+  } else {
+    menuCounts.set(map, menuCounts.get(map) + 1);
+  }
+
+  const category = scalar(fields, "category");
+  if (!knownCategories.has(category)) {
+    fail(`${file}: category must be one of ${Array.from(knownCategories).join(", ")}`);
+  }
+
+  const order = Number(scalar(fields, "order"));
+  if (!Number.isInteger(order) || order < 1) {
+    fail(`${file}: order must be a positive integer`);
+  }
+}
+
+for (const [map, expectedCount] of expectedMenuCounts) {
+  const actualCount = menuCounts.get(map);
+  if (actualCount !== expectedCount) {
+    fail(`menu item count for ${map} must be ${expectedCount}, received ${actualCount}`);
   }
 }
 
 if (!process.exitCode) {
-  console.log(`content validation passed: ${dishFiles.length} dish file(s) checked`);
+  console.log(
+    `content validation passed: ${dishFiles.length} dish file(s), ${menuItemFiles.length} menu item file(s) checked`,
+  );
 }

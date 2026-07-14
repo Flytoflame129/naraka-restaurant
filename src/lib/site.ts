@@ -18,7 +18,7 @@ export function sitePath(path = "/") {
 }
 
 export function isPublicDishStatus(status: string, publishStatus = "published") {
-  return publishStatus === "published" && status !== "rejected";
+  return publishStatus === "published" && status === "verified";
 }
 
 export function statusLabel(status: string) {

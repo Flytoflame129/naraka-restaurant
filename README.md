@@ -32,7 +32,18 @@ npm run validate:content
 
 ## 内容结构
 
-菜品内容放在 `src/content/dishes/`。每个菜品 Markdown 必须包含：
+正式菜单条目放在 `src/content/menu-items/`，用于菜单页直接展示。每个条目包含：
+
+- `title`
+- `slug`
+- `map`
+- `category`
+- `description`
+- `order`
+
+正式菜单条目是本站虚拟餐厅设定，不自动等同于已经完成来源考证的玩家梗档案，也不会生成菜品详情页。
+
+完整菜品档案放在 `src/content/dishes/`。每个菜品 Markdown 必须包含：
 
 - `title`
 - `slug`
@@ -54,7 +65,7 @@ npm run validate:content
 
 `publishStatus` 表示是否进入公开页面，可用值：`draft`、`published`、`needs-review`。
 
-没有可靠来源的内容只能使用 `pending` 或 `mixed`，并在页面可见位置写明“待考证”或“资料整理中”。`needs-review` 用于研究草稿，默认不进入公开页面列表。
+没有可靠来源的内容只能使用 `pending` 或 `mixed`，并在页面可见位置写明“待考证”或“资料整理中”。`needs-review` 用于研究草稿，默认不进入公开页面列表。只有同时满足 `publishStatus: published` 与 `status: verified` 的完整菜品档案才会生成公开详情页。
 
 ## GitHub Pages 部署
 

@@ -1,88 +1,90 @@
 ---
 import { getCollection } from "astro:content";
-import DishGrid from "../components/DishGrid.astro";
 import MapThemeCard from "../components/MapThemeCard.astro";
+import MenuItemCard from "../components/MenuItemCard.astro";
 import PageHero from "../components/PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapThemes } from "../data/mapThemes";
-import { isPublicDishStatus, sitePath } from "../lib/site";
+import { sitePath } from "../lib/site";
 
-const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
-const dishesByTheme = mapThemes.map((theme) => ({
+const menuItems = await getCollection("menuItems");
+const itemsByTheme = mapThemes.map((theme) => ({
   theme,
-  dishes: dishes.filter((dish) => dish.data.map === theme.name),
+  items: menuItems
+    .filter((item) => item.data.map === theme.name)
+    .sort((a, b) => a.data.order - b.data.order),
 }));
 ---
 
-<BaseLayout title="菜单" description="浏览 NARAKA Restaurant 的公开菜品菜单。">
+<BaseLayout title="菜单" description="浏览无间食肆按聚窟洲、火罗国与龙隐洞天划分的虚拟主题菜单。">
   <PageHero
-    eyebrow="菜单卷轴 / 悬赏榜"
-    title="今日悬赏菜单"
-    lead="只展示允许公开的菜品。筛选按钮继续按三张地图切换，公开数量、氛围图和分区说明都按真实内容状态输出。"
+    eyebrow="菜单卷轴 / 三地席面"
+    title="择一方入席，点一道上桌"
+    lead="右上角地图主题就是本席菜单。切换聚窟洲、火罗国或龙隐洞天，只呈上属于当前席面的菜品。"
     compact
   >
-    <a class="button secondary" href={sitePath("/submit/")}>查看后厨委托书</a>
+    <a class="button secondary" href={sitePath("/submit/")}>向后厨递交新菜谱</a>
   </PageHero>
 
   <section class="section-tight">
     <div class="container">
-      <div class="filter-panel" aria-label="菜单筛选">
+      <div class="filter-panel" aria-label="菜单主题切换">
+        <p class="eyebrow">选择本席地图</p>
         <div class="filter-row">
-          <button class="filter-button" type="button" data-menu-filter="all" aria-pressed="true">全部席位</button>
           {mapThemes.map((theme) => (
-            <button class="filter-button" type="button" data-menu-filter={theme.name} aria-pressed="false">{theme.name}</button>
+            <button
+              class="filter-button"
+              type="button"
+              data-theme-target={theme.key}
+              aria-pressed={theme.key === "juku" ? "true" : "false"}
+            >
+              {theme.name}
+            </button>
           ))}
         </div>
       </div>
     </div>
   </section>
 
-  {dishesByTheme.map(({ theme, dishes }) => (
-    <section class="section-tight theme-section" data-theme-section={theme.name} data-theme-card={theme.key}>
+  {itemsByTheme.map(({ theme, items }) => (
+    <section
+      class:list={["section-tight", "theme-section", { "is-hidden": theme.key !== "juku" }]}
+      data-theme-section={theme.key}
+      data-theme-card={theme.key}
+    >
       <div class="container">
         <p class="eyebrow">{theme.label}</p>
-        <h2 class="section-title">{theme.name}</h2>
-        <div class="info-grid">
+        <h2 class="section-title">{theme.name}菜单</h2>
+        <div class="info-grid menu-theme-intro">
           <MapThemeCard theme={theme} />
           <article class="info-card">
-            <h3>席位说明</h3>
+            <h3>本席说明</h3>
             <p>{theme.description}</p>
-            <p><strong>公开菜品：</strong>{dishes.length} 道</p>
-            <p>
-              {dishes.length > 0
-                ? "这一席已经有可公开浏览的菜品，继续沿用现有卡片和详情页入口。"
-                : "这一席暂时没有符合公开条件的菜品，保持真实空席，不补虚构占位。"}
-            </p>
+            <p><strong>当前上桌：</strong>{items.length} 道</p>
+            <p>以下均为无间食肆虚拟菜单设定。菜名可以有江湖余味，席面不会冒充现实售卖或官方资料。</p>
           </article>
         </div>
 
-        {dishes.length > 0 ? (
-          <DishGrid dishes={dishes} />
-        ) : (
-          <div class="empty-state">
-            当前没有符合公开过滤的菜品。待考证、草稿或未授权条目继续留在后厨，不会在菜单页伪装成可点单内容。
-          </div>
-        )}
+        <div class="menu-item-grid">
+          {items.map((item, index) => <MenuItemCard item={item} sequence={index + 1} />)}
+        </div>
       </div>
     </section>
   ))}
 
   <script>
-    const filterButtons = Array.from(document.querySelectorAll("[data-menu-filter]"));
     const sections = Array.from(document.querySelectorAll("[data-theme-section]"));
 
-    for (const button of filterButtons) {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.menuFilter;
-
-        for (const item of filterButtons) {
-          item.setAttribute("aria-pressed", item === button ? "true" : "false");
-        }
-
-        for (const section of sections) {
-          section.classList.toggle("is-hidden", filter !== "all" && section.dataset.themeSection !== filter);
-        }
-      });
+    function showTheme(theme) {
+      for (const section of sections) {
+        section.classList.toggle("is-hidden", section.dataset.themeSection !== theme);
+      }
     }
+
+    window.addEventListener("naraka-theme-change", (event) => {
+      if (event instanceof CustomEvent) showTheme(event.detail.theme);
+    });
+
+    showTheme(document.documentElement.dataset.theme || "juku");
   </script>
 </BaseLayout>

@@ -98,14 +98,26 @@ const dishes = defineCollection({
         });
       }
 
-      if (dish.publishStatus === "published" && dish.status === "rejected") {
+      if (dish.publishStatus === "published" && dish.status !== "verified") {
         context.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "rejected dishes cannot be published",
+          message: "only verified dishes can be published",
           path: ["publishStatus"],
         });
       }
     }),
 });
 
-export const collections = { dishes };
+const menuItems = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/menu-items" }),
+  schema: z.object({
+    title: z.string().min(1),
+    slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    map: z.enum(mapThemeNames),
+    category: z.enum(dishCategories),
+    description: z.string().min(1).max(120),
+    order: z.number().int().positive(),
+  }),
+});
+
+export const collections = { dishes, menuItems };

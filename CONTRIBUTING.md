@@ -18,7 +18,9 @@
 
 ## 菜品 Markdown 要求
 
-菜品文件位于 `src/content/dishes/`。发布前必须通过：
+正式菜单条目位于 `src/content/menu-items/`，只填写菜名、地图、分类、本站原创菜单描述和排序，不应在简介中擅自补写梗来源或游戏机制。
+
+需要来源说明和独立详情页的完整菜品档案位于 `src/content/dishes/`。发布前必须通过：
 
 ```bash
 npm run validate:content

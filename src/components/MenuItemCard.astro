@@ -1,0 +1,14 @@
+---
+const { item, sequence } = Astro.props;
+const data = item.data;
+---
+
+<article class="menu-item-card">
+  <div class="card-kicker">
+    <span>席位 {String(sequence).padStart(2, "0")}</span>
+    <span>{data.map}</span>
+  </div>
+  <h3>{data.title}</h3>
+  <p>{data.description}</p>
+  <span class="menu-item-category">{data.category}</span>
+</article>

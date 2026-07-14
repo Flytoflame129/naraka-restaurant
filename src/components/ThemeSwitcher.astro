@@ -31,6 +31,8 @@ import { mapThemes } from "../data/mapThemes";
     for (const button of buttons) {
       button.setAttribute("aria-pressed", button.dataset.themeTarget === theme ? "true" : "false");
     }
+
+    window.dispatchEvent(new CustomEvent("naraka-theme-change", { detail: { theme } }));
   }
 
   const savedTheme = window.localStorage.getItem(themeKey);

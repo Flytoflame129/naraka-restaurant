@@ -450,6 +450,12 @@ select:focus-visible {
   min-height: clamp(22rem, 58vh, 30rem);
 }
 
+.page-hero.page-hero--compact h1 {
+  max-inline-size: 15ch;
+  font-size: 3.25rem;
+  line-height: 1.15;
+}
+
 .hero::before,
 .page-hero::before {
   position: absolute;
@@ -611,6 +617,7 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 }
 
 .dish-grid,
+.menu-item-grid,
 .theme-grid,
 .info-grid,
 .stats-grid,
@@ -628,6 +635,63 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 
 .detail-section-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.menu-item-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.menu-item-card {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  min-width: 0;
+  min-height: 12rem;
+  padding: 1.1rem;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-panel);
+  background:
+    linear-gradient(145deg, rgba(212, 176, 106, 0.08), transparent 44%),
+    var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
+}
+
+.menu-item-card::before {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-gold), var(--color-accent));
+  content: "";
+}
+
+.menu-item-card h3 {
+  margin: 0;
+  color: var(--color-ink);
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.menu-item-card p {
+  margin: 0;
+  color: var(--color-ink-muted);
+  line-height: 1.75;
+}
+
+.menu-item-category {
+  justify-self: start;
+  margin-top: auto;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(212, 176, 106, 0.34);
+  border-radius: var(--radius-panel);
+  color: var(--color-gold);
+  font-size: 0.86rem;
+  font-weight: 800;
 }
 
 .dish-card,
@@ -1073,11 +1137,17 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
     max-width: 100%;
   }
 
+  .page-hero.page-hero--compact h1 {
+    max-inline-size: 14ch;
+    font-size: 2.75rem;
+  }
+
   .hero-visual {
     min-height: 18rem;
   }
 
   .dish-grid,
+  .menu-item-grid,
   .theme-grid,
   .info-grid,
   .stats-grid,
@@ -1101,6 +1171,10 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
     font-size: clamp(2.5rem, 7vw, 5.75rem);
   }
 
+  .page-hero.page-hero--compact h1 {
+    font-size: 2.25rem;
+  }
+
   .lead {
     font-size: 1rem;
   }
@@ -1121,6 +1195,7 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   }
 
   .dish-grid,
+  .menu-item-grid,
   .theme-grid,
   .info-grid,
   .stats-grid,
