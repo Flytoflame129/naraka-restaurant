@@ -1070,6 +1070,64 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   padding: 1rem;
 }
 
+.menu-detail-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid rgba(212, 176, 106, 0.34);
+  border-radius: var(--radius-panel);
+  background: rgba(8, 8, 7, 0.5);
+  color: var(--color-ink);
+}
+
+.menu-detail-tag[data-map-theme="huoluo"] {
+  border-color: rgba(217, 137, 49, 0.52);
+  color: #ffd08a;
+}
+
+.menu-detail-tag[data-map-theme="longyin"] {
+  border-color: rgba(52, 166, 178, 0.52);
+  color: #9de5e7;
+}
+
+.menu-related-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-related-list li {
+  padding: 0.45rem 0.7rem;
+  border-left: 2px solid var(--color-brand);
+  background: rgba(212, 176, 106, 0.08);
+  color: var(--color-ink);
+}
+
+.menu-ai-credit strong {
+  color: var(--color-gold);
+}
+
+.detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border: 1px solid var(--color-line);
+  color: var(--color-gold);
+  font-weight: 800;
+  text-align: center;
+}
+
+.detail-back-link:hover,
+.detail-back-link:focus-visible {
+  border-color: var(--color-gold);
+  color: var(--color-ink);
+}
+
 .filter-panel {
   margin-top: 1.5rem;
   padding: 1rem;
