@@ -14,7 +14,7 @@ const featuredDishes = dishes.slice(0, 3);
   <section class="hero hero--main">
     <div class="container hero-panel">
       <div class="hero-copy">
-        <p class="eyebrow">非官方玩家同好创作站</p>
+        <p class="eyebrow">无间食肆 · 今日开席</p>
         <h1
           class="hero-title"
           data-theme-title
@@ -39,9 +39,9 @@ const featuredDishes = dishes.slice(0, 3);
         <p class="eyebrow">今日席位</p>
         <h2>无间食肆今日告示</h2>
         <div class="button-row">
-          <span class="meme-badge pending">显著非官方</span>
+          <span class="meme-badge pending">同好共创</span>
         </div>
-        <p>这里把玩家熟悉的江湖话装进虚拟菜谱，不是真实餐厅，也不代表官方资料、公告或活动。</p>
+        <p>玩家熟悉的江湖故事在这里化作一道道虚拟菜品。今日灯火已亮，请按席入座。</p>
         <p><strong>今日席面：</strong>翻菜单看招牌菜，沿地图找不同风味，再把新菜名递进后厨。</p>
         <p><strong>食肆规矩：</strong>菜名可以大胆，出处不能乱写；没有把握的传闻会留在后厨继续整理。</p>
       </article>
@@ -52,7 +52,7 @@ const featuredDishes = dishes.slice(0, 3);
     <div class="container">
       <p class="eyebrow">地图席位</p>
       <h2 class="section-title">三处开席，各有风味</h2>
-      <p class="lead">聚窟洲、火罗国、龙隐洞天既是页面分区，也是视觉主题。入口统一展示原创氛围图，不冒充官方地图资料页。</p>
+      <p class="lead">三方水土各成一席：聚窟洲雾色温润，火罗国烈宴灼热，龙隐洞天幽光深邃。</p>
       <div class="theme-grid">
         {mapThemes.map((theme) => <MapThemeCard theme={theme} />)}
       </div>
@@ -68,7 +68,7 @@ const featuredDishes = dishes.slice(0, 3);
         <DishGrid dishes={featuredDishes} featured />
       ) : (
         <div class="empty-state">
-          当前还没有符合公开条件的招牌菜。待考证、草稿或未授权内容会继续留在后厨账本里，不会直接挂到首页。
+          今日招牌仍在后厨试味，待主厨定席后再端上桌。
         </div>
       )}
     </div>
@@ -76,16 +76,16 @@ const featuredDishes = dishes.slice(0, 3);
 
   <section class="section">
     <div class="container">
-      <p class="eyebrow">玩家传闻 / 投稿入口</p>
+      <p class="eyebrow">江湖来帖 / 后厨接菜</p>
       <h2 class="section-title">江湖来菜，后厨接帖</h2>
       <div class="info-grid">
         <article class="info-card">
-          <h3>江湖传闻入菜</h3>
-          <p>首页这里只说明整理规则，不凭空新增热梗条目。来源未补齐的内容继续标注“待考证”，不会改写成已核实事实。</p>
+          <h3>席间故事入菜</h3>
+          <p>玩家记忆里的妙语与名场面，会在后厨慢慢熬成新菜；来历尚未理清的，只作试味，不急着挂牌。</p>
         </article>
         <article class="info-card">
           <h3>后厨投稿委托</h3>
-          <p>投稿时请带上梗名、出处、关联角色或操作、图片授权和是否允许展示。维护者先核来源，再决定是否进入公开菜单。</p>
+          <p>递菜谱时，请带上菜名、出处、相关角色或招式，以及图片许可。后厨核清来路后，再择席上桌。</p>
           <p><a href={sitePath("/submit/")}>前往投稿说明</a></p>
         </article>
         <article class="info-card">

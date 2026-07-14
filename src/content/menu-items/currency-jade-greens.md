@@ -1,5 +1,5 @@
 ---
-title: "货币賭玉一片绿时蔬"
+title: "货币赌玉一片绿时蔬"
 slug: "currency-jade-greens"
 map: "聚窟洲"
 category: "怪菜"

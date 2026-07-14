@@ -72,6 +72,10 @@ html[data-theme="longyin"] {
   --component-theme-card-overlay: linear-gradient(180deg, rgba(9, 11, 8, 0.06), rgba(13, 17, 12, 0.56) 58%, rgba(11, 12, 10, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(59, 82, 58, 0.2), transparent 54%);
   --component-theme-image: var(--asset-theme-juku);
+  --menu-card-border: rgba(185, 154, 88, 0.7);
+  --menu-card-surface: rgba(15, 24, 18, 0.94);
+  --menu-card-pattern: repeating-linear-gradient(115deg, rgba(157, 178, 132, 0.07) 0 1px, transparent 1px 18px);
+  --menu-card-sign: #d6bd7d;
 }
 
 [data-theme-card="huoluo"] {
@@ -80,6 +84,10 @@ html[data-theme="longyin"] {
   --component-theme-card-overlay: linear-gradient(180deg, rgba(22, 11, 5, 0.06), rgba(28, 14, 7, 0.54) 56%, rgba(14, 9, 6, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(128, 61, 28, 0.24), transparent 54%);
   --component-theme-image: var(--asset-theme-huoluo);
+  --menu-card-border: rgba(217, 137, 49, 0.78);
+  --menu-card-surface: rgba(38, 18, 10, 0.95);
+  --menu-card-pattern: repeating-linear-gradient(135deg, rgba(225, 106, 43, 0.09) 0 2px, transparent 2px 20px);
+  --menu-card-sign: #e6a24f;
 }
 
 [data-theme-card="longyin"] {
@@ -88,6 +96,10 @@ html[data-theme="longyin"] {
   --component-theme-card-overlay: linear-gradient(180deg, rgba(24, 13, 12, 0.08), rgba(36, 18, 17, 0.58) 58%, rgba(10, 11, 12, 0.96) 100%);
   --component-theme-section-overlay: linear-gradient(90deg, rgba(128, 66, 43, 0.18), rgba(44, 67, 72, 0.1) 34%, transparent 56%);
   --component-theme-image: var(--asset-theme-longyin);
+  --menu-card-border: rgba(76, 162, 174, 0.72);
+  --menu-card-surface: rgba(21, 15, 31, 0.96);
+  --menu-card-pattern: radial-gradient(circle at 82% 18%, rgba(112, 82, 160, 0.18) 0 2px, transparent 3px), repeating-radial-gradient(circle at 82% 18%, transparent 0 22px, rgba(72, 155, 166, 0.06) 23px 24px);
+  --menu-card-sign: #86c5c8;
 }
 
 *,
@@ -645,18 +657,16 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 .menu-item-card {
   position: relative;
   display: grid;
-  gap: 0.75rem;
+  gap: 0.55rem;
   align-content: start;
   min-width: 0;
-  min-height: 12rem;
-  padding: 1.1rem;
+  min-height: 10.5rem;
+  padding: 0.9rem 1rem;
   overflow: hidden;
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--menu-card-border, var(--color-line));
   border-radius: var(--radius-panel);
-  background:
-    linear-gradient(145deg, rgba(212, 176, 106, 0.08), transparent 44%),
-    var(--color-surface-raised);
-  box-shadow: var(--shadow-card);
+  background: var(--menu-card-pattern, none), var(--menu-card-surface, var(--color-surface-raised));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025), var(--shadow-card);
 }
 
 .menu-item-card::before {
@@ -664,34 +674,51 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   inset: 0 auto auto 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-brand), var(--color-gold), var(--color-accent));
+  background: linear-gradient(90deg, var(--color-brand), var(--menu-card-sign, var(--color-gold)), var(--menu-card-border, var(--color-accent)));
   content: "";
+}
+
+.menu-item-card .card-kicker {
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--menu-card-border, var(--color-line)) 55%, transparent);
 }
 
 .menu-item-card h3 {
   margin: 0;
   color: var(--color-ink);
   font-family: "Noto Serif SC", serif;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  line-height: 1.45;
+  font-size: clamp(1.12rem, 1.75vw, 1.38rem);
+  line-height: 1.35;
+  text-wrap: balance;
+  word-break: keep-all;
   overflow-wrap: anywhere;
+}
+
+.menu-item-card h3.is-long-title {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.4;
 }
 
 .menu-item-card p {
   margin: 0;
   color: var(--color-ink-muted);
-  line-height: 1.75;
+  font-size: 0.96rem;
+  line-height: 1.6;
 }
 
 .menu-item-category {
+  position: relative;
   justify-self: start;
-  margin-top: auto;
-  padding: 0.3rem 0.6rem;
-  border: 1px solid rgba(212, 176, 106, 0.34);
-  border-radius: var(--radius-panel);
-  color: var(--color-gold);
-  font-size: 0.86rem;
+  margin-top: 0.15rem;
+  padding: 0.24rem 0.75rem;
+  border: 1px solid var(--menu-card-border, rgba(212, 176, 106, 0.34));
+  border-left-width: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--menu-card-sign, var(--color-gold)) 12%, transparent);
+  color: var(--menu-card-sign, var(--color-gold));
+  font-size: 0.82rem;
   font-weight: 800;
+  letter-spacing: 0;
 }
 
 .dish-card,
@@ -1177,6 +1204,10 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 
   .lead {
     font-size: 1rem;
+  }
+
+  .menu-item-card h3.is-long-title {
+    font-size: 1.08rem;
   }
 
   .button-row > * {
