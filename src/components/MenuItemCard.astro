@@ -1,5 +1,6 @@
 ---
 import { getMapTheme } from "../data/mapThemes";
+import { sitePath } from "../lib/site";
 
 const { item, sequence } = Astro.props;
 const data = item.data;
@@ -12,7 +13,9 @@ const isLongTitle = Array.from(data.title).length >= 9;
     <span>席位 {String(sequence).padStart(2, "0")}</span>
     <span>{data.map}</span>
   </div>
-  <h3 class:list={{ "is-long-title": isLongTitle }}>{data.title}</h3>
+  <h3 class:list={{ "is-long-title": isLongTitle }}>
+    <a href={sitePath(`/menu/${data.slug}/`)}>{data.title}</a>
+  </h3>
   <p>{data.description}</p>
   <span class="menu-item-category">{data.category}</span>
 </article>

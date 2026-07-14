@@ -1,13 +1,19 @@
 ---
 import { getCollection } from "astro:content";
-import DishGrid from "../components/DishGrid.astro";
+import DailySpecialCard from "../components/DailySpecialCard.astro";
 import MapThemeCard from "../components/MapThemeCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapThemes } from "../data/mapThemes";
-import { isPublicDishStatus, sitePath } from "../lib/site";
+import { sitePath } from "../lib/site";
 
-const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
-const featuredDishes = dishes.slice(0, 3);
+const menuItems = await getCollection("menuItems");
+const dailyGroups = mapThemes.map((theme, offset) => ({
+  theme,
+  offset,
+  items: menuItems
+    .filter((item) => item.data.map === theme.name)
+    .sort((a, b) => a.data.order - b.data.order),
+}));
 ---
 
 <BaseLayout title="首页" description="NARAKA Restaurant 是《永劫无间 / NARAKA: BLADEPOINT》玩家同好创作站。">
@@ -62,15 +68,13 @@ const featuredDishes = dishes.slice(0, 3);
   <section class="section">
     <div class="container">
       <p class="eyebrow">今日招牌</p>
-      <h2 class="section-title">主厨今日上桌</h2>
-      <p class="lead">今日席面先端上一道镇桌小吃。刀光落盘，脆响开席，点进菜牌即可查看完整设定与出处。</p>
-      {featuredDishes.length > 0 ? (
-        <DishGrid dishes={featuredDishes} featured />
-      ) : (
-        <div class="empty-state">
-          今日招牌仍在后厨试味，待主厨定席后再端上桌。
-        </div>
-      )}
+      <h2 class="section-title">今日三席推荐</h2>
+      <p class="lead">聚窟洲、火罗国、龙隐洞天各上一道；今日不变，明日换席。</p>
+      <div class="daily-special-grid">
+        {dailyGroups.map(({ theme, offset, items }) => (
+          <DailySpecialCard theme={theme} offset={offset} items={items} />
+        ))}
+      </div>
     </div>
   </section>
 
@@ -96,4 +100,38 @@ const featuredDishes = dishes.slice(0, 3);
       </div>
     </div>
   </section>
+
+  <script>
+    const now = new Date();
+    const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000);
+
+    for (const slot of document.querySelectorAll("[data-daily-slot]")) {
+      if (!(slot instanceof HTMLElement)) continue;
+
+      const optionsElement = slot.querySelector("[data-daily-options]");
+      if (!(optionsElement instanceof HTMLScriptElement)) continue;
+
+      const options = JSON.parse(optionsElement.textContent || "[]");
+      if (!Array.isArray(options) || options.length === 0) continue;
+
+      const index = (dayNumber + Number(slot.dataset.offset)) % options.length;
+      const selected = options[index];
+      const link = slot.querySelector("[data-daily-link]");
+      const image = slot.querySelector("[data-daily-image]");
+      const title = slot.querySelector("[data-daily-title]");
+      const map = slot.querySelector("[data-daily-map]");
+      const category = slot.querySelector("[data-daily-category]");
+      const description = slot.querySelector("[data-daily-description]");
+
+      if (link instanceof HTMLAnchorElement) link.href = selected.href;
+      if (image instanceof HTMLImageElement) {
+        image.src = selected.image;
+        image.alt = selected.imageAlt;
+      }
+      if (title) title.textContent = selected.title;
+      if (map) map.textContent = selected.map;
+      if (category) category.textContent = selected.category;
+      if (description) description.textContent = selected.description;
+    }
+  </script>
 </BaseLayout>
