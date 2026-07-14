@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">振刀脆响酥抽象占位图</title>
+  <desc id="desc">红金刀光、黑色食盘和酥点碎片组成的原创抽象视觉。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#120908"/>
+      <stop offset="0.48" stop-color="#3b0d12"/>
+      <stop offset="1" stop-color="#0a0807"/>
+    </linearGradient>
+    <linearGradient id="blade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f6df9d"/>
+      <stop offset="0.48" stop-color="#f24a33"/>
+      <stop offset="1" stop-color="#f8efe0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <path d="M70 420 C210 335 325 310 480 330 C635 350 735 325 890 238" fill="none" stroke="#d2ad62" stroke-width="3" opacity=".45"/>
+  <path d="M150 292 L790 116 L825 156 L180 342 Z" fill="url(#blade)" opacity=".82"/>
+  <path d="M190 360 L790 194" fill="none" stroke="#fff6df" stroke-width="10" opacity=".22"/>
+  <ellipse cx="480" cy="392" rx="270" ry="54" fill="#080606" stroke="#d2ad62" stroke-width="5" opacity=".82"/>
+  <g fill="#f0c46f">
+    <circle cx="356" cy="366" r="28"/>
+    <circle cx="432" cy="352" r="24"/>
+    <circle cx="502" cy="363" r="32"/>
+    <circle cx="590" cy="354" r="26"/>
+  </g>
+  <g fill="#b51f2a" opacity=".85">
+    <rect x="306" y="250" width="28" height="108" transform="rotate(-33 320 304)"/>
+    <rect x="648" y="176" width="20" height="118" transform="rotate(53 658 235)"/>
+  </g>
+</svg>

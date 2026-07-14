@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">返魂花清补盏抽象占位图</title>
+  <desc id="desc">冷青幽光、暗金碗盏和抽象花影组成的原创占位图。</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#34a6b2" stop-opacity=".76"/>
+      <stop offset=".42" stop-color="#1b3d43" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#070606"/>
+    </radialGradient>
+    <linearGradient id="bowl" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d2ad62"/>
+      <stop offset=".55" stop-color="#6f4421"/>
+      <stop offset="1" stop-color="#140b09"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="#080706"/>
+  <rect width="960" height="540" fill="url(#glow)" opacity=".9"/>
+  <path d="M92 126 C260 86 420 120 512 206 C608 296 756 288 882 220" fill="none" stroke="#d2ad62" stroke-width="3" opacity=".25"/>
+  <ellipse cx="480" cy="384" rx="248" ry="62" fill="#060504" stroke="#d2ad62" stroke-width="5"/>
+  <path d="M260 366 C296 472 665 472 700 366 Z" fill="url(#bowl)" opacity=".88"/>
+  <ellipse cx="480" cy="362" rx="218" ry="48" fill="#10282c" stroke="#f2cf82" stroke-width="4"/>
+  <g fill="none" stroke="#b9f3f4" stroke-width="5" opacity=".78">
+    <path d="M480 318 C448 268 458 220 480 184 C506 226 511 270 480 318Z"/>
+    <path d="M480 318 C416 304 386 270 372 226 C425 228 462 256 480 318Z"/>
+    <path d="M480 318 C540 298 574 266 590 226 C536 226 500 257 480 318Z"/>
+  </g>
+  <circle cx="480" cy="312" r="30" fill="#f6df9d" opacity=".72"/>
+  <text x="480" y="470" text-anchor="middle" fill="#f5d38d" font-family="serif" font-size="48" font-weight="700">返魂花清补盏</text>
+</svg>

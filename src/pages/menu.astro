@@ -1,0 +1,90 @@
+---
+import { getCollection } from "astro:content";
+import MapThemeCard from "../components/MapThemeCard.astro";
+import MenuItemCard from "../components/MenuItemCard.astro";
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mapThemes } from "../data/mapThemes";
+import { sitePath } from "../lib/site";
+
+const menuItems = await getCollection("menuItems");
+const itemsByTheme = mapThemes.map((theme) => ({
+  theme,
+  items: menuItems
+    .filter((item) => item.data.map === theme.name)
+    .sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<BaseLayout title="菜单" description="浏览无间食肆按聚窟洲、火罗国与龙隐洞天划分的虚拟主题菜单。">
+  <PageHero
+    eyebrow="菜单卷轴 / 三地席面"
+    title="择一方入席，点一道上桌"
+    lead="右上角地图主题就是本席菜单。切换聚窟洲、火罗国或龙隐洞天，只呈上属于当前席面的菜品。"
+    compact
+  >
+    <a class="button secondary" href={sitePath("/submit/")}>向后厨递交新菜谱</a>
+  </PageHero>
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="filter-panel" aria-label="菜单主题切换">
+        <p class="eyebrow">选择本席地图</p>
+        <div class="filter-row">
+          {mapThemes.map((theme) => (
+            <button
+              class="filter-button"
+              type="button"
+              data-theme-target={theme.key}
+              aria-pressed={theme.key === "juku" ? "true" : "false"}
+            >
+              {theme.name}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {itemsByTheme.map(({ theme, items }) => (
+    <section
+      class:list={["section-tight", "theme-section", { "is-hidden": theme.key !== "juku" }]}
+      data-theme-section={theme.key}
+      data-theme-card={theme.key}
+    >
+      <div class="container">
+        <p class="eyebrow">{theme.label}</p>
+        <h2 class="section-title">{theme.name}菜单</h2>
+        <div class="info-grid menu-theme-intro">
+          <MapThemeCard theme={theme} />
+          <article class="info-card">
+            <h3>本席说明</h3>
+            <p>{theme.description}</p>
+            <p><strong>当前上桌：</strong>{items.length} 道</p>
+            <p>以下均为无间食肆虚拟菜单设定。菜名可以有江湖余味，席面不会冒充现实售卖或官方资料。</p>
+          </article>
+        </div>
+
+        <div class="menu-item-grid">
+          {items.map((item, index) => <MenuItemCard item={item} sequence={index + 1} />)}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <script>
+    const sections = Array.from(document.querySelectorAll("[data-theme-section]"));
+
+    function showTheme(theme) {
+      for (const section of sections) {
+        section.classList.toggle("is-hidden", section.dataset.themeSection !== theme);
+      }
+    }
+
+    window.addEventListener("naraka-theme-change", (event) => {
+      if (event instanceof CustomEvent) showTheme(event.detail.theme);
+    });
+
+    showTheme(document.documentElement.dataset.theme || "juku");
+  </script>
+</BaseLayout>

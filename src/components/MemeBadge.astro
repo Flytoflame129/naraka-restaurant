@@ -1,0 +1,14 @@
+---
+import { statusLabel } from "../lib/site";
+
+interface Props {
+  status: string;
+  memeType?: string;
+}
+
+const { status, memeType } = Astro.props;
+---
+
+<span class:list={["meme-badge", status]}>
+  {statusLabel(status)}{memeType ? ` · ${memeType}` : ""}
+</span>

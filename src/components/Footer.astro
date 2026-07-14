@@ -1,0 +1,18 @@
+---
+import { copyrightNotice, nonOfficialNotice, repositoryUrl, sitePath } from "../lib/site";
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>NARAKA Restaurant</strong></p>
+    <p>{nonOfficialNotice}</p>
+    <p>{copyrightNotice}</p>
+    <p>
+      <a href={sitePath("/about/")}>版权与非官方声明</a>
+      {" · "}
+      <a href={sitePath("/submit/")}>投稿说明</a>
+      {" · "}
+      <a href={repositoryUrl}>GitHub 仓库</a>
+    </p>
+  </div>
+</footer>

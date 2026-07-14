@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">豆浆烩面占位图</title>
+  <desc id="desc">红色桌面上的白碗、面条和豆浆色汤面。</desc>
+  <rect width="960" height="600" fill="#fff3e8"/>
+  <rect y="420" width="960" height="180" fill="#b71f35"/>
+  <ellipse cx="480" cy="352" rx="270" ry="92" fill="#6b1c2a" opacity=".22"/>
+  <ellipse cx="480" cy="330" rx="260" ry="110" fill="#ffffff"/>
+  <ellipse cx="480" cy="320" rx="210" ry="76" fill="#f3dfb8"/>
+  <path d="M310 308c70 36 144 36 220 0 62-29 121-27 178 8" fill="none" stroke="#d9ad66" stroke-width="18" stroke-linecap="round"/>
+  <path d="M314 346c89 38 172 36 250-4 42-22 91-20 146 6" fill="none" stroke="#d9ad66" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="400" cy="290" r="18" fill="#b71f35"/>
+  <circle cx="540" cy="286" r="14" fill="#4f7d5a"/>
+  <rect x="658" y="160" width="76" height="190" rx="8" fill="#4a2b28" transform="rotate(18 696 255)"/>
+  <rect x="690" y="150" width="30" height="202" rx="8" fill="#7b4a40" transform="rotate(18 705 251)"/>
+</svg>

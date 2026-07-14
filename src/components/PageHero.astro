@@ -1,0 +1,34 @@
+---
+import type { MapThemeKey } from "../data/mapThemes";
+import { sitePath } from "../lib/site";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  image?: string;
+  themeKey?: MapThemeKey;
+  compact?: boolean;
+}
+
+const { eyebrow, title, lead, image, themeKey, compact = false } = Astro.props;
+const imageStyle = image ? `--page-hero-image: url("${sitePath(image)}")` : undefined;
+const hasDefaultSlot = Astro.slots.has("default");
+---
+
+<section
+  class:list={["page-hero", { "page-hero--compact": compact }]}
+  data-theme-card={themeKey}
+  style={imageStyle}
+>
+  <div class="container">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p class="lead">{lead}</p>
+    {hasDefaultSlot ? (
+      <div class="button-row">
+        <slot />
+      </div>
+    ) : null}
+  </div>
+</section>

@@ -1,0 +1,71 @@
+---
+interface Source {
+  title: string;
+  url?: string;
+  noPublicLinkReason?: string;
+  platform: string;
+  sourceType: "official" | "guide" | "community" | "video" | "forum" | "unknown";
+  supports: string[];
+  reliability: "high" | "medium" | "low";
+  checkedAt: Date | string;
+  notes: string;
+}
+
+interface Props {
+  sources: Source[];
+}
+
+const { sources } = Astro.props;
+
+const typeLabels: Record<Source["sourceType"], string> = {
+  official: "官方",
+  guide: "攻略",
+  community: "社区",
+  video: "视频",
+  forum: "论坛",
+  unknown: "未确认",
+};
+
+const reliabilityLabels: Record<Source["reliability"], string> = {
+  high: "高",
+  medium: "中",
+  low: "低",
+};
+
+function formatCheckedAt(value: Date | string) {
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toISOString().slice(0, 10);
+}
+---
+
+<ul class="source-list">
+  {sources.map((source) => (
+    <li class="source-card">
+      <strong>
+        {source.url ? (
+          <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+        ) : (
+          source.title
+        )}
+      </strong>
+
+      <div>
+        <span>支持说法：</span>
+        <ul>
+          {source.supports.map((claim) => <li>{claim}</li>)}
+        </ul>
+      </div>
+
+      <p>
+        {source.platform} 路 {typeLabels[source.sourceType]} 路 可靠度：{reliabilityLabels[source.reliability]} 路 核查：{formatCheckedAt(source.checkedAt)}
+      </p>
+
+      {source.noPublicLinkReason && <p>无公开链接：{source.noPublicLinkReason}</p>}
+      <p>维护备注：{source.notes}</p>
+    </li>
+  ))}
+</ul>

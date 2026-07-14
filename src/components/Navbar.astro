@@ -1,0 +1,35 @@
+---
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+import { sitePath, siteTitle } from "../lib/site";
+
+const navItems = [
+  { href: "/", label: "首页" },
+  { href: "/menu/", label: "菜单" },
+  { href: "/gallery/", label: "画廊" },
+  { href: "/submit/", label: "投稿" },
+  { href: "/about/", label: "关于" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href={sitePath("/")}>
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span>{siteTitle}</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      {navItems.map((item) => {
+        const href = sitePath(item.href);
+        const isCurrent = currentPath === href || currentPath === item.href;
+        return (
+          <a href={href} aria-current={isCurrent ? "page" : undefined}>
+            {item.label}
+          </a>
+        );
+      })}
+      <ThemeSwitcher />
+    </nav>
+  </div>
+</header>

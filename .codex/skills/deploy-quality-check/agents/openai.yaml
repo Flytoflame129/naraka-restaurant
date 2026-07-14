@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy Quality Check"
+  short_description: "Run pre-deploy checks for the site"
+  default_prompt: "Use $deploy-quality-check to run the pre-deploy quality checklist for NARAKA Restaurant."

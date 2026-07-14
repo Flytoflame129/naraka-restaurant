@@ -1,0 +1,5 @@
+interface:
+  display_name: "NARAKA Content Pipeline"
+  short_description: "Research sourced memes and draft fan-made dishes"
+  default_prompt: "Use $naraka-content-pipeline to research a NARAKA player meme and, when evidence permits, create a needs-review dish draft."
+

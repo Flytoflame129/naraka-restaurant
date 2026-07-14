@@ -1,0 +1,52 @@
+---
+import MemeBadge from "./MemeBadge.astro";
+import { getMapTheme } from "../data/mapThemes";
+import { sitePath } from "../lib/site";
+
+const { dish } = Astro.props;
+const data = dish.data;
+const theme = getMapTheme(data.map);
+
+const relatedItems = [
+  ...data.relatedCharacter.map((item) => `角色：${item}`),
+  ...data.relatedWeapon.map((item) => `武器：${item}`),
+  ...data.relatedOperation.map((item) => `操作：${item}`),
+];
+
+function formatArchiveCode(slug: string) {
+  let hash = 0;
+
+  for (const char of slug) {
+    hash = (hash * 33 + char.charCodeAt(0)) >>> 0;
+  }
+
+  return `NR-${hash.toString(36).toUpperCase().padStart(4, "0").slice(-4)}`;
+}
+
+const archiveCode = formatArchiveCode(data.slug);
+const relatedText = relatedItems.length > 0 ? relatedItems.join(" / ") : "相关角色 / 武器 / 操作：待补充";
+---
+
+<article class="dish-card">
+  <a href={sitePath(`/dishes/${data.slug}/`)}>
+    <img src={sitePath(data.image.src)} alt={data.image.alt} loading="lazy" width="1600" height="900" />
+    <div class="dish-card-body">
+      <div class="card-kicker">
+        <span>档案号 {archiveCode}</span>
+        <span>{theme?.name ?? data.map}</span>
+      </div>
+      <h3>{data.title}</h3>
+      <p>{data.summary}</p>
+      <div class="card-meta">
+        <span>可信度：{data.credibility}</span>
+        <span>分类：{data.category}</span>
+        <span>梗类型：{data.memeType}</span>
+      </div>
+      <p>{relatedText}</p>
+      <div class="card-kicker">
+        <MemeBadge status={data.status} memeType={data.memeType} />
+        <span>虚拟菜单标注：{data.priceLabel}</span>
+      </div>
+    </div>
+  </a>
+</article>

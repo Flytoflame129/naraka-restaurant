@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">龙隐洞天占位图</title>
+  <desc id="desc">深色洞天背景中的一杯青蓝色热茶。</desc>
+  <rect width="960" height="600" fill="#17252a"/>
+  <path d="M0 460c180-140 330-180 470-120 150 64 270 44 490-128v388H0z" fill="#25454b"/>
+  <path d="M132 0l88 236 74-236h108l92 260L594 0h98l-84 600H0V0z" fill="#20343a" opacity=".78"/>
+  <ellipse cx="480" cy="395" rx="250" ry="82" fill="#000" opacity=".26"/>
+  <rect x="330" y="260" width="300" height="150" rx="8" fill="#e8f7f5"/>
+  <ellipse cx="480" cy="260" rx="150" ry="58" fill="#ffffff"/>
+  <ellipse cx="480" cy="252" rx="116" ry="38" fill="#9fd9d9"/>
+  <path d="M620 300c82-12 100 82 24 96" fill="none" stroke="#e8f7f5" stroke-width="30" stroke-linecap="round"/>
+  <path d="M425 220c-36-38 36-58 0-100M510 220c-36-38 36-58 0-100" fill="none" stroke="#9fd9d9" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="732" cy="128" r="10" fill="#f3dfb8"/>
+  <circle cx="236" cy="182" r="8" fill="#f3dfb8"/>
+</svg>

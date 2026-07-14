@@ -1,0 +1,100 @@
+name: 菜品 / 梗来源投稿
+description: 提交新的下饭菜品、梗来源补充或画廊作品线索。
+title: "[投稿] "
+labels:
+  - submission
+  - needs-review
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢投稿。NARAKA Restaurant 是非官方玩家同好创作项目，不是官方网站。请不要提交未授权图片、客户端提取素材、低俗攻击或引战内容。
+  - type: input
+    id: dish-name
+    attributes:
+      label: 菜品名 / 梗名
+      description: 如果只是补充来源，也请写明对应菜品或梗。
+      placeholder: 例如：豆浆烩面（待考证）
+    validations:
+      required: true
+  - type: dropdown
+    id: map-theme
+    attributes:
+      label: 地图主题
+      options:
+        - 聚窟洲
+        - 火罗国
+        - 龙隐洞天
+        - 宛渠（待开发）
+    validations:
+      required: true
+  - type: dropdown
+    id: meme-type
+    attributes:
+      label: 梗类型
+      options:
+        - 谐音梗
+        - 角色梗
+        - 武器梗
+        - 地图梗
+        - 操作梗
+        - 社区梗
+        - 赛事梗
+        - 二创梗
+        - 其他
+        - 暂不确定
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 菜品设定或梗说明
+      description: 请用自己的话概括，不要大量复制原文。
+      placeholder: 这道菜想表达什么？梗大概来自什么语境？
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: 来源链接
+      description: 请尽量提供原始视频、原帖、投稿记录或可核验链接。没有来源时必须写“待考证”。
+      placeholder: |
+        - 链接：
+          平台：
+          作者 / 发布者：
+          日期：
+          备注：
+    validations:
+      required: true
+  - type: dropdown
+    id: credibility
+    attributes:
+      label: 可信度自评
+      options:
+        - 高：原始来源或多条可靠来源一致
+        - 中：可靠二手来源，但原始来源未找到
+        - 低：单条转述或上下文不足
+        - 待考证：没有可靠来源或说法冲突
+    validations:
+      required: true
+  - type: textarea
+    id: image-permission
+    attributes:
+      label: 图片或画廊授权说明
+      description: 如投稿图片、海报、菜单设计或截图，必须说明作者、来源和授权范围。
+      placeholder: 无图片 / 作者为本人并授权本站展示 / 已取得作者授权，链接如下……
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety-checks
+    attributes:
+      label: 投稿确认
+      options:
+        - label: 我理解本站是非官方玩家同好创作项目，不代表游戏官方。
+          required: true
+        - label: 我没有把未考证内容写成已确认事实；来源不足处已标注“待考证”。
+          required: true
+        - label: 投稿内容不包含低俗、歧视、攻击、引战、隐私泄露、开盒或网暴内容。
+          required: true
+        - label: 如包含图片或二创作品，我已提供授权说明或来源说明。
+          required: true

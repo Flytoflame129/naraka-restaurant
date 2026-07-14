@@ -1,0 +1,40 @@
+---
+import PageHero from "../components/PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { copyrightNotice, repositoryUrl } from "../lib/site";
+
+const issuesUrl = `${repositoryUrl}/issues`;
+---
+
+<BaseLayout title="关于" description="NARAKA Restaurant 的非官方声明、版权说明和维护规则。">
+  <PageHero
+    eyebrow="关于无间食肆"
+    title="以一席江湖味，留住玩家故事"
+    lead="无间食肆是一座由《永劫无间》玩家共同构想的虚拟餐厅。我们以菜品收录玩家交流中的故事与创意，并持续整理来源、标注二创边界。"
+    compact
+  />
+
+  <section class="section-tight">
+    <div class="container">
+      <div class="info-grid">
+        <article class="info-card">
+          <h2>非官方立场</h2>
+          <p>{copyrightNotice}</p>
+          <p>本站不代表官方立场，不冒充官方公告，也不把同好整理包装成官方资料库。</p>
+        </article>
+        <article class="info-card">
+          <h2>玩家文化整理</h2>
+          <p>目标是把玩家梗、来源线索和核查备注整理清楚。来源不完整的内容继续标“待考证”，不会改写成已验证事实。</p>
+        </article>
+        <article class="info-card">
+          <h2>虚拟餐厅包装</h2>
+          <p>菜品、席位和文案都是同好包装，用来增强阅读体验，不代表真实售卖，也不直接搬运官方视觉素材。</p>
+        </article>
+        <article class="info-card">
+          <h2>撤稿与权益路径</h2>
+          <p>如果你是作者、权利人或投稿者，需要补授权、申请下架或纠正文案，请到 <a href={issuesUrl}>GitHub Issues</a> 留言，维护者会优先处理并记录结果。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

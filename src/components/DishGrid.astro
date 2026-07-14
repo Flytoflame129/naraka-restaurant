@@ -1,0 +1,9 @@
+---
+import DishCard from "./DishCard.astro";
+
+const { dishes, featured = false } = Astro.props;
+---
+
+<div class:list={["dish-grid", { "dish-grid--featured": featured }]}>
+  {dishes.map((dish) => <DishCard dish={dish} />)}
+</div>

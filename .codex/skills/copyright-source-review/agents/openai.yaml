@@ -1,0 +1,4 @@
+interface:
+  display_name: "Copyright Source Review"
+  short_description: "Review sources copyright and safety risks"
+  default_prompt: "Use $copyright-source-review to review sources, copyright, permissions, and community safety risks."

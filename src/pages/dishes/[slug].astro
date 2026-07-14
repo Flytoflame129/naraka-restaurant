@@ -1,0 +1,132 @@
+---
+import { getCollection } from "astro:content";
+import MemeBadge from "../../components/MemeBadge.astro";
+import SourceList from "../../components/SourceList.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMapTheme } from "../../data/mapThemes";
+import { isPublicDishStatus, publishStatusLabel, sitePath, statusLabel } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const dishes = await getCollection("dishes", ({ data }) => isPublicDishStatus(data.status, data.publishStatus));
+
+  return dishes.map((dish) => ({
+    params: { slug: dish.data.slug },
+    props: { dish },
+  }));
+}
+
+const { dish } = Astro.props;
+const data = dish.data;
+const theme = getMapTheme(data.map);
+const relatedItems = [
+  ...data.relatedCharacter.map((item) => `角色：${item}`),
+  ...data.relatedWeapon.map((item) => `武器：${item}`),
+  ...data.relatedOperation.map((item) => `操作：${item}`),
+];
+const relatedText = relatedItems.length > 0 ? relatedItems.join(" / ") : "相关角色 / 武器 / 操作：待补充";
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <section class="detail-hero">
+    <div class="container detail-hero-grid">
+      <div>
+        <p class="eyebrow">{theme?.label ?? data.map}</p>
+        <h1 class="page-title">{data.title}</h1>
+        <p class="lead">{data.dishIntro}</p>
+        <div class="meta-row">
+          <span>地图：{theme?.name ?? data.map}</span>
+          <span>可信度：{data.credibility}</span>
+          <span>状态：{statusLabel(data.status)}</span>
+          <span>分类：{data.category}</span>
+        </div>
+        <div class="meta-row">
+          <MemeBadge status={data.status} memeType={data.memeType} />
+          <span>梗类型：{data.memeType}</span>
+          <span>虚拟菜单标注：{data.priceLabel}</span>
+        </div>
+      </div>
+      <img src={sitePath(data.image.src)} alt={data.image.alt} width="1600" height="900" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-layout">
+      <article>
+        <div class="notice">
+          “梗来源”和右侧“来源链接”只记录公开线索与核查备注；“菜品设定”“玩家吐槽”“推荐搭配”属于本站同好包装，不作为事实来源。
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">菜品介绍</p>
+            <h2>菜品介绍</h2>
+            <p>{data.summary}</p>
+            <p>{relatedText}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">梗来源</p>
+            <h2>梗来源</h2>
+            <p>{data.memeOrigin}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">菜品设定</p>
+            <h2>菜品设定</h2>
+            <p>{data.dishSetting}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">玩家吐槽</p>
+            <h2>玩家吐槽</h2>
+            <p>{data.playerComment}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">推荐搭配</p>
+            <h2>推荐搭配</h2>
+            <p>{data.recommendedPairing}</p>
+            <p>{data.pairingNote}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">待考证说明</p>
+            <h2>待考证说明</h2>
+            <p>{data.verificationNote}</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="detail-aside">
+        <div class="info-card">
+          <h2>菜品档案</h2>
+          <p><strong>{statusLabel(data.status)}</strong></p>
+          <p>地图：{theme?.name ?? data.map}</p>
+          <p>梗类型：{data.memeType}</p>
+          <p>可信度：{data.credibility}</p>
+          <p>发布状态：{publishStatusLabel(data.publishStatus)}</p>
+          <p>整理者：{data.curator}</p>
+          <p>辣度：{data.spiceLevel} / 5</p>
+          <p>图片来源：{data.image.credit}</p>
+          <p>图片授权：{data.image.license}</p>
+        </div>
+
+        <div class="info-card source-panel">
+          <h2>来源链接</h2>
+          <p>以下条目优先列出支持说法、来源类型、可靠度、核查日期与维护备注；外链保持来源原始标题。</p>
+          <SourceList sources={data.sources} />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
