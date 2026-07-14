@@ -21,7 +21,21 @@ const requiredFields = [
   "publishStatus",
   "curator",
 ];
-const requiredMenuItemFields = ["title", "slug", "map", "category", "description", "order"];
+const requiredMenuItemFields = [
+  "title",
+  "slug",
+  "map",
+  "category",
+  "description",
+  "order",
+  "dishIntro",
+  "dishSetting",
+  "playerComment",
+  "recommendedPairing",
+  "relatedElements",
+  "image",
+];
+const structuredMenuItemFields = new Set(["relatedElements", "image"]);
 
 const knownMaps = new Set(["聚窟洲", "火罗国", "龙隐洞天"]);
 const knownStatuses = new Set(["verified", "pending", "mixed", "rejected"]);
@@ -280,10 +294,20 @@ for (const file of menuItemFiles) {
     continue;
   }
 
-  const { fields } = parsed;
+  const { fields, raw } = parsed;
   for (const field of requiredMenuItemFields) {
-    if (!fields.has(field) || !scalar(fields, field)) {
+    if (!fields.has(field) || (!structuredMenuItemFields.has(field) && !scalar(fields, field))) {
       fail(`${file}: missing required field ${field}`);
+    }
+  }
+
+  if (!hasArrayItem(raw, "relatedElements")) {
+    fail(`${file}: relatedElements needs at least one item`);
+  }
+
+  for (const child of ["src", "alt", "credit", "license"]) {
+    if (!hasObjectField(raw, "image", child)) {
+      fail(`${file}: image missing required field ${child}`);
     }
   }
 
