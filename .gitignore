@@ -7,3 +7,7 @@ dist/
 .superpowers/
 .env
 .env.local
+*.log
+coverage/
+.DS_Store
+Thumbs.db
