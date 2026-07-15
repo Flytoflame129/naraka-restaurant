@@ -16,7 +16,7 @@ relatedElements:
   - "火罗国烈宴"
 image:
   src: "/assets/dishes/menu/divine-fire-red-armor-bun.webp"
-  alt: "深褐石盘上四向排列的红皮蒸包，包面带原创几何层纹与金色封口"
+  alt: "深色石盘上摆放四枚带几何层纹的红皮蒸包，其中一枚露出热馅，背景为沙城宴火"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

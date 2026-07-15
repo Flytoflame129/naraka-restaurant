@@ -16,7 +16,7 @@ relatedElements:
   - "红蛋（本站菜名二创）"
 image:
   src: "/assets/dishes/menu/zifu-palace-red-egg.webp"
-  alt: "紫金小碟中的完整红壳卤蛋、对切暖黄蛋心与嫩叶，背景带园林叶影和轻薄汤泉雾气"
+  alt: "紫黑餐盘上摆放三枚红壳卤蛋和一枚对切蛋，配有紫花与铜叶，背景为洞壁和紫色星点"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

@@ -16,7 +16,7 @@ relatedElements:
   - "张家禁地（本站菜名二创）"
 image:
   src: "/assets/dishes/menu/zhang-forbidden-mushroom-sea-firefly-soup.webp"
-  alt: "冷青深盏中的鲜蘑清汤、半透明可食用凝胶与细嫩菌片，置于幽暗地宫风格席面上"
+  alt: "黑色深盏中盛着鲜蘑清汤与冷青色可食珠，背景是粗粝洞壁、铜屏和散落紫色星光"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

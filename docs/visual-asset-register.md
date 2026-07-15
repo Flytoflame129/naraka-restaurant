@@ -44,9 +44,31 @@
 - 生成日期：`2026-07-10`
 - 权利备注：本站原创 AI 辅助氛围素材，不含官方素材，不代表官方概念设计。
 
+### 菜单菜品图
+
+下列 15 张 `1600 x 900` WebP 用于菜单卡片、菜品详情和首页推荐位。它们均由 OpenAI 内置 imagegen 原创生成并由项目维护者整理，不是游戏截图、官方宣传图或官方概念图。
+
+| 相对路径 | 用途 | 中文 alt | 生成方式 | 权利备注 |
+| --- | --- | --- | --- | --- |
+| `public/assets/dishes/menu/buzhou-shiban-fish.webp` | “不舟滩现捞石斑鱼”菜单卡片、详情和推荐图 | 清蒸银灰石斑鱼置于黑色长盘，铺有葱姜细丝，背景是雾中水岸与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/currency-jade-greens.webp` | “货币赌玉一片绿时蔬”菜单卡片、详情和推荐图 | 菜心、青瓜薄片、青豆和香草铺满翠色圆盘，背景是雾林瀑布与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/divine-fire-red-armor-bun.webp` | “神火红甲包”菜单卡片、详情和推荐图 | 深色石盘上摆放四枚带几何层纹的红皮蒸包，其中一枚露出热馅，背景为沙城宴火 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/feather-arrow-golden-crow-char-siu.webp` | “羽箭金乌叉烧”菜单卡片、详情和推荐图 | 金红蜜汁叉烧切片呈放射状铺盘，间隔叶形酥片与竹签，背景为落日沙海宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/fire-cage-barbecue.webp` | “火笼烧烤”菜单卡片、详情和推荐图 | 镂空铜色笼形炭炉在木桌中央燃烧，周围摆满肉串、菌菇和青椒烤串 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/fireman-wok-toss.webp` | “火男怒火颠勺”菜单卡片、详情和推荐图 | 圆底铁锅在烈焰中颠起肉片、藕片、辣椒与葱段，背景为雾林夜宴 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/gaoshou-peach-crisps.webp` | “糕手桃酥”菜单卡片、详情和推荐图 | 金黄开裂桃酥与三枚粉白桃形点心摆在漆盘上，旁边有热茶与桃花 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | “开箱必出红四拼盘”菜单卡片、详情和推荐图 | 圆形四格漆盘内分别摆放红色烤肉、果冻、包点和薄脆，置于雾林暖灯木案上 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/jidi-city-red-sausage.webp` | “极帝城红肠”菜单卡片、详情和推荐图 | 黑色长盘上铺满焦边红肠厚片、香草和深色浆果，背景是青光洞壁、铜屏与紫色星点 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
+| `public/assets/dishes/menu/kunlun-snow-lotus.webp` | “昆仑净雪莲”菜单卡片、详情和推荐图 | 浅青冰盏中盛着清澈冷饮与霜白莲形冻，四周铺有碎冰，背景为明亮沙漠宫席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/purple-herb-seven-peaches.webp` | “紫草炖七桃”菜单卡片、详情和推荐图 | 深紫陶钵中盛着紫色甜汤和七枚浅粉桃形团子，中央点缀薄荷，背景为雾林暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/spicy-sand-konjac.webp` | “麻辣沙魔芋”菜单卡片、详情和推荐图 | 黑色大盘中堆叠红油魔芋片、辣椒与金黄酥屑，背景为扬沙中的古城宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/wolf-rib-platter.webp` | “狼行千里吃排骨肉”菜单卡片、详情和推荐图 | 粗陶盘上堆叠酱亮焦香的炭烤肋排，背景为月夜草地与营火 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/zhang-forbidden-mushroom-sea-firefly-soup.webp` | “张家禁地鲜蘑菇海萤汤”菜单卡片、详情和推荐图 | 黑色深盏中盛着鲜蘑清汤与冷青色可食珠，背景是粗粝洞壁、铜屏和散落紫色星光 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
+| `public/assets/dishes/menu/zifu-palace-red-egg.webp` | “紫府宫红蛋”菜单卡片、详情和推荐图 | 紫黑餐盘上摆放三枚红壳卤蛋和一枚对切蛋，配有紫花与铜叶，背景为洞壁和紫色星点 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
+
 ## 统一版权边界
 
-- 四张图片均仅作为本站原创玩家同好创作站的氛围素材。
+- 本登记中的图片均仅作为本站原创玩家同好创作站的氛围或菜单素材。
 - 图片不含《永劫无间 / NARAKA: BLADEPOINT》的官方 Logo、商标图形、可识别角色、武器、地图地标、游戏截图或官方 UI。
 - 本项目不代表游戏开发商、发行商或任何官方运营主体；相关游戏名称、商标、角色、设定和素材版权归其相应权利人所有。
 - 如后续发现权利风险或收到权利人、作者的删除请求，应优先下架相关资产并记录处理结果。

@@ -1,9 +1,10 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { basename, extname, join, resolve, sep } from "node:path";
 
 const root = process.cwd();
-const dishesDir = join(root, "src", "content", "dishes");
-const menuItemsDir = join(root, "src", "content", "menu-items");
+const dishesDir = resolve(root, "src", "content", "dishes");
+const menuItemsDir = resolve(root, "src", "content", "menu-items");
+const menuImagesDir = resolve(root, "public", "assets", "dishes", "menu");
 const requiredFields = [
   "title",
   "slug",
@@ -102,6 +103,55 @@ function hasObjectField(raw, field, child) {
   }
 
   return false;
+}
+
+function objectScalar(raw, field, child) {
+  const lines = raw.split(/\r?\n/);
+  const start = lines.findIndex((line) => line.match(new RegExp(`^${field}:\\s*$`)));
+  if (start === -1) {
+    return "";
+  }
+
+  for (const line of lines.slice(start + 1)) {
+    if (/^[A-Za-z][A-Za-z0-9]*:\s*/.test(line)) {
+      return "";
+    }
+
+    const match = line.match(new RegExp(`^\\s+${child}:\\s*(.+)$`));
+    if (match) {
+      return match[1].trim().replace(/^["']|["']$/g, "");
+    }
+  }
+
+  return "";
+}
+
+function resolveMenuImageSource(source) {
+  const baseUrl = new URL("https://naraka-restaurant.invalid");
+  let parsed;
+
+  try {
+    parsed = new URL(source, baseUrl);
+  } catch {
+    return null;
+  }
+
+  if (
+    parsed.origin !== baseUrl.origin ||
+    parsed.search ||
+    parsed.hash ||
+    parsed.pathname !== source ||
+    !/^\/assets\/dishes\/menu\/[a-z0-9-]+\.webp$/.test(parsed.pathname)
+  ) {
+    return null;
+  }
+
+  const imagePath = resolve(root, "public", ...parsed.pathname.slice(1).split("/"));
+  if (!imagePath.startsWith(`${menuImagesDir}${sep}`) || extname(imagePath) !== ".webp") {
+    return null;
+  }
+
+  return imagePath;
 }
 
 function sourceBlocks(raw) {
@@ -318,6 +368,20 @@ for (const file of menuItemFiles) {
     fail(`${file}: duplicate menu item slug ${slug}`);
   }
   menuItemSlugs.add(slug);
+
+  const imageSource = objectScalar(raw, "image", "src");
+  const imagePath = resolveMenuImageSource(imageSource);
+  if (!imagePath) {
+    fail(`${file}: image.src must be a safe /assets/dishes/menu/<slug>.webp path`);
+  } else {
+    if (!existsSync(imagePath)) {
+      fail(`${file}: image.src does not resolve to an existing file`);
+    }
+
+    if (basename(imagePath, ".webp") !== slug) {
+      fail(`${file}: image.src basename must match slug ${slug}`);
+    }
+  }
 
   const map = scalar(fields, "map");
   if (!knownMaps.has(map)) {

@@ -16,7 +16,7 @@ relatedElements:
   - "红肠（本站菜名二创）"
 image:
   src: "/assets/dishes/menu/jidi-city-red-sausage.webp"
-  alt: "深色石盘中轴对称摆放的煎红肠厚片、清爽腌菜与香草，背景带抽象青铜几何纹"
+  alt: "黑色长盘上铺满焦边红肠厚片、香草和深色浆果，背景是青光洞壁、铜屏与紫色星点"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

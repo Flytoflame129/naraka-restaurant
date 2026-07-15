@@ -15,7 +15,7 @@ relatedElements:
   - "火罗国沙海席面"
 image:
   src: "/assets/dishes/menu/spicy-sand-konjac.webp"
-  alt: "赤褐陶盘中的红油魔芋结、辣椒与金黄酥屑，置于沙金色餐桌背景前"
+  alt: "黑色大盘中堆叠红油魔芋片、辣椒与金黄酥屑，背景为扬沙中的古城宴席"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

@@ -15,7 +15,7 @@ relatedElements:
   - "炭烤肋排长盘"
 image:
   src: "/assets/dishes/menu/wolf-rib-platter.webp"
-  alt: "炭烤牛羊肋排沿粗陶长盘向远处排列，粗盐、孜然和风形蒸汽掠过草原纹织物"
+  alt: "粗陶盘上堆叠酱亮焦香的炭烤肋排，背景为月夜草地与营火"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

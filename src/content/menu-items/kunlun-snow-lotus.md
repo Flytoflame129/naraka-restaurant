@@ -16,7 +16,7 @@ relatedElements:
   - "冰裂纹席面"
 image:
   src: "/assets/dishes/menu/kunlun-snow-lotus.webp"
-  alt: "浅青杯盏中的清澈冷饮、霜白莲形冻与可食用冰晶，置于银灰冰纹托盘上"
+  alt: "浅青冰盏中盛着清澈冷饮与霜白莲形冻，四周铺有碎冰，背景为明亮沙漠宫席"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

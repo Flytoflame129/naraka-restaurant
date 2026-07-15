@@ -15,7 +15,7 @@ relatedElements:
   - "肉串、菌菇、豆腐与时蔬"
 image:
   src: "/assets/dishes/menu/fire-cage-barbecue.webp"
-  alt: "原创黑铁笼形桌面炭炉内燃着红炭，顶部烤网摆放肉串、菌菇、豆腐和时蔬"
+  alt: "镂空铜色笼形炭炉在木桌中央燃烧，周围摆满肉串、菌菇和青椒烤串"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

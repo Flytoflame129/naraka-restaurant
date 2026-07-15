@@ -15,7 +15,7 @@ relatedElements:
   - "猛火快炒"
 image:
   src: "/assets/dishes/menu/fireman-wok-toss.webp"
-  alt: "炉火旁的圆底铁锅颠起肉片、辣椒和葱段，长柄勺与红橙火光位于画面中央"
+  alt: "圆底铁锅在烈焰中颠起肉片、藕片、辣椒与葱段，背景为雾林夜宴"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

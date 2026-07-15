@@ -15,7 +15,7 @@ relatedElements:
   - "紫色可食叶片与探入长筷"
 image:
   src: "/assets/dishes/menu/purple-herb-seven-peaches.webp"
-  alt: "陶煲清汤中有七枚浅粉桃形糯米团，紫色可食叶片环绕，长筷从薄雾间探入"
+  alt: "深紫陶钵中盛着紫色甜汤和七枚浅粉桃形团子，中央点缀薄荷，背景为雾林暖灯"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

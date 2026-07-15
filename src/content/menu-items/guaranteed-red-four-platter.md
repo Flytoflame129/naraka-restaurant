@@ -15,7 +15,7 @@ relatedElements:
   - "聚窟洲雾林木案"
 image:
   src: "/assets/dishes/menu/guaranteed-red-four-platter.webp"
-  alt: "铜包角四格木食盒内摆放红椒卷、胭脂萝卜、红米团和红色果冻，暗红暖光映在雾林木案上"
+  alt: "圆形四格漆盘内分别摆放红色烤肉、果冻、包点和薄脆，置于雾林暖灯木案上"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

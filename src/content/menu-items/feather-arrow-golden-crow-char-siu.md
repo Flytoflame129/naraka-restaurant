@@ -15,7 +15,7 @@ relatedElements:
   - "火罗国抽象席面"
 image:
   src: "/assets/dishes/menu/feather-arrow-golden-crow-char-siu.webp"
-  alt: "深褐长盘中的金红蜜汁厚切叉烧、烤蔬菜与香料，背景为抽象沙金古城宴席"
+  alt: "金红蜜汁叉烧切片呈放射状铺盘，间隔叶形酥片与竹签，背景为落日沙海宴席"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

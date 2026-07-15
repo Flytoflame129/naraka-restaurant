@@ -15,7 +15,7 @@ relatedElements:
   - "抽象铜筹与玉色酱汁碟"
 image:
   src: "/assets/dishes/menu/currency-jade-greens.webp"
-  alt: "深浅青菜、菜心和香草铺满圆盘，盘边散着抽象铜筹并配有玉色酱汁小碟"
+  alt: "菜心、青瓜薄片、青豆和香草铺满翠色圆盘，背景是雾林瀑布与暖灯"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---

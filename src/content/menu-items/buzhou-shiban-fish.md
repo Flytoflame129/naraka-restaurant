@@ -15,7 +15,7 @@ relatedElements:
   - "浅滩水汽与旧船木托盘"
 image:
   src: "/assets/dishes/menu/buzhou-shiban-fish.webp"
-  alt: "清蒸银灰石斑鱼置于旧船木托盘和芦叶上，周围有水珠、麻绳与雾中船骨剪影"
+  alt: "清蒸银灰石斑鱼置于黑色长盘，铺有葱姜细丝，背景是雾中水岸与暖灯"
   credit: "AI 生成原创视觉，由项目维护者整理"
   license: "项目原创生成图，仅供本站非商业展示"
 ---
