@@ -57,7 +57,7 @@
 | `public/assets/dishes/menu/fire-cage-barbecue.webp` | “火笼烧烤”菜单卡片、详情和推荐图 | 镂空铜色笼形炭炉在木桌中央燃烧，周围摆满肉串、菌菇和青椒烤串 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/fireman-wok-toss.webp` | “火男怒火颠勺”菜单卡片、详情和推荐图 | 圆底铁锅在烈焰中颠起肉片、藕片、辣椒与葱段，背景为雾林夜宴 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/gaoshou-peach-crisps.webp` | “糕手桃酥”菜单卡片、详情和推荐图 | 金黄开裂桃酥与三枚粉白桃形点心摆在漆盘上，旁边有热茶与桃花 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
-| `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | “开箱必出红四拼盘”菜单卡片、详情和推荐图 | 圆形四格漆盘内分别摆放红色烤肉、果冻、包点和薄脆，置于雾林暖灯木案上 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | “开箱必出红四拼盘”菜单卡片、详情和推荐图 | 四格鎏金方盘内摆着红袍形乳鸽藕糕、酱烤肋排、焗大虾与山楂糖饰，宝箱造型托盘周围升起白雾 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；使用抽象花纹、宝箱意象与通用食材造型，不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/jidi-city-red-sausage.webp` | “极帝城红肠”菜单卡片、详情和推荐图 | 黑色长盘上铺满焦边红肠厚片、香草和深色浆果，背景是青光洞壁、铜屏与紫色星点 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
 | `public/assets/dishes/menu/kunlun-snow-lotus.webp` | “昆仑净雪莲”菜单卡片、详情和推荐图 | 浅青冰盏中盛着清澈冷饮与霜白莲形冻，四周铺有碎冰，背景为明亮沙漠宫席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/purple-herb-seven-peaches.webp` | “紫草炖七桃”菜单卡片、详情和推荐图 | 深紫陶钵中盛着紫色甜汤和七枚浅粉桃形团子，中央点缀薄荷，背景为雾林暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
