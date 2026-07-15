@@ -20,7 +20,7 @@
 | 神火红甲包 | `public/assets/dishes/menu/divine-fire-red-armor-bun.webp` | 火罗国 | 清晰；四枚红色蒸包及一枚剖面包为主体 | 赤红、焦橙、沙金 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；包面几何层纹为原创装饰，不指向官方甲胄或标识 | 通过，可用于本站非商业展示 |
 | 羽箭金乌叉烧 | `public/assets/dishes/menu/feather-arrow-golden-crow-char-siu.webp` | 火罗国 | 清晰；蜜汁叉烧与羽叶形装饰集中陈列 | 金黄、蜜红、深褐 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；沙漠宴席背景为通用原创场景 | 通过，可用于本站非商业展示 |
 | 火笼烧烤 | `public/assets/dishes/menu/fire-cage-barbecue.webp` | 聚窟洲 | 清晰；中央笼形炭炉及四周烤串可辨识 | 炭黑、火橙、夜蓝 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；火焰纹炉罩为原创器物装饰 | 通过，可用于本站非商业展示 |
-| 火男怒火颠勺 | `public/assets/dishes/menu/fireman-wok-toss.webp` | 聚窟洲 | 清晰；铁锅、肉片、藕片、辣椒和翻炒动作明确 | 火橙、酱褐、深绿 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；仅表现菜品动作，不呈现可识别角色 | 通过，可用于本站非商业展示 |
+| 火男怒火颠勺 | `public/assets/dishes/menu/fireman-wok-toss.webp` | 聚窟洲 | 清晰；完整锅沿、金色长柄炒勺、肉片、藕片、红椒、葱段和腾空弧线明确 | 火橙、金色、酱褐、深绿 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；仅表现通用猛火快炒动作，不呈现可识别角色或技能特效 | 通过，可用于本站非商业展示 |
 | 糕手桃酥 | `public/assets/dishes/menu/gaoshou-peach-crisps.webp` | 聚窟洲 | 清晰；桃形点心与开裂桃酥均可辨识 | 桃粉、酥金、墨绿 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；器皿与林景为通用原创元素 | 通过，可用于本站非商业展示 |
 | 开箱必出红四拼盘 | `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | 聚窟洲 | 清晰；鎏金方盘内四类赤红食物和宝箱造型托盘均完整可见 | 绛红、鎏金、墨绿、雾白 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；盘面花纹、托盘和食物轮廓均为抽象原创设计，不复刻官方宝箱、返魂花图标或武器模型 | 通过，可用于本站非商业展示 |
 | 极帝城红肠 | `public/assets/dishes/menu/jidi-city-red-sausage.webp` | 龙隐洞天 | 清晰；厚切红肠为前景主体 | 深红、青蓝、紫金 | 未见文字或文字伪影、人物、Logo、游戏 UI、截图或可识别官方素材；青光洞壁、铜屏与散落紫色光点为抽象原创环境，不对应官方 UI 或地图地标 | 通过，可用于本站非商业展示 |
