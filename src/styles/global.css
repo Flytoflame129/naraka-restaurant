@@ -1144,8 +1144,10 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
 
 .detail-hero img {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-panel);
   box-shadow: var(--shadow-card);
