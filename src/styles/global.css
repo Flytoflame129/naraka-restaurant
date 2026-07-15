@@ -704,6 +704,18 @@ html[data-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   text-decoration: none;
 }
 
+.menu-item-card h3 a::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.menu-item-card:hover,
+.menu-item-card:focus-within {
+  border-color: var(--menu-card-sign, var(--color-gold));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--menu-card-sign, var(--color-gold)) 34%, transparent), var(--shadow-card);
+}
+
 .menu-item-card h3 a:hover {
   color: var(--menu-card-sign, var(--color-gold));
 }
