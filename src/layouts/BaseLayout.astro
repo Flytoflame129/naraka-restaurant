@@ -8,12 +8,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  initialTheme?: string;
 }
 
 const {
   title = siteTitle,
   description = "NARAKA Restaurant 是《永劫无间》玩家同好创作的虚拟游戏主题餐厅站点。",
   image = "/assets/visuals/hero-main.webp",
+  initialTheme = "juku",
 } = Astro.props;
 
 const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
@@ -30,7 +32,7 @@ const assetVariables = [
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-theme="juku">
+<html lang="zh-CN" data-theme={initialTheme}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

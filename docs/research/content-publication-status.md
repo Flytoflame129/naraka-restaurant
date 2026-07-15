@@ -9,7 +9,7 @@
 当前站点通过 `src/lib/site.ts` 中的 `isPublicDishStatus(status, publishStatus)` 判断菜品是否生成公开详情页：
 
 - `publishStatus` 必须是 `published`。
-- `status` 不能是 `rejected`。
+- `status` 必须是 `verified`。
 
 因此，`needs-review` 与 `draft` 菜品不会生成公开详情页。
 

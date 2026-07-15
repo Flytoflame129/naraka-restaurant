@@ -18,7 +18,7 @@ const data = item.data;
 const theme = getMapTheme(data.map);
 ---
 
-<BaseLayout title={data.title} description={data.description} image={data.image.src}>
+<BaseLayout title={data.title} description={data.description} image={data.image.src} initialTheme={theme?.key ?? "juku"}>
   <section class="detail-hero">
     <div class="container detail-hero-grid">
       <div>
