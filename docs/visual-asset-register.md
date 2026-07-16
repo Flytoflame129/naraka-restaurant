@@ -64,7 +64,7 @@
 | `public/assets/dishes/menu/spicy-sand-konjac.webp` | “麻辣沙魔芋”菜单卡片、详情和推荐图 | 赤褐陶盘中堆满红油魔芋结、魔芋片和干辣椒，盘边金黄酥屑如扬沙飞起，背景为暖火古城宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；以食材和通用沙城环境表现扬沙意象，不复刻官方机关或地图素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/wolf-rib-platter.webp` | “狼行千里吃排骨肉”菜单卡片、详情和推荐图 | 粗陶盘上堆叠酱亮焦香的炭烤肋排，背景为月夜草地与营火 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/zhang-forbidden-mushroom-sea-firefly-soup.webp` | “张家禁地鲜蘑菇海萤汤”菜单卡片、详情和推荐图 | 黑色深盏中盛着鲜蘑清汤与冷青色可食珠，背景是粗粝洞壁、铜屏和散落紫色星光 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
-| `public/assets/dishes/menu/zifu-palace-red-egg.webp` | “紫府宫红蛋”菜单卡片、详情和推荐图 | 紫黑餐盘上摆放三枚红壳卤蛋和一枚对切蛋，配有紫花与铜叶，背景为洞壁和紫色星点 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
+| `public/assets/dishes/menu/zifu-palace-red-egg.webp` | “紫府宫红蛋”菜单卡片、详情和推荐图 | 暗紫狐尾纹圆盘中央摆着一枚裂开的赤红糖壳流心蛋，七枚铜钱造型酥点完整环绕四周 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；红蛋、七枚铜钱酥点与狐尾曲线均为通用原创食物和器皿设计，不复刻魂玉、谜面或官方图标，不代表官方概念设计 |
 
 ## 统一版权边界
 
