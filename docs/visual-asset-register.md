@@ -51,7 +51,7 @@
 | 相对路径 | 用途 | 中文 alt | 生成方式 | 权利备注 |
 | --- | --- | --- | --- | --- |
 | `public/assets/dishes/menu/buzhou-shiban-fish.webp` | “不舟滩现捞石斑鱼”菜单卡片、详情和推荐图 | 清蒸银灰石斑鱼置于黑色长盘，铺有葱姜细丝，背景是雾中水岸与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
-| `public/assets/dishes/menu/currency-jade-greens.webp` | “货币赌玉一片绿时蔬”菜单卡片、详情和推荐图 | 菜心、青瓜薄片、青豆和香草铺满翠色圆盘，背景是雾林瀑布与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/currency-jade-greens.webp` | “货币赌玉一片绿时蔬”菜单卡片、详情和推荐图 | 白瓷浅盘铺满鲜嫩翠绿菜叶，盘边散落抽象铜筹，背景为雾林瀑布与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；铜筹为无文字抽象设计，不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/divine-fire-red-armor-bun.webp` | “神火红甲包”菜单卡片、详情和推荐图 | 深色石盘上摆放四枚带几何层纹的红皮蒸包，其中一枚露出热馅，背景为沙城宴火 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/feather-arrow-golden-crow-char-siu.webp` | “羽箭金乌叉烧”菜单卡片、详情和推荐图 | 金红蜜汁叉烧切片呈放射状铺盘，间隔叶形酥片与竹签，背景为落日沙海宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/fire-cage-barbecue.webp` | “火笼烧烤”菜单卡片、详情和推荐图 | 镂空铜色笼形炭炉在木桌中央燃烧，周围摆满肉串、菌菇和青椒烤串 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
