@@ -54,7 +54,7 @@
 | `public/assets/dishes/menu/currency-jade-greens.webp` | “货币赌玉一片绿时蔬”菜单卡片、详情和推荐图 | 白瓷浅盘铺满鲜嫩翠绿菜叶，盘边散落抽象铜筹，背景为雾林瀑布与暖灯 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；铜筹为无文字抽象设计，不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/divine-fire-red-armor-bun.webp` | “神火红甲包”菜单卡片、详情和推荐图 | 深色石盘上摆放四枚带几何层纹的红皮蒸包，其中一枚露出热馅，背景为沙城宴火 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/feather-arrow-golden-crow-char-siu.webp` | “羽箭金乌叉烧”菜单卡片、详情和推荐图 | 金红蜜汁叉烧切片呈放射状铺盘，间隔叶形酥片与竹签，背景为落日沙海宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
-| `public/assets/dishes/menu/fire-cage-barbecue.webp` | “火笼烧烤”菜单卡片、详情和推荐图 | 镂空铜色笼形炭炉在木桌中央燃烧，周围摆满肉串、菌菇和青椒烤串 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
+| `public/assets/dishes/menu/fire-cage-barbecue.webp` | “火笼烧烤”菜单卡片、详情和推荐图 | 黑铁笼形炭炉由三根绳索悬在木桌上方，烤网上铺满肉串、菌菇、豆腐和青椒，炉中红炭迸出火星 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；悬吊炉具为通用原创结构，不复刻官方模型或特效，不代表官方概念设计 |
 | `public/assets/dishes/menu/fireman-wok-toss.webp` | “火男怒火颠勺”菜单卡片、详情和推荐图 | 圆底黑铁锅在红橙烈焰中颠起肉片、藕片、红椒与葱段，金色长柄炒勺横贯锅面，背景为雾林夜宴 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含角色、技能特效或官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/gaoshou-peach-crisps.webp` | “糕手桃酥”菜单卡片、详情和推荐图 | 五枚粉色桃型酥点整齐摆在白色素纸上，周围散落少量酥渣并点缀桃花，背景为深色木案 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含角色、角色纹样或官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | “开箱必出红四拼盘”菜单卡片、详情和推荐图 | 四格鎏金方盘内摆着红袍形乳鸽藕糕、酱烤肋排、焗大虾与山楂糖饰，宝箱造型托盘周围升起白雾 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；使用抽象花纹、宝箱意象与通用食材造型，不含官方素材，不代表官方概念设计 |
