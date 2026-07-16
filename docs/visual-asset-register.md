@@ -58,7 +58,7 @@
 | `public/assets/dishes/menu/fireman-wok-toss.webp` | “火男怒火颠勺”菜单卡片、详情和推荐图 | 圆底黑铁锅在红橙烈焰中颠起肉片、藕片、红椒与葱段，金色长柄炒勺横贯锅面，背景为雾林夜宴 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含角色、技能特效或官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/gaoshou-peach-crisps.webp` | “糕手桃酥”菜单卡片、详情和推荐图 | 五枚粉色桃型酥点整齐摆在白色素纸上，周围散落少量酥渣并点缀桃花，背景为深色木案 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含角色、角色纹样或官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/guaranteed-red-four-platter.webp` | “开箱必出红四拼盘”菜单卡片、详情和推荐图 | 四格鎏金方盘内摆着红袍形乳鸽藕糕、酱烤肋排、焗大虾与山楂糖饰，宝箱造型托盘周围升起白雾 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；使用抽象花纹、宝箱意象与通用食材造型，不含官方素材，不代表官方概念设计 |
-| `public/assets/dishes/menu/jidi-city-red-sausage.webp` | “极帝城红肠”菜单卡片、详情和推荐图 | 黑色长盘上铺满焦边红肠厚片、香草和深色浆果，背景是青光洞壁、铜屏与紫色星点 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；抽象洞窟宴席不对应官方地标，不代表官方概念设计 |
+| `public/assets/dishes/menu/jidi-city-red-sausage.webp` | “极帝城红肠”菜单卡片、详情和推荐图 | 多根笔直赤红烤肠整齐铺在暗金纹饰长盘上，其中一根露出肉质切面，背景为紫光地下皇城宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；以食物排列和赤红暗金配色表现长剑联想，不绘制武器或复刻官方皇城地标，不代表官方概念设计 |
 | `public/assets/dishes/menu/kunlun-snow-lotus.webp` | “昆仑净雪莲”菜单卡片、详情和推荐图 | 浅青冰盏中盛着清澈冷饮与霜白莲形冻，四周铺有碎冰，背景为明亮沙漠宫席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；不含官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/purple-herb-seven-peaches.webp` | “紫草炖七桃”菜单卡片、详情和推荐图 | 带莲瓣与法轮浮雕的黑色粗陶煲盛着清汤和七枚浅粉桃形糯米团，两柄黑杆白头短枪从紫叶间探入 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；短枪与陶煲纹饰均为通用原创设计，不含角色、游戏画面或官方素材，不代表官方概念设计 |
 | `public/assets/dishes/menu/spicy-sand-konjac.webp` | “麻辣沙魔芋”菜单卡片、详情和推荐图 | 赤褐陶盘中堆满红油魔芋结、魔芋片和干辣椒，盘边金黄酥屑如扬沙飞起，背景为暖火古城宴席 | OpenAI 内置 imagegen；项目维护者整理 | 项目原创生成图，仅供本站非商业展示；以食材和通用沙城环境表现扬沙意象，不复刻官方机关或地图素材，不代表官方概念设计 |
