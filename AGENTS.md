@@ -72,11 +72,11 @@
 
 ## 构建与验证命令
 
-当前仓库已初始化 Astro MVP，常用命令是：
+当前仓库使用 Node.js 24 与 npm 10 或更高版本。首次克隆后优先使用 `npm ci` 按锁文件安装依赖。常用命令是：
 
 ```bash
 git status --short
-npm install
+npm ci
 npm run dev
 npm run validate:content
 npm run build
@@ -89,5 +89,7 @@ npm run preview
 npm run validate:content
 npm run build
 ```
+
+Pull Request 会由 `.github/workflows/ci.yml` 自动构建；合并到 `main` 后由 `.github/workflows/deploy.yml` 发布 GitHub Pages。
 
 如果添加 TypeScript、测试或格式化工具，再把对应命令补充到本节。

@@ -25,7 +25,6 @@ body:
         - 聚窟洲
         - 火罗国
         - 龙隐洞天
-        - 宛渠（待开发）
     validations:
       required: true
   - type: dropdown

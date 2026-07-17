@@ -2,7 +2,7 @@
 
 ## 背景
 
-NARAKA Restaurant 需要长期维护大量轻量内容：梗、菜品、来源、地图主题、投稿说明和社区作品。项目希望托管在 GitHub，并通过 GitHub Pages 部署。当前不安装依赖，不创建完整 Astro 项目；本文档只记录技术选择。
+NARAKA Restaurant 需要长期维护大量轻量内容：菜品、来源、地图主题、投稿说明和社区作品。项目已采用 Astro + Markdown Content Collections，并通过 GitHub Actions 构建后部署到 GitHub Pages；本文档保留方案比较和当前技术决策依据。
 
 ## 比较维度
 
@@ -109,4 +109,3 @@ NARAKA Restaurant 需要长期维护大量轻量内容：梗、菜品、来源�
 - 需要用户账号、评论、点赞、收藏等动态功能。
 - 需要非技术维护者在可视化后台频繁编辑内容。
 - 需要复杂搜索、推荐或多媒体资产管理。
-

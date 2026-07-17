@@ -1,0 +1,109 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getMapTheme } from "../../data/mapThemes";
+import { sitePath } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const items = await getCollection("menuItems");
+
+  return items.map((item) => ({
+    params: { slug: item.data.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const data = item.data;
+const theme = getMapTheme(data.map);
+---
+
+<BaseLayout title={data.title} description={data.description} image={data.image.src} initialTheme={theme?.key ?? "juku"}>
+  <section class="detail-hero">
+    <div class="container detail-hero-grid">
+      <div>
+        <p class="eyebrow">{theme?.label ?? data.map}</p>
+        <h1 class="page-title">{data.title}</h1>
+        <p class="lead">{data.description}</p>
+        <div class="meta-row" aria-label="菜品信息">
+          <span class="menu-detail-tag" data-map-theme={theme?.key}>地图：{theme?.name ?? data.map}</span>
+          <span class="menu-detail-tag">分类：{data.category}</span>
+        </div>
+      </div>
+      <img
+        src={sitePath(data.image.src)}
+        alt={data.image.alt}
+        width="1600"
+        height="900"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-layout">
+      <article>
+        <div class="notice">
+          本页为无间食肆虚拟菜品二创，不代表游戏官方设定或现实售卖。
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">菜品介绍</p>
+            <h2>菜品介绍</h2>
+            <p>{data.dishIntro}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">菜品设定</p>
+            <h2>菜品设定</h2>
+            <p>{data.dishSetting}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">席间趣评</p>
+            <h2>席间趣评</h2>
+            <p>{data.playerComment}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">推荐搭配</p>
+            <h2>推荐搭配</h2>
+            <p>{data.recommendedPairing}</p>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <div class="detail-copy">
+            <p class="eyebrow">相关江湖元素</p>
+            <h2>相关江湖元素</h2>
+            <ul class="menu-related-list">
+              {data.relatedElements.map((element) => <li>{element}</li>)}
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <aside class="detail-aside">
+        <div class="info-card">
+          <h2>席面信息</h2>
+          <p>地图：{theme?.name ?? data.map}</p>
+          <p>分类：{data.category}</p>
+        </div>
+
+        <div class="info-card menu-ai-credit">
+          <h2>AI 图片说明</h2>
+          <p><strong>来源：</strong>{data.image.credit}</p>
+          <p><strong>授权：</strong>{data.image.license}</p>
+        </div>
+
+        <a class="detail-back-link" href={sitePath("/menu/")}>返回正式菜单</a>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

@@ -117,6 +117,17 @@ const menuItems = defineCollection({
     category: z.enum(dishCategories),
     description: z.string().min(1).max(120),
     order: z.number().int().positive(),
+    dishIntro: z.string().min(1),
+    dishSetting: z.string().min(1),
+    playerComment: z.string().min(1),
+    recommendedPairing: z.string().min(1),
+    relatedElements: z.array(z.string().min(1)).min(1),
+    image: z.object({
+      src: z.string().regex(/^\/assets\/dishes\/menu\/[a-z0-9-]+\.webp$/),
+      alt: z.string().min(1),
+      credit: z.literal("AI 生成原创视觉，由项目维护者整理"),
+      license: z.literal("项目原创生成图，仅供本站非商业展示"),
+    }),
   }),
 });
 

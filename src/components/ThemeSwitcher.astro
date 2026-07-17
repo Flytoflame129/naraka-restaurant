@@ -36,7 +36,7 @@ import { mapThemes } from "../data/mapThemes";
   }
 
   const savedTheme = window.localStorage.getItem(themeKey);
-  applyTheme(savedTheme || "juku");
+  applyTheme(savedTheme || document.documentElement.dataset.theme || "juku");
 
   for (const button of buttons) {
     button.addEventListener("click", () => applyTheme(button.dataset.themeTarget));

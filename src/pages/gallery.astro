@@ -9,7 +9,7 @@ import { sitePath } from "../lib/site";
   <PageHero
     eyebrow="食肆画廊"
     title="同好作品陈列架"
-    lead="只展示原创或获得授权的作品。没有作者署名、来源链接和授权范围的内容，不会上架到这里。"
+    lead="这里陈列玩家原创与授权作品，每一件都随作者署名和来处一同入馆。"
     compact
   >
     <a class="button secondary" href={sitePath("/submit/")}>查看投稿说明</a>
@@ -19,7 +19,7 @@ import { sitePath } from "../lib/site";
     <div class="container">
       {galleryItems.length === 0 ? (
         <div class="empty-state">
-          当前还没有正式画廊作品。投稿前请先确认作者署名、来源链接、授权范围和撤稿联系方式，避免上传游戏客户端提取素材或未授权二创。
+          陈列架正等待第一件作品。来稿请附作者署名、作品来处、展示许可与撤稿联系方式。
         </div>
       ) : (
         <div class="info-grid">

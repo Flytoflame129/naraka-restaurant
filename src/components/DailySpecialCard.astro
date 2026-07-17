@@ -1,0 +1,43 @@
+---
+import { sitePath } from "../lib/site";
+
+const { theme, items, offset } = Astro.props;
+const options = [...items]
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data }) => ({
+    title: data.title,
+    map: data.map,
+    category: data.category,
+    description: data.description,
+    href: sitePath(`/menu/${data.slug}/`),
+    image: sitePath(data.image.src),
+    imageAlt: data.image.alt,
+  }));
+const initial = options[0];
+const optionsJson = JSON.stringify(options).replaceAll("<", "\\u003c");
+---
+
+<article
+  class="daily-special-card"
+  data-daily-slot
+  data-offset={offset}
+  data-theme-card={theme.key}
+>
+  <a class="daily-special-link" href={initial.href} data-daily-link>
+    <img
+      src={initial.image}
+      alt={initial.imageAlt}
+      width="1600"
+      height="900"
+      loading="lazy"
+      data-daily-image
+    />
+    <div class="daily-special-copy">
+      <span class="daily-special-map" data-daily-map>{initial.map}</span>
+      <h3 data-daily-title>{initial.title}</h3>
+      <p data-daily-description>{initial.description}</p>
+      <span class="menu-item-category" data-daily-category>{initial.category}</span>
+    </div>
+  </a>
+  <script type="application/json" data-daily-options set:html={optionsJson}></script>
+</article>

@@ -1,8 +1,21 @@
 {
   "name": "naraka-restaurant",
   "version": "0.1.0",
+  "description": "《永劫无间》玩家同好创作的非官方虚拟主题餐厅静态站点",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flytoflame129/naraka-restaurant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Flytoflame129/naraka-restaurant/issues"
+  },
+  "homepage": "https://flytoflame129.github.io/naraka-restaurant/",
+  "engines": {
+    "node": ">=24",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "npm run validate:content && astro build",

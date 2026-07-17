@@ -22,9 +22,11 @@ export const GET: APIRoute = async ({ site }) => {
   const dishes = await getCollection("dishes", ({ data }) =>
     isPublicDishStatus(data.status, data.publishStatus),
   );
+  const menuItems = await getCollection("menuItems");
   const routes = [
     ...staticRoutes,
     ...dishes.map((dish) => `/dishes/${dish.data.slug}/`),
+    ...menuItems.map((item) => `/menu/${item.data.slug}/`),
   ];
   const urls = routes
     .map((route) => `  <url><loc>${escapeXml(new URL(sitePath(route), origin).href)}</loc></url>`)
