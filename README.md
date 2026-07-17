@@ -81,7 +81,6 @@ docs/                   产品、领域、研究和视觉资产登记
 3. 运行 `npm run build`。
 4. 上传 `dist/` 并发布到 GitHub Pages。
 
-预期站点地址：<https://flytoflame129.github.io/naraka-restaurant/>
 
 ## 非官方声明
 
