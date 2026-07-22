@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import BackLink from "astro-vtbot/components/BackLink.astro";
 import MemeBadge from "../../components/MemeBadge.astro";
 import SourceList from "../../components/SourceList.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -32,7 +31,7 @@ const relatedText = relatedItems.length > 0 ? relatedItems.join(" / ") : "相关
     <div class="container detail-hero-grid">
       <div>
         <p class="eyebrow">{theme?.label ?? data.map}</p>
-        <h1 class="page-title" transition:name="page-title">{data.title}</h1>
+        <h1 class="page-title">{data.title}</h1>
         <p class="lead">{data.dishIntro}</p>
         <div class="meta-row">
           <span>地图：{theme?.name ?? data.map}</span>
@@ -126,8 +125,6 @@ const relatedText = relatedItems.length > 0 ? relatedItems.join(" / ") : "相关
           <p>以下条目优先列出支持说法、来源类型、可靠度、核查日期与维护备注；外链保持来源原始标题。</p>
           <SourceList sources={data.sources} />
         </div>
-
-        <BackLink class="detail-back-link" href={sitePath("/menu/")}>返回菜单</BackLink>
       </aside>
     </div>
   </section>

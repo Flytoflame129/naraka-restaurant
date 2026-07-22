@@ -35,7 +35,7 @@ const itemsByTheme = mapThemes.map((theme) => ({
             <button
               class="filter-button"
               type="button"
-              data-map-theme-target={theme.key}
+              data-theme-target={theme.key}
               aria-pressed={theme.key === "juku" ? "true" : "false"}
             >
               {theme.name}
@@ -73,18 +73,18 @@ const itemsByTheme = mapThemes.map((theme) => ({
   ))}
 
   <script>
+    const sections = Array.from(document.querySelectorAll("[data-theme-section]"));
+
     function showTheme(theme) {
-      for (const section of document.querySelectorAll("[data-theme-section]")) {
+      for (const section of sections) {
         section.classList.toggle("is-hidden", section.dataset.themeSection !== theme);
       }
     }
 
-    window.addEventListener("naraka-map-theme-change", (event) => {
+    window.addEventListener("naraka-theme-change", (event) => {
       if (event instanceof CustomEvent) showTheme(event.detail.theme);
     });
 
-    document.addEventListener("astro:page-load", () => {
-      showTheme(document.documentElement.dataset.mapTheme || "juku");
-    });
+    showTheme(document.documentElement.dataset.theme || "juku");
   </script>
 </BaseLayout>

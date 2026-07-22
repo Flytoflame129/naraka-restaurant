@@ -1,10 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import { Picture } from "astro:assets";
-import BackLink from "astro-vtbot/components/BackLink.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getMapTheme } from "../../data/mapThemes";
-import { getImageAsset } from "../../lib/imageAssets";
 import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
@@ -19,33 +16,26 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const data = item.data;
 const theme = getMapTheme(data.map);
-const imageAsset = getImageAsset(data.image.src);
 ---
 
-<BaseLayout title={data.title} description={data.description} image={imageAsset.src} initialTheme={theme?.key ?? "juku"}>
+<BaseLayout title={data.title} description={data.description} image={data.image.src} initialTheme={theme?.key ?? "juku"}>
   <section class="detail-hero">
     <div class="container detail-hero-grid">
       <div>
         <p class="eyebrow">{theme?.label ?? data.map}</p>
-        <h1 class="page-title" transition:name="page-title">{data.title}</h1>
+        <h1 class="page-title">{data.title}</h1>
         <p class="lead">{data.description}</p>
         <div class="meta-row" aria-label="菜品信息">
           <span class="menu-detail-tag" data-map-theme={theme?.key}>地图：{theme?.name ?? data.map}</span>
           <span class="menu-detail-tag">分类：{data.category}</span>
         </div>
       </div>
-      <div class="detail-hero-media" transition:name={`menu-image-${data.slug}`}>
-        <Picture
-          src={imageAsset}
-          formats={["avif"]}
-          fallbackFormat="webp"
-          widths={[448, 896]}
-          sizes="(max-width: 900px) calc(100vw - 2rem), 448px"
-          alt={data.image.alt}
-          loading="eager"
-          fetchpriority="high"
-        />
-      </div>
+      <img
+        src={sitePath(data.image.src)}
+        alt={data.image.alt}
+        width="1600"
+        height="900"
+      />
     </div>
   </section>
 
@@ -112,7 +102,7 @@ const imageAsset = getImageAsset(data.image.src);
           <p><strong>授权：</strong>{data.image.license}</p>
         </div>
 
-        <BackLink class="detail-back-link" href={sitePath("/menu/")}>返回正式菜单</BackLink>
+        <a class="detail-back-link" href={sitePath("/menu/")}>返回正式菜单</a>
       </aside>
     </div>
   </section>

@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import DailySpecialCard from "../components/DailySpecialCard.astro";
 import MapThemeCard from "../components/MapThemeCard.astro";
-import ThemeHeroPicture from "../components/ThemeHeroPicture.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapThemes } from "../data/mapThemes";
 import { sitePath } from "../lib/site";
@@ -19,13 +18,12 @@ const dailyGroups = mapThemes.map((theme, offset) => ({
 
 <BaseLayout title="首页" description="NARAKA Restaurant 是《永劫无间 / NARAKA: BLADEPOINT》玩家同好创作站。">
   <section class="hero hero--main">
-    <ThemeHeroPicture />
     <div class="container hero-panel">
       <div class="hero-copy">
         <p class="eyebrow">无间食肆 · 今日开席</p>
         <h1
           class="hero-title"
-          data-map-theme-title
+          data-theme-title
           data-juku={mapThemes[0].heroTitle}
           data-huoluo={mapThemes[1].heroTitle}
           data-longyin={mapThemes[2].heroTitle}
@@ -104,41 +102,36 @@ const dailyGroups = mapThemes.map((theme, offset) => ({
   </section>
 
   <script>
-    function updateDailySpecials() {
-      const now = new Date();
-      const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000);
+    const now = new Date();
+    const dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86_400_000);
 
-      for (const slot of document.querySelectorAll("[data-daily-slot]")) {
-        if (!(slot instanceof HTMLElement)) continue;
+    for (const slot of document.querySelectorAll("[data-daily-slot]")) {
+      if (!(slot instanceof HTMLElement)) continue;
 
-        const optionsElement = slot.querySelector("[data-daily-options]");
-        if (!(optionsElement instanceof HTMLScriptElement)) continue;
+      const optionsElement = slot.querySelector("[data-daily-options]");
+      if (!(optionsElement instanceof HTMLScriptElement)) continue;
 
-        const options = JSON.parse(optionsElement.textContent || "[]");
-        if (!Array.isArray(options) || options.length === 0) continue;
+      const options = JSON.parse(optionsElement.textContent || "[]");
+      if (!Array.isArray(options) || options.length === 0) continue;
 
-        const index = (dayNumber + Number(slot.dataset.offset)) % options.length;
-        const selected = options[index];
-        const link = slot.querySelector("[data-daily-link]");
-        const image = slot.querySelector("[data-daily-image]");
-        const title = slot.querySelector("[data-daily-title]");
-        const map = slot.querySelector("[data-daily-map]");
-        const category = slot.querySelector("[data-daily-category]");
-        const description = slot.querySelector("[data-daily-description]");
+      const index = (dayNumber + Number(slot.dataset.offset)) % options.length;
+      const selected = options[index];
+      const link = slot.querySelector("[data-daily-link]");
+      const image = slot.querySelector("[data-daily-image]");
+      const title = slot.querySelector("[data-daily-title]");
+      const map = slot.querySelector("[data-daily-map]");
+      const category = slot.querySelector("[data-daily-category]");
+      const description = slot.querySelector("[data-daily-description]");
 
-        if (link instanceof HTMLAnchorElement) link.href = selected.href;
-        if (image instanceof HTMLImageElement) {
-          image.srcset = "";
-          image.src = selected.image;
-          image.alt = selected.imageAlt;
-        }
-        if (title) title.textContent = selected.title;
-        if (map) map.textContent = selected.map;
-        if (category) category.textContent = selected.category;
-        if (description) description.textContent = selected.description;
+      if (link instanceof HTMLAnchorElement) link.href = selected.href;
+      if (image instanceof HTMLImageElement) {
+        image.src = selected.image;
+        image.alt = selected.imageAlt;
       }
+      if (title) title.textContent = selected.title;
+      if (map) map.textContent = selected.map;
+      if (category) category.textContent = selected.category;
+      if (description) description.textContent = selected.description;
     }
-
-    document.addEventListener("astro:page-load", updateDailySpecials);
   </script>
 </BaseLayout>

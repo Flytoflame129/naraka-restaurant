@@ -24,10 +24,5 @@
   },
   "devDependencies": {
     "astro": "^7.0.6"
-  },
-  "dependencies": {
-    "astro-loading-indicator": "^0.9.0",
-    "astro-theme-toggle": "^0.8.1",
-    "astro-vtbot": "^3.0.0"
   }
 }
