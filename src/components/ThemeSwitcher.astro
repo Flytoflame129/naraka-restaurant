@@ -4,41 +4,53 @@ import { mapThemes } from "../data/mapThemes";
 
 <div class="theme-switcher" aria-label="地图主题切换">
   {mapThemes.map((theme) => (
-    <button type="button" data-theme-target={theme.key} title={`${theme.name}主题`} aria-pressed={theme.key === "juku" ? "true" : "false"}>
+    <button type="button" data-map-theme-target={theme.key} title={`${theme.name}主题`} aria-pressed={theme.key === "juku" ? "true" : "false"}>
       {theme.name}
     </button>
   ))}
 </div>
 
 <script>
-  const themeKey = "naraka-restaurant-theme";
-  const buttons = Array.from(document.querySelectorAll("[data-theme-target]"));
-  const allowedThemes = new Set(buttons.map((button) => button.dataset.themeTarget));
+  const themeKey = "naraka-restaurant-map-theme";
+  const allowedThemes = new Set(["juku", "huoluo", "longyin"]);
 
-  function applyTheme(theme) {
+  function applyMapTheme(theme) {
     if (!allowedThemes.has(theme)) {
       theme = "juku";
     }
 
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem(themeKey, theme);
+    document.documentElement.dataset.mapTheme = theme;
+    try {
+      window.localStorage.setItem(themeKey, theme);
+    } catch (_) {}
 
-    for (const title of document.querySelectorAll("[data-theme-title]")) {
+    for (const title of document.querySelectorAll("[data-map-theme-title]")) {
       const nextTitle = title.dataset[theme];
       if (nextTitle) title.textContent = nextTitle;
     }
 
-    for (const button of buttons) {
-      button.setAttribute("aria-pressed", button.dataset.themeTarget === theme ? "true" : "false");
+    for (const button of document.querySelectorAll("[data-map-theme-target]")) {
+      button.setAttribute("aria-pressed", button.dataset.mapThemeTarget === theme ? "true" : "false");
     }
 
-    window.dispatchEvent(new CustomEvent("naraka-theme-change", { detail: { theme } }));
+    window.dispatchEvent(new CustomEvent("naraka-map-theme-change", { detail: { theme } }));
   }
 
-  const savedTheme = window.localStorage.getItem(themeKey);
-  applyTheme(savedTheme || document.documentElement.dataset.theme || "juku");
-
-  for (const button of buttons) {
-    button.addEventListener("click", () => applyTheme(button.dataset.themeTarget));
+  function restoreMapTheme() {
+    let savedTheme = null;
+    try {
+      savedTheme = window.localStorage.getItem(themeKey);
+    } catch (_) {}
+    applyMapTheme(savedTheme || document.documentElement.dataset.mapTheme || "juku");
   }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const button = target.closest("[data-map-theme-target]");
+    if (!(button instanceof HTMLElement)) return;
+    applyMapTheme(button.dataset.mapThemeTarget);
+  });
+
+  document.addEventListener("astro:page-load", restoreMapTheme);
 </script>
