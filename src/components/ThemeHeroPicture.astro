@@ -1,0 +1,22 @@
+---
+import { Picture } from "astro:assets";
+import { mapThemes } from "../data/mapThemes";
+import { mapThemeImages } from "../lib/imageAssets";
+---
+
+<div class="hero-theme-media" aria-hidden="true" transition:name="theme-hero">
+  {mapThemes.map((theme) => (
+    <div class="hero-theme-picture" data-map-theme-picture={theme.key}>
+      <Picture
+        src={mapThemeImages[theme.key]}
+        formats={["avif"]}
+        fallbackFormat="webp"
+        widths={[640, 1280, 1672]}
+        sizes="100vw"
+        alt=""
+        loading={theme.key === "juku" ? "eager" : "lazy"}
+        fetchpriority={theme.key === "juku" ? "high" : "auto"}
+      />
+    </div>
+  ))}
+</div>

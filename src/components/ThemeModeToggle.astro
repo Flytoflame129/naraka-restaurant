@@ -1,0 +1,39 @@
+<button class="color-theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+  <svg class="color-theme-icon color-theme-icon--light" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg class="color-theme-icon color-theme-icon--dark" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path>
+  </svg>
+</button>
+
+<script>
+  import { getTheme, setTheme } from "astro-theme-toggle/client";
+
+  const selector = ".color-theme-toggle";
+
+  function updateThemeToggle() {
+    const isDark = document.documentElement.classList.contains("dark");
+
+    for (const button of document.querySelectorAll(selector)) {
+      button.setAttribute("aria-pressed", String(isDark));
+      button.setAttribute("aria-label", isDark ? "切换到浅色主题" : "切换到深色主题");
+      button.setAttribute("title", isDark ? "切换到浅色主题" : "切换到深色主题");
+    }
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const button = target.closest(selector);
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    const current = getTheme();
+    setTheme(current === "dark" ? "light" : "dark");
+    updateThemeToggle();
+  });
+
+  document.addEventListener("astro:page-load", updateThemeToggle);
+</script>

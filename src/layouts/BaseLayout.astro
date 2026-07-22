@@ -1,6 +1,10 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+import LoadingIndicator from "astro-loading-indicator/component";
+import { ThemeScript } from "astro-theme-toggle/components";
+import { ClientRouter, fade } from "astro:transitions";
+import { mapThemeImages } from "../lib/imageAssets";
 import { sitePath, siteTitle } from "../lib/site";
 import "../styles/global.css";
 
@@ -20,22 +24,33 @@ const {
 
 const pageTitle = title === siteTitle ? siteTitle : `${title} | ${siteTitle}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const socialImageUrl = new URL(sitePath(image), Astro.site ?? Astro.url.origin);
+const socialImagePath = image.startsWith("/assets/") ? sitePath(image) : image;
+const socialImageUrl = new URL(socialImagePath, Astro.site ?? Astro.url.origin);
 const assetVariables = [
   ["--asset-hero-main", "/assets/visuals/hero-main.webp"],
-  ["--asset-theme-juku", "/assets/visuals/theme-juku.webp"],
-  ["--asset-theme-huoluo", "/assets/visuals/theme-huoluo.webp"],
-  ["--asset-theme-longyin", "/assets/visuals/theme-longyin.webp"],
+  ["--asset-theme-juku", mapThemeImages.juku.src],
+  ["--asset-theme-huoluo", mapThemeImages.huoluo.src],
+  ["--asset-theme-longyin", mapThemeImages.longyin.src],
 ]
-  .map(([name, path]) => `${name}: url("${sitePath(path)}")`)
+  .map(([name, path]) => `${name}: url("${path.startsWith("/assets/") ? sitePath(path) : path}")`)
   .join(";");
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-theme={initialTheme}>
+<html lang="zh-CN" data-map-theme={initialTheme} transition:animate={fade({ duration: "180ms" })}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23601015'/%3E%3Cpath d='M19 45V18h6l15 18V18h6v27h-6L25 27v18z' fill='%23d4b06a'/%3E%3C/svg%3E" />
+    <ThemeScript />
+    <script is:inline>
+      try {
+        const mapTheme = window.localStorage.getItem("naraka-restaurant-map-theme");
+        if (["juku", "huoluo", "longyin"].includes(mapTheme)) {
+          document.documentElement.dataset.mapTheme = mapTheme;
+        }
+      } catch (_) {}
+    </script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -48,14 +63,8 @@ const assetVariables = [
     <meta property="og:image" content={socialImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <style is:inline set:html={`:root{${assetVariables}}`}></style>
-    <script is:inline>
-      try {
-        const theme = window.localStorage.getItem("naraka-restaurant-theme");
-        if (theme) {
-          document.documentElement.dataset.theme = theme;
-        }
-      } catch (_) {}
-    </script>
+    <ClientRouter />
+    <LoadingIndicator color="var(--color-accent)" height="3px" threshold={250} animationDuration={240} />
   </head>
   <body>
     <div class="site-shell">
