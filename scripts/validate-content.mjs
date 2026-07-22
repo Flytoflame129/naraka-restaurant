@@ -4,7 +4,7 @@ import { basename, extname, join, resolve, sep } from "node:path";
 const root = process.cwd();
 const dishesDir = resolve(root, "src", "content", "dishes");
 const menuItemsDir = resolve(root, "src", "content", "menu-items");
-const menuImagesDir = resolve(root, "public", "assets", "dishes", "menu");
+const menuImagesDir = resolve(root, "src", "assets", "dishes", "menu");
 const requiredFields = [
   "title",
   "slug",
@@ -146,7 +146,7 @@ function resolveMenuImageSource(source) {
     return null;
   }
 
-  const imagePath = resolve(root, "public", ...parsed.pathname.slice(1).split("/"));
+  const imagePath = resolve(root, "src", ...parsed.pathname.slice(1).split("/"));
   if (!imagePath.startsWith(`${menuImagesDir}${sep}`) || extname(imagePath) !== ".webp") {
     return null;
   }

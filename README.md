@@ -41,6 +41,7 @@ npm run preview
 
 ```text
 src/
+  assets/               由 astro:assets 优化的本地内容图片
   components/           Astro 展示组件
   content/menu-items/   15 道正式虚拟菜单及详情内容
   content/dishes/       带来源、可信度和发布状态的考据档案
@@ -48,7 +49,7 @@ src/
   layouts/              全站布局
   pages/                静态路由
   styles/               全站 CSS
-public/assets/          原创视觉和菜品图片
+public/assets/          favicon、社交分享图等无需处理的静态资源
 scripts/                无额外依赖的内容校验脚本
 docs/                   产品、领域、研究和视觉资产登记
 .codex/skills/          项目专用 Codex 工作流

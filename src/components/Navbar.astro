@@ -1,5 +1,6 @@
 ---
 import ThemeSwitcher from "./ThemeSwitcher.astro";
+import ThemeModeToggle from "./ThemeModeToggle.astro";
 import { sitePath, siteTitle } from "../lib/site";
 
 const navItems = [
@@ -30,6 +31,7 @@ const currentPath = Astro.url.pathname;
         );
       })}
       <ThemeSwitcher />
+      <ThemeModeToggle />
     </nav>
   </div>
 </header>

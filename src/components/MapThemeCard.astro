@@ -1,6 +1,7 @@
 ---
 import { mapThemes } from "../data/mapThemes";
-import { sitePath } from "../lib/site";
+import { Picture } from "astro:assets";
+import { mapThemeImages } from "../lib/imageAssets";
 
 interface Props {
   theme: (typeof mapThemes)[number];
@@ -10,7 +11,15 @@ const { theme } = Astro.props;
 ---
 
 <article class="theme-card" data-theme-card={theme.key} style={`--theme-card-accent: ${theme.accent}`}>
-  <img src={sitePath(theme.image)} alt={theme.alt} loading="lazy" width="1600" height="900" />
+  <Picture
+    src={mapThemeImages[theme.key]}
+    formats={["avif"]}
+    fallbackFormat="webp"
+    widths={[384, 768]}
+    sizes="(max-width: 560px) calc(100vw - 1.25rem), (max-width: 900px) 50vw, 384px"
+    alt={theme.alt}
+    loading="lazy"
+  />
   <div class="theme-card-body">
     <p class="card-kicker">{theme.label}</p>
     <h3>{theme.name}</h3>
