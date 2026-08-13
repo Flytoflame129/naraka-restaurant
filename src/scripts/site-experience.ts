@@ -5,12 +5,52 @@ export function initSiteExperience(): void {
 
   const controller = new AbortController();
   const { signal } = controller;
-  cleanupPreviousInitialization = () => controller.abort();
+  let revealObserver: IntersectionObserver | undefined;
+  cleanupPreviousInitialization = () => {
+    controller.abort();
+    revealObserver?.disconnect();
+  };
 
   const root = document.documentElement;
   const header = document.querySelector<HTMLElement>("[data-site-header]");
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
+
+  const syncHeaderState = (): void => {
+    header?.classList.toggle("has-scrolled", window.scrollY > 24);
+  };
+
+  window.addEventListener("scroll", syncHeaderState, { passive: true, signal });
+  syncHeaderState();
+
+  for (const section of document.querySelectorAll<HTMLElement>(
+    ".section > .container, .section-tight > .container",
+  )) {
+    section.setAttribute("data-reveal", "");
+  }
+
+  const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  const revealImmediately = (): void => {
+    for (const target of revealTargets) target.classList.add("is-revealed");
+  };
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealImmediately();
+  } else {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-revealed");
+          revealObserver?.unobserve(entry.target);
+        }
+      },
+      { rootMargin: "0px 0px -8%", threshold: 0.12 },
+    );
+
+    for (const target of revealTargets) revealObserver.observe(target);
+  }
 
   if (!header || !toggle || !panel) {
     root.classList.remove("menu-open");
