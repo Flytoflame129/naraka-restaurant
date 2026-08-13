@@ -23,7 +23,7 @@ const hasDefaultSlot = Astro.slots.has("default");
   style={imageStyle}
 >
   <ThemeHeroPicture />
-  <div class="container">
+  <div class="container" data-reveal data-reveal-group="hero-copy">
     <p class="eyebrow">{eyebrow}</p>
     <h1 transition:name="page-title">{title}</h1>
     <p class="lead">{lead}</p>

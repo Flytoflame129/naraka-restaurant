@@ -28,7 +28,7 @@ const itemsByTheme = mapThemes.map((theme) => ({
 
   <section class="section-tight">
     <div class="container">
-      <div class="filter-panel" aria-label="菜单主题切换">
+      <div class="filter-panel" aria-label="菜单主题切换" data-reveal>
         <p class="eyebrow">选择本席地图</p>
         <div class="filter-row">
           {mapThemes.map((theme) => (
@@ -49,6 +49,7 @@ const itemsByTheme = mapThemes.map((theme) => ({
   {itemsByTheme.map(({ theme, items }) => (
     <section
       class:list={["section-tight", "theme-section", { "is-hidden": theme.key !== "juku" }]}
+      data-reveal
       data-theme-section={theme.key}
       data-theme-card={theme.key}
     >

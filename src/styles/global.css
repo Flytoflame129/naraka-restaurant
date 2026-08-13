@@ -691,6 +691,60 @@ html:not(.js) [data-reveal] {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
+html.reveal-ready [data-reveal][data-reveal-group="hero-copy"] > * {
+  opacity: 0;
+  transform: translate3d(0, 1.5rem, 0);
+  transition:
+    opacity 560ms ease,
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.reveal-ready [data-reveal][data-reveal-group="hero-copy"].is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+
+html.reveal-ready [data-reveal][data-reveal-group="hero-copy"].is-revealed > :nth-child(2) {
+  transition-delay: 100ms;
+}
+
+html.reveal-ready [data-reveal][data-reveal-group="hero-copy"].is-revealed > :nth-child(3) {
+  transition-delay: 180ms;
+}
+
+html.reveal-ready [data-reveal][data-reveal-group="hero-copy"].is-revealed > .button-row {
+  transition-delay: 240ms;
+}
+
+html.reveal-ready [data-reveal][data-reveal-group="hero-aside"] {
+  transition-duration: 520ms;
+  transition-delay: 100ms;
+}
+
+html.reveal-ready [data-reveal].is-revealed :is(.theme-card, .daily-special-card, .info-card, .menu-item-card) {
+  animation: card-arrive 560ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+html.reveal-ready [data-reveal].is-revealed :is(.theme-card, .daily-special-card, .info-card, .menu-item-card):nth-child(2) {
+  animation-delay: 80ms;
+}
+
+html.reveal-ready [data-reveal].is-revealed :is(.theme-card, .daily-special-card, .info-card, .menu-item-card):nth-child(3) {
+  animation-delay: 160ms;
+}
+
+@keyframes card-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .hero-panel {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
@@ -1850,6 +1904,16 @@ html[data-map-theme="longyin"] .theme-intro[data-theme-copy="longyin"] {
   [data-reveal].is-revealed {
     opacity: 1;
     transform: none;
+  }
+
+  html.reveal-ready [data-reveal][data-reveal-group] > *,
+  html.reveal-ready [data-reveal][data-reveal-group].is-revealed > *,
+  html.reveal-ready [data-reveal].is-revealed :is(.theme-card, .daily-special-card, .info-card, .menu-item-card) {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+    transition: none !important;
+    transition-delay: 0s !important;
   }
 
   .hero::before,

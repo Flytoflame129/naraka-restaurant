@@ -21,7 +21,7 @@ const dailyGroups = mapThemes.map((theme, offset) => ({
   <section class="hero hero--main">
     <ThemeHeroPicture />
     <div class="container hero-panel">
-      <div class="hero-copy">
+      <div class="hero-copy" data-reveal data-reveal-group="hero-copy">
         <p class="eyebrow">无间食肆 · 今日开席</p>
         <h1
           class="hero-title"
@@ -43,7 +43,7 @@ const dailyGroups = mapThemes.map((theme, offset) => ({
         </div>
       </div>
 
-      <article class="info-card" aria-label="今日席位">
+      <article class="info-card" aria-label="今日席位" data-reveal data-reveal-group="hero-aside">
         <p class="eyebrow">今日席位</p>
         <h2>无间食肆今日告示</h2>
         <div class="button-row">
