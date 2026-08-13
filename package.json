@@ -18,7 +18,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:content && astro build",
+    "build": "npm run validate:content && npm run validate:experience && astro build",
     "preview": "astro preview",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:experience": "node scripts/validate-site-experience.mjs"
