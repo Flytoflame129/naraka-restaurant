@@ -27,8 +27,8 @@ const itemsByTheme = mapThemes.map((theme) => ({
   </PageHero>
 
   <section class="section-tight">
-    <div class="container">
-      <div class="filter-panel" aria-label="菜单主题切换" data-reveal>
+    <div class="container" data-reveal>
+      <div class="filter-panel" aria-label="菜单主题切换">
         <p class="eyebrow">选择本席地图</p>
         <div class="filter-row">
           {mapThemes.map((theme) => (
@@ -72,20 +72,4 @@ const itemsByTheme = mapThemes.map((theme) => ({
       </div>
     </section>
   ))}
-
-  <script>
-    function showTheme(theme) {
-      for (const section of document.querySelectorAll("[data-theme-section]")) {
-        section.classList.toggle("is-hidden", section.dataset.themeSection !== theme);
-      }
-    }
-
-    window.addEventListener("naraka-map-theme-change", (event) => {
-      if (event instanceof CustomEvent) showTheme(event.detail.theme);
-    });
-
-    document.addEventListener("astro:page-load", () => {
-      showTheme(document.documentElement.dataset.mapTheme || "juku");
-    });
-  </script>
 </BaseLayout>

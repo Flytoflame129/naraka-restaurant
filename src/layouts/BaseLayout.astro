@@ -3,7 +3,8 @@ import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import LoadingIndicator from "astro-loading-indicator/component";
 import { ThemeScript } from "astro-theme-toggle/components";
-import { ClientRouter, fade } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
+import type { TransitionDirectionalAnimations } from "astro";
 import { mapThemeImages } from "../lib/imageAssets";
 import { sitePath, siteTitle } from "../lib/site";
 import "../styles/global.css";
@@ -34,10 +35,41 @@ const assetVariables = [
 ]
   .map(([name, path]) => `${name}: url("${path.startsWith("/assets/") ? sitePath(path) : path}")`)
   .join(";");
+
+const cinematicPageTransition: TransitionDirectionalAnimations = {
+  forwards: {
+    old: {
+      name: "site-page-exit",
+      duration: "560ms",
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+      fillMode: "both",
+    },
+    new: {
+      name: "site-page-enter",
+      duration: "560ms",
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      fillMode: "both",
+    },
+  },
+  backwards: {
+    old: {
+      name: "site-page-exit",
+      duration: "560ms",
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+      fillMode: "both",
+    },
+    new: {
+      name: "site-page-enter",
+      duration: "560ms",
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      fillMode: "both",
+    },
+  },
+};
 ---
 
 <!doctype html>
-<html lang="zh-CN" data-map-theme={initialTheme} transition:animate={fade({ duration: "180ms" })}>
+<html lang="zh-CN" data-map-theme={initialTheme} transition:animate={cinematicPageTransition}>
   <head>
     <script is:inline>document.documentElement.classList.add("js");</script>
     <meta charset="UTF-8" />

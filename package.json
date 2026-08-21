@@ -21,7 +21,8 @@
     "build": "npm run validate:content && npm run validate:experience && astro build",
     "preview": "astro preview",
     "validate:content": "node scripts/validate-content.mjs",
-    "validate:experience": "node scripts/validate-site-experience.mjs"
+    "validate:experience": "node scripts/validate-site-experience.mjs",
+    "qa:experience": "npm run build && node scripts/qa-site-experience.mjs"
   },
   "devDependencies": {
     "astro": "^7.0.6"
