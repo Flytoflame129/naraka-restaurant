@@ -14,24 +14,51 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="container nav">
     <a class="brand" href={sitePath("/")}>
       <span class="brand-mark" aria-hidden="true">N</span>
       <span>{siteTitle}</span>
     </a>
-    <nav class="nav-links" aria-label="主导航">
-      {navItems.map((item) => {
-        const href = sitePath(item.href);
-        const isCurrent = currentPath === href || currentPath === item.href;
-        return (
-          <a href={href} aria-current={isCurrent ? "page" : undefined}>
-            {item.label}
-          </a>
-        );
-      })}
-      <ThemeSwitcher />
-      <ThemeModeToggle />
-    </nav>
+    <button
+      class="nav-menu-toggle"
+      type="button"
+      data-menu-toggle
+      aria-expanded="false"
+      aria-controls="site-navigation"
+    >
+      <span data-menu-toggle-label>打开主导航</span>
+    </button>
+
+    <div class="nav-panel" id="site-navigation" data-menu-panel>
+      <div class="nav-panel-header">
+        <h2 class="nav-panel-title">主导航</h2>
+        <button class="nav-menu-close" type="button" data-menu-close aria-label="关闭主导航">
+          <span aria-hidden="true">关闭</span>
+        </button>
+      </div>
+
+      <nav class="nav-links" aria-label="主导航">
+        {navItems.map((item) => {
+          const href = sitePath(item.href);
+          const isCurrent = currentPath === href || currentPath === item.href;
+          return (
+            <a href={href} aria-current={isCurrent ? "page" : undefined}>
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <div class="nav-preferences" aria-label="显示偏好">
+        <ThemeSwitcher />
+        <ThemeModeToggle />
+      </div>
+    </div>
   </div>
+  <div
+    class="nav-menu-overlay"
+    data-menu-overlay
+    aria-hidden="true"
+  ></div>
 </header>
