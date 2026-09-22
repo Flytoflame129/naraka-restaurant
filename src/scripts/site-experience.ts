@@ -1,9 +1,12 @@
-let cleanupPreviousInitialization: (() => void) | undefined;
+let cleanupPreviousInitialization: ((preserveNavigation?: boolean) => void) | undefined;
 
 export function initSiteExperience(): void {
-  cleanupPreviousInitialization?.();
+  cleanupPreviousInitialization?.(true);
 
   const root = document.documentElement;
+  // ClientRouter replaces root attributes, but deduplicates the inline bootstrap.
+  // Restore this before no-JS fallback styles can expand the mobile navigation.
+  root.classList.add("js");
   const controller = new AbortController();
   const { signal } = controller;
   let revealObserver: IntersectionObserver | undefined;
@@ -12,13 +15,16 @@ export function initSiteExperience(): void {
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
   const overlay = document.querySelector<HTMLElement>("[data-menu-overlay]");
-  cleanupPreviousInitialization = () => {
+  cleanupPreviousInitialization = (preserveNavigation = false) => {
     controller.abort();
     revealObserver?.disconnect();
     for (const target of document.querySelectorAll<HTMLElement>(".is-pressed")) {
       target.classList.remove("is-pressed");
     }
-    root.classList.remove("site-experience-ready", "reveal-ready", "menu-open");
+    // Removing the navigation gate during a healthy reinitialization forces
+    // fallback layout and animates the new drawer out of the viewport.
+    if (!preserveNavigation) root.classList.remove("site-experience-ready");
+    root.classList.remove("reveal-ready", "menu-open");
     header?.removeAttribute("data-menu-open");
     toggle?.setAttribute("aria-expanded", "false");
     panel?.removeAttribute("aria-hidden");
@@ -131,7 +137,10 @@ export function initSiteExperience(): void {
     syncThemeSections(root.dataset.mapTheme || "juku");
     syncThemeAccessibility();
 
-    if (!header || !toggle || !panel) return;
+    if (!header || !toggle || !panel) {
+      cleanupPreviousInitialization();
+      return;
+    }
 
     const toggleLabel = toggle.querySelector<HTMLElement>("[data-menu-toggle-label]");
     const mobileMenu = window.matchMedia("(max-width: 900px)");
@@ -210,4 +219,23 @@ export function initSiteExperience(): void {
   }
 }
 
+// The router may force layout while swapping/focusing the new body, before
+// after-swap fires. Carry only proven navigation capability into the incoming
+// document, always with the new drawer closed, to avoid a fallback-layout flash.
+document.addEventListener("astro:before-swap", (event) => {
+  const incomingRoot = event.newDocument.documentElement;
+  incomingRoot.classList.add("js");
+  if (!document.documentElement.classList.contains("site-experience-ready")) return;
+
+  incomingRoot.classList.add("site-experience-ready");
+  incomingRoot.classList.remove("menu-open");
+  const panel = event.newDocument.querySelector<HTMLElement>("[data-menu-panel]");
+  if (panel && window.matchMedia("(max-width: 900px)").matches) {
+    panel.inert = true;
+    panel.setAttribute("aria-hidden", "true");
+  }
+});
+
+// Initialize the swapped DOM before the transition captures its first frame.
+document.addEventListener("astro:after-swap", initSiteExperience);
 document.addEventListener("astro:page-load", initSiteExperience);

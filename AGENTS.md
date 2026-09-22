@@ -78,6 +78,7 @@
 git status --short
 npm ci
 npm run dev
+npm run validate:repository
 npm run validate:content
 npm run build
 npm run preview
@@ -86,6 +87,7 @@ npm run preview
 合并 PR 前至少运行：
 
 ```bash
+npm run validate:repository
 npm run validate:content
 npm run build
 ```
@@ -93,3 +95,5 @@ npm run build
 Pull Request 会由 `.github/workflows/ci.yml` 自动构建；合并到 `main` 后由 `.github/workflows/deploy.yml` 发布 GitHub Pages。
 
 如果添加 TypeScript、测试或格式化工具，再把对应命令补充到本节。
+
+`npm run build` 包含仓库卫生、内容和体验静态检查。修改交互后另运行 `npm run qa:experience`；GitHub Pages 子路径复测需要构建与 QA 使用相同 `BASE_PATH`。机器专属 QA 输出保存在已忽略的 `.cache/qa/`，不得强制添加临时报告、缓存或构建产物；规范、研究来源与项目技能源文件应保留。

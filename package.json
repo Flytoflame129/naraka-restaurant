@@ -18,9 +18,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run validate:content && npm run validate:experience && astro build",
+    "build": "npm run validate:repository && npm run validate:content && npm run validate:experience && astro build",
     "preview": "astro preview",
     "validate:content": "node scripts/validate-content.mjs",
+    "validate:repository": "node scripts/validate-repository.mjs",
     "validate:experience": "node scripts/validate-site-experience.mjs",
     "qa:experience": "npm run build && node scripts/qa-site-experience.mjs"
   },
