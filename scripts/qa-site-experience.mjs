@@ -5,9 +5,14 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const evidencePath = join(root, "docs", "qa", "site-experience-latest.json");
+const evidencePath = join(root, ".cache", "qa", "site-experience-latest.json");
 const previewPort = 43_220 + (process.pid % 500);
-const baseUrl = `http://127.0.0.1:${previewPort}`;
+const previewBase = (process.env.BASE_PATH || "").replace(/^\/+|\/+$/g, "");
+const baseUrl = new URL(process.env.QA_BASE_URL || `http://127.0.0.1:${previewPort}/${previewBase}`);
+if (!baseUrl.pathname.endsWith("/")) baseUrl.pathname += "/";
+const pageUrl = (path) => new URL(path.replace(/^\/+/, ""), baseUrl);
+const menuPath = pageUrl("/menu/").pathname;
+const viewportWidth = Number(process.env.QA_VIEWPORT_WIDTH || 375);
 const chromeCandidates = [
   process.env.CHROME_PATH,
   "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -112,13 +117,15 @@ async function main() {
   };
 
   try {
-    preview = spawn(
-      process.execPath,
-      [join(root, "node_modules", "astro", "bin", "astro.mjs"), "preview", "--host", "127.0.0.1", "--port", String(previewPort)],
-      { cwd: root, windowsHide: true, stdio: ["ignore", "pipe", "pipe"] },
-    );
-    preview.stdout.on("data", (data) => previewLog.push(String(data).trim()));
-    preview.stderr.on("data", (data) => previewLog.push(String(data).trim()));
+    if (!process.env.QA_BASE_URL) {
+      preview = spawn(
+        process.execPath,
+        [join(root, "node_modules", "astro", "bin", "astro.mjs"), "preview", "--host", "127.0.0.1", "--port", String(previewPort)],
+        { cwd: root, windowsHide: true, stdio: ["ignore", "pipe", "pipe"] },
+      );
+      preview.stdout.on("data", (data) => previewLog.push(String(data).trim()));
+      preview.stderr.on("data", (data) => previewLog.push(String(data).trim()));
+    }
 
     await waitFor(async () => (await fetch(baseUrl)).ok, "Astro preview");
 
@@ -155,7 +162,7 @@ async function main() {
       cdp.send("Network.enable"),
       cdp.send("Log.enable"),
       cdp.send("Emulation.setDeviceMetricsOverride", {
-        width: 375,
+        width: viewportWidth,
         height: 812,
         deviceScaleFactor: 1,
         mobile: true,
@@ -190,9 +197,10 @@ async function main() {
     };
 
     const navigate = async (path) => {
-      await cdp.send("Page.navigate", { url: `${baseUrl}${path}` });
+      const url = pageUrl(path);
+      await cdp.send("Page.navigate", { url: url.href });
       await waitFor(
-        () => evaluate(`location.pathname === ${JSON.stringify(path)} && document.documentElement.classList.contains("site-experience-ready")`),
+        () => evaluate(`location.pathname === ${JSON.stringify(url.pathname)} && document.documentElement.classList.contains("site-experience-ready")`),
         path,
       );
     };
@@ -254,6 +262,65 @@ async function main() {
 
     await navigate("/");
 
+    await record("mobile-menu-navigation", async () => {
+      const selector = '.hero a.button[href$="/menu/"]';
+      await evaluate(`document.querySelector(${JSON.stringify(selector)}).scrollIntoView({ block: "center", behavior: "instant" })`);
+      await evaluate(`(() => {
+        window.__navSamples = [];
+        window.__navSampling = true;
+        const sample = (phase) => {
+          const header = document.querySelector("[data-site-header]");
+          const panel = document.querySelector("[data-menu-panel]");
+          if (header && panel && location.pathname === ${JSON.stringify(menuPath)}) {
+            window.__navSamples.push({
+              phase, ready: document.documentElement.classList.contains("site-experience-ready"),
+              headerHeight: header.getBoundingClientRect().height,
+              panelPosition: getComputedStyle(panel).position,
+              panelVisible: getComputedStyle(panel).visibility,
+              expanded: document.querySelector("[data-menu-toggle]").getAttribute("aria-expanded"),
+              inert: panel.inert,
+            });
+          }
+        };
+        document.addEventListener("astro:after-swap", () => sample("after-swap"), { once: true });
+        const frame = () => {
+          if (!window.__navSampling) return;
+          sample("frame");
+          requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      })()`);
+      const point = await evaluate(`(() => {
+        const rect = document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect();
+        return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      })()`);
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await waitFor(() => evaluate(`location.pathname === ${JSON.stringify(menuPath)} && document.documentElement.classList.contains("site-experience-ready")`), "hero menu navigation");
+      await sleep(750);
+      const samples = await evaluate("window.__navSampling = false; window.__navSamples");
+      const obstructed = samples.filter((sample) => sample.headerHeight > 100 || sample.expanded !== "false" || !sample.inert || sample.panelVisible !== "hidden");
+      if (samples.length === 0 || obstructed.length > 0) {
+        throw new Error(JSON.stringify({ samples: samples.length, obstructed: obstructed.slice(0, 8) }));
+      }
+      if (process.env.QA_SCREENSHOT === "1") {
+        await mkdir(dirname(evidencePath), { recursive: true });
+        const screenshot = await cdp.send("Page.captureScreenshot", { format: "png" });
+        await writeFile(join(dirname(evidencePath), "mobile-menu-navigation.png"), Buffer.from(screenshot.data, "base64"));
+      }
+      // Exercise the listeners on the swapped page, not only after a hard load.
+      await clickAt("[data-menu-toggle]");
+      await waitFor(() => evaluate('document.querySelector("[data-menu-toggle]").getAttribute("aria-expanded") === "true"'), "menu still opens after swap");
+      await key("Escape");
+      const closeAfterSwap = await evaluate(`(() => {
+        const toggle = document.querySelector("[data-menu-toggle]");
+        return toggle.getAttribute("aria-expanded") === "false" && document.activeElement === toggle && document.querySelector("[data-menu-panel]").inert;
+      })()`);
+      if (!closeAfterSwap) throw new Error("Menu did not close and restore focus after the page swap");
+      await navigate("/");
+      return { samples: samples.length, maxHeaderHeight: Math.max(...samples.map((sample) => sample.headerHeight)), menuStayedClosed: true, closeAfterSwap };
+    });
+
     await record("mobile-layout-and-targets", async () => {
       const evidence = await evaluate(`(() => {
         const selectors = ["[data-menu-toggle]", ".theme-switcher button", ".color-theme-toggle"];
@@ -263,7 +330,8 @@ async function main() {
         });
         return { sizes, overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth };
       })()`);
-      if (evidence.overflow > 0 || evidence.sizes.some(({ width, height }) => width < 44 || height < 44)) {
+      // DOMRect may report 43.999984px for a 44px target after transforms.
+      if (evidence.overflow > 0 || evidence.sizes.some(({ width, height }) => width + 0.001 < 44 || height + 0.001 < 44)) {
         throw new Error(JSON.stringify(evidence));
       }
       return evidence;
@@ -395,8 +463,8 @@ async function main() {
           }))
         }), 100);
       })`, true);
-      await waitFor(() => evaluate('location.pathname === "/menu/" && document.documentElement.classList.contains("site-experience-ready")'), "Astro menu transition");
-      if (evidence.path !== "/menu/" || evidence.animations.length === 0) throw new Error(JSON.stringify(evidence));
+      await waitFor(() => evaluate(`location.pathname === ${JSON.stringify(menuPath)} && document.documentElement.classList.contains("site-experience-ready")`), "Astro menu transition");
+      if (evidence.path !== menuPath || evidence.animations.length === 0) throw new Error(JSON.stringify(evidence));
       return evidence;
     });
 
@@ -458,19 +526,47 @@ async function main() {
       return { normal, reduced };
     });
 
+    await record("no-javascript-navigation-fallback", async () => {
+      await cdp.send("Emulation.setScriptExecutionDisabled", { value: true });
+      try {
+        await cdp.send("Page.navigate", { url: pageUrl("/").href });
+        await waitFor(() => evaluate('document.readyState === "complete" && !document.documentElement.classList.contains("js")'), "no-JavaScript load");
+        const evidence = await evaluate(`(() => {
+          const panel = document.querySelector("[data-menu-panel]");
+          return {
+            enhanced: document.documentElement.classList.contains("site-experience-ready"),
+            links: panel.querySelectorAll("nav a").length,
+            position: getComputedStyle(panel).position,
+            visibility: getComputedStyle(panel).visibility,
+            inert: panel.inert,
+            toggleDisplay: getComputedStyle(document.querySelector("[data-menu-toggle]")).display,
+          };
+        })()`);
+        if (evidence.enhanced || evidence.links !== 5 || evidence.position !== "static" || evidence.visibility !== "visible" || evidence.inert || evidence.toggleDisplay !== "none") {
+          throw new Error(JSON.stringify(evidence));
+        }
+        return evidence;
+      } finally {
+        await cdp.send("Emulation.setScriptExecutionDisabled", { value: false });
+      }
+    });
+
     await record("browser-errors", async () => {
       if (browserIssues.length > 0) throw new Error(JSON.stringify(browserIssues));
       return { issues: [] };
     });
 
+    if (checks.length === 0) throw new Error(`Unknown QA_CHECK: ${selectedCheck}`);
+
     const result = {
       schemaVersion: 1,
       generatedAt: new Date().toISOString(),
-      command: "npm.cmd run qa:experience",
+      command: "node scripts/qa-site-experience.mjs",
+      selectedCheck: selectedCheck ?? null,
       environment: {
         browser: chromePath,
-        viewport: { width: 375, height: 812, mobile: true, touch: true },
-        preview: baseUrl,
+        viewport: { width: viewportWidth, height: 812, mobile: true, touch: true },
+        preview: baseUrl.href,
       },
       summary: {
         status: checks.every(({ status }) => status === "pass") ? "pass" : "fail",

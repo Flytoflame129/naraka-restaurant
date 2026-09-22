@@ -100,9 +100,10 @@ npm.cmd run dev
 | 命令 | 用途 |
 | --- | --- |
 | `npm run dev` | 启动本地开发服务 |
+| `npm run validate:repository` | 检查 Git 是否误跟踪了仓库忽略规则中的本地文件 |
 | `npm run validate:content` | 校验菜单、考据档案及相关内容规则 |
 | `npm run validate:experience` | 静态检查导航、动效与降级约定；不能代替浏览器验收 |
-| `npm run build` | 依次运行内容校验、体验静态检查、Astro 静态构建 |
+| `npm run build` | 依次运行仓库卫生检查、内容校验、体验静态检查、Astro 静态构建 |
 | `npm run preview` | 预览已有的 `dist/`，需要先运行构建 |
 | `npm run qa:experience` | 先构建，再启动预览并执行浏览器体验检查 |
 
@@ -121,11 +122,11 @@ npm.cmd run qa:experience
 
 当前脚本先尝试 `CHROME_PATH` 指定的浏览器可执行文件，未指定或该路径不可用时，再尝试 Windows 常见 Chrome / Edge 安装路径。脚本当前主要面向 Windows 本地检查，其他运行环境需要确认浏览器路径和启动条件。
 
-检查内容包括移动端布局与点击目标、菜单关闭及焦点恢复、地图主题切换与持久化、页面转场、内容入场、触屏反馈、减少动态效果和浏览器错误。
+检查内容包括移动端布局与点击目标、“翻开菜单卷轴”后逐帧导航遮挡回归、菜单关闭及焦点恢复、地图主题切换与持久化、页面转场、内容入场、触屏反馈、减少动态效果、无脚本导航降级和浏览器错误。
 
-当前默认视口为 `375 × 812`，脚本访问本地根路径；运行前不要保留 GitHub Pages 的 `BASE_PATH` 环境变量。子路径部署、多尺寸及跨浏览器检查需另行执行。
+当前默认视口为 `375 × 812`，可通过 `QA_VIEWPORT_WIDTH` 指定其他手机或平板宽度（不超过 900px）。脚本支持与构建一致的 `BASE_PATH`，也可通过 `QA_BASE_URL` 检查已部署站点。不同设备及跨浏览器仍需单独验收，命令示例见 [体验 QA 文档](docs/qa/README.md)。
 
-结果会覆盖写入 [最近一次 QA 记录](docs/qa/site-experience-latest.json)。判断结果时需同时查看记录的 `generatedAt`、视口和检查范围；历史通过不代表当前线上状态，也不代表完整的跨浏览器测试。重放说明见 [体验 QA 文档](docs/qa/README.md)。
+结果会覆盖写入本地 `.cache/qa/site-experience-latest.json`，不提交到 Git。判断结果时需同时查看记录的 `generatedAt`、视口、目标地址和检查范围；历史通过不代表当前线上状态，也不代表完整的跨浏览器测试。
 
 ## 项目结构
 
@@ -188,13 +189,15 @@ publishStatus: published
 
 详细规则见 [CONTRIBUTING.md](CONTRIBUTING.md) 和 [AGENTS.md](AGENTS.md)。
 
+本地依赖、构建产物、缓存、内部任务报告及机器专属 QA 输出通过 `.gitignore` 排除。`npm run validate:repository` 已接入构建，防止被忽略的文件再次误入 Git；`.gitignore` 不会自动解除已跟踪文件，清理时应针对已确认路径使用 `git rm --cached`，保留本地副本。该检查不是密钥扫描，也不会改写历史提交。项目规范、内容来源文档及 `.codex/skills/` 是有意维护的源文件，不作为缓存删除。
+
 ### GitHub Pages
 
 仓库的 **Settings → Pages → Source** 需要设置为 **GitHub Actions**。
 
 - [ci.yml](.github/workflows/ci.yml)：PR 或手动触发，安装依赖并执行 `npm run build`。
 - [deploy.yml](.github/workflows/deploy.yml)：推送到 `main` 或手动触发，构建并发布 `dist/`。
-- 当前 CI 包含内容和体验静态检查，**没有自动执行浏览器 QA**。
+- 当前 CI 包含仓库卫生、内容和体验静态检查，**没有自动执行浏览器 QA**。
 
 工作流会设置以下环境变量：
 

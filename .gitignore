@@ -7,6 +7,9 @@ dist/
 .firecrawl/
 .worktrees/
 .superpowers/
+.cache/
+# Machine-specific QA output from the earlier tracked location.
+docs/qa/site-experience-latest.json
 .env
 .env.local
 .env.*
